@@ -3,7 +3,7 @@ name: Deploy SQL Database
 on:
   push:
     paths:
-      - GitActionsDatabaseTestQuery.sql  # Runs only if this file changes
+       GitActionsDatabaseTestQuery.sql  # Runs only if this file changes
     branches:
       - main  # Runs only on the main branch
       - side  # Runs only on the side branch
