@@ -1,0 +1,22 @@
+name: Deploy SQL Database
+
+on:
+  push:
+    branches:
+      - side  # Runs on push to the 'side' branch
+      - main  # Runs on push to the 'main' branch
+    paths:
+      - GitActionsDatabaseTestQuery.sql  # Runs only if this file changes
+
+jobs:
+  deploy:
+    runs-on: self-hosted  # Runs on your local machine with the self-hosted runner
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3  # Fetches the latest repo files
+
+      - name: Execute SQL Script
+        run: |
+          sqlcmd -S localhost -U sa -P ${{ secrets.SQL_PASSWORD }} -i GitActionsDatabaseTestQuery.sql
+        shell: bash
