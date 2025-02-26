@@ -1,0 +1,30 @@
+name: Check SQL Format
+
+on:
+  push:
+    paths:
+      - '**/*.sql'  # Triggers on any change to .sql files in the repository (in any folder)
+  pull_request:
+    paths:
+      - '**/*.sql'  # Triggers on any change to .sql files in a pull request
+
+jobs:
+  lint_sql:
+    runs-on: ubuntu-latest  # Runs the job on the latest Ubuntu runner
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3  # Checkout the repository to access the files
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'  # Use a stable version of Node.js (this can be changed as necessary)
+
+      - name: Install sql-lint
+        run: |
+          npm install -g sql-lint  # Install the sql-lint package globally
+
+      - name: Run sql-lint
+        run: |
+          sql-lint '**/*.sql'  # Lint all .sql files in the repository
