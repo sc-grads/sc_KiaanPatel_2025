@@ -6,7 +6,7 @@ on:
   push:
     # The workflow will only trigger when there are changes to the GitActionsDatabaseTestQuery.sql file.
     paths:
-      - GitActionsDatabaseTestQuery.sql  # Runs only if this file changes
+      - 'GitActionsDatabaseTestQuery.sql'  # Runs only if this file changes
     
     # The workflow will run on pushes to the 'main' branch.
     branches:
