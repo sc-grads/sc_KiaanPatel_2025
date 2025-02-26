@@ -12,3 +12,9 @@ CREATE TABLE User (
 	User_Address VARCHAR(100)
 );
 GO
+
+/*
+
+comment added 
+
+*/
