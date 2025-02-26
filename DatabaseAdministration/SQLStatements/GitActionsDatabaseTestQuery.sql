@@ -10,6 +10,7 @@ CREATE TABLE User (
 	User_Email VARCHAR(100) UNIQUE NOT NULL,
 	User_PhoneNumber VARCHAR(10) UNIQUE,
 	User_Address VARCHAR(100)
+	User_IDNumber INT NOT NULL
 );
 GO
 
