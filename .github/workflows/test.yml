@@ -3,7 +3,7 @@ name: Deploy SQL Database
 on:
   push:
     paths:
-       GitActionsDatabaseTestQuery.sql  # Runs only if this file changes
+      - GitActionsDatabaseTestQuery.sql  # Runs only if this file changes
     branches:
       - main  # Runs only on the main branch
       - side  # Runs only on the side branch
@@ -17,6 +17,7 @@ jobs:
         uses: actions/checkout@v3  # Fetches the latest repo files
 
       - name: Execute SQL Script
-        run: |
+        run: 
+          git push origin main
           sqlcmd -S localhost -U sa -P YourPassword -i GitActionsDatabaseTestQuery.sql
         shell: bash
