@@ -10,7 +10,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: self-hosted  # Runs on your local machine with the self-hosted runner
+    runs-on: ubuntu-latest  # Runs on your local machine with the self-hosted runner
 
     steps:
       - name: Checkout repository
