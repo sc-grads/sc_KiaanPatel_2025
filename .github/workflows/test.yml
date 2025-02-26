@@ -2,15 +2,15 @@ name: Deploy SQL Database
 
 on:
   push:
-    branches:
-      - side  # Runs on push to the 'side' branch
-      - main  # Runs on push to the 'main' branch
     paths:
       - GitActionsDatabaseTestQuery.sql  # Runs only if this file changes
+    branches:
+      - main  # Runs only on the main branch
+      - side  # Runs only on the side branch
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest  # Runs on your local machine with the self-hosted runner
+    runs-on: ubuntu-latest  # Runs on your local machine
 
     steps:
       - name: Checkout repository
@@ -18,5 +18,5 @@ jobs:
 
       - name: Execute SQL Script
         run: |
-          sqlcmd -S localhost -U sa -P ${{ secrets.SQL_PASSWORD }} -i GitActionsDatabaseTestQuery.sql
+          sqlcmd -S localhost -U sa -P YourPassword -i GitActionsDatabaseTestQuery.sql
         shell: bash
