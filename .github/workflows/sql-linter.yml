@@ -35,10 +35,10 @@ name: SQL Linter CI
 on:  
   push:  
     paths:
-      - 'DatabaseAdministration/SQLStatements/GitActionsDatabaseTestQuery.sql'  # Replace with the path to your SQL file
+      - 'DatabaseAdministration/SQLStatements/GitActionsDatabaseTestQuery.sql'  # Only triggers on changes to this file
   pull_request:  
     paths:
-      - 'DatabaseAdministration/SQLStatements/GitActionsDatabaseTestQuery.sql'  # Replace with the path to your SQL file
+      - 'DatabaseAdministration/SQLStatements/GitActionsDatabaseTestQuery.sql'  # Only triggers on changes to this file
   workflow_dispatch:  # Allows manual triggering
 
 jobs:
@@ -58,6 +58,4 @@ jobs:
         run: pip install sqlfluff
       
       - name: Run SQLFluff on a specific SQL file
-        run: sqlfluff lint path/to/your/file.sql --dialect tsql
-
-
+        run: sqlfluff lint DatabaseAdministration/SQLStatements/GitActionsDatabaseTestQuery.sql --dialect tsql
