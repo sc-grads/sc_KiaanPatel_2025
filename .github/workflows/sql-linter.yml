@@ -21,11 +21,11 @@ jobs:
       - name: Install SQLFluff
         run: pip install sqlfluff
       
-      - name: Run SQLFluff on all SQL files (Logging Only)
-        run: sqlfluff lint --dialect tsql . || true  
+      #- name: Run SQLFluff on all SQL files (Logging Only)
+      #  run: sqlfluff lint --dialect tsql . || true  
         # The "|| true" ensures the workflow does NOT fail even if errors are found.
 
       # Uncomment the following step to make the workflow strict (fail on errors)
-      # - name: Run SQLFluff (Strict Mode - Fails on Errors)
-      #   run: sqlfluff lint --dialect tsql .
+      - name: Run SQLFluff (Strict Mode - Fails on Errors)
+        run: sqlfluff lint --dialect tsql .
 
