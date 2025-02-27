@@ -35,10 +35,10 @@ name: SQL Linter CI
 on:  
   push:  
     paths:
-      - 'GitActionsDatabaseTestQuery.sql'  # Replace with the path to your SQL file
+      - 'DatabaseAdministration/SQLStatements/GitActionsDatabaseTestQuery.sql'  # Replace with the path to your SQL file
   pull_request:  
     paths:
-      - 'GitActionsDatabaseTestQuery.sql'  # Replace with the path to your SQL file
+      - 'DatabaseAdministration/SQLStatements/GitActionsDatabaseTestQuery.sql'  # Replace with the path to your SQL file
   workflow_dispatch:  # Allows manual triggering
 
 jobs:
