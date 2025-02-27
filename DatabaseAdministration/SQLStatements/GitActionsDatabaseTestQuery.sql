@@ -1,8 +1,8 @@
 CREATE DATABASE MYDATABASE;
-GO
+-- GO -- Commented out for SQLFluff (if needed, uncomment for SQL Server tools)
 USE MYDATABASE;
 
-CREATE TABLE USER (
+CREATE TABLE Users (
     USER_ID INT PRIMARY KEY IDENTITY(1,1),
     USER_NAME VARCHAR(50) NOT NULL,
     USER_SURNAME VARCHAR(50) NOT NULL,
@@ -11,8 +11,6 @@ CREATE TABLE USER (
     USER_ADDRESS VARCHAR(100),
     USER_IDNUMBER INT NOT NULL
 );
-GO
+-- GO -- Commented out for SQLFluff (if needed, uncomment for SQL Server tools)
 
-/*
-comment added
-*/
+-- Comment added
