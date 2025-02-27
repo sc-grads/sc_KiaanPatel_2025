@@ -1,1 +1,31 @@
+name: SQL Linter CI
+
+on:  
+  push:  
+  pull_request:  
+  workflow_dispatch:  # Allows manual triggering
+
+jobs:
+  sql-lint:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+      
+      - name: Install SQLFluff
+        run: pip install sqlfluff
+      
+      - name: Run SQLFluff on all SQL files (Logging Only)
+        run: sqlfluff lint --dialect tsql . || true  
+        # The "|| true" ensures the workflow does NOT fail even if errors are found.
+
+      # Uncomment the following step to make the workflow strict (fail on errors)
+      # - name: Run SQLFluff (Strict Mode - Fails on Errors)
+      #   run: sqlfluff lint --dialect tsql .
 
