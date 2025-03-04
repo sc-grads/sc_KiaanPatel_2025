@@ -1,21 +1,16 @@
-CREATE DATABASE MyDatabase;
-GO
-USE MyDatabase;
+CREATE DATABASE MYDATABASE;
+-- GO -- Commented out for SQLFluff (if needed, uncomment for SQL Server tools)
+USE MYDATABASE;
 
-CREATE TABLE User (
-
-	User_ID INT PRIMARY KEY IDENTITY(1,1),
-	User_Name VARCHAR(50) NOT NULL,
-	User_Surname VARCHAR(50) NOT NULL,
-	User_Email VARCHAR(100) UNIQUE NOT NULL,
-	User_PhoneNumber VARCHAR(10) UNIQUE,
-	User_Address VARCHAR(50)
-	
+CREATE TABLE USERS (
+    USER_ID INT PRIMARY KEY IDENTITY (1, 1),
+    USER_NAME VARCHAR(50) NOT NULL,
+    USER_SURNAME VARCHAR(50) NOT NULL,
+    USER_EMAIL VARCHAR(100) UNIQUE NOT NULL,
+    USER_PHONENUMBER VARCHAR(10) UNIQUE,
+    USER_ADDRESS VARCHAR(100),
+    USER_IDNUMBER INT NOT NULL
 );
-GO
+-- GO -- Commented out for SQLFluff (if needed, uncomment for SQL Server tools)
 
-/*
-
-comment added 
-
-*/
+-- Comment added
