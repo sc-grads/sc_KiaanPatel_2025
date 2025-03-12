@@ -24,5 +24,5 @@ update SalesStaff set TerritoryGroup = 'United Kingdom' where TerritoryGroup is 
 
 update SalesStaff set SalesQuota = sp.SalesQuota 
 from SalesStaff ss
-inner join [AdventureWorks2022].[Sales].[vSalesPerson]
+inner join [AdventureWorks2022].[Sales].[vSalesPerson] sp
 on ss.FullName = (sp.FirstName+' '+sp.LastName)
