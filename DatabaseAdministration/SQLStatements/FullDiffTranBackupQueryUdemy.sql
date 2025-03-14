@@ -47,4 +47,7 @@ insert into SQLBackupRestoreTest (ID,loginname) values (117, 'test117')
 print getdate()
 
 
+RESTORE DATABASE AdventureWorks2022 WITH RECOVERY --use this if db still recovering and have restoring by its name to instantly recover and get it back online
+GO 
+    
 
