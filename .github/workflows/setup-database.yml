@@ -31,7 +31,7 @@ jobs:
       # Execute the combined SQL script using the pre-provided Pinggy URL
       - name: Setup Database, User, Table, Procedure, and Data
         run: |
-          sqlcmd -S "${{ secrets.PINGGY_URL }}" -U Auto_user -P ${{ secrets.SQL_PASSWORD }} -i sql_scripts/setup_all.sql
+          sqlcmd -S "${{ secrets.PINGGY_URL }}" -U Auto_user -P ${{ secrets.SQL_PASSWORD }} -i DatabaseAdministration/SQLStatements/SetupAll.sql
         shell: cmd
 
       # Test the setup
