@@ -33,13 +33,13 @@ jobs:
       - name: Add SQL Server tools to PATH
         run: echo "/opt/mssql-tools/bin" >> $GITHUB_PATH
 
-      # Test connection to SQL Server using an admin user
+            # Test connection to SQL Server using an admin user
       - name: Test Connection to SQL Server
         env:
           ADMIN_USER: ${{ secrets.ADMIN_USER }}
           ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
         run: |
-          sqlcmd -S "${{ secrets.PINGGY_URL }}" -U "$ADMIN_USER" -P "$ADMIN_PASSWORD" -Q "SELECT @@VERSION" || echo "Connection failed: check server, user, or password"
+          sqlcmd -S "${{ secrets.PINGGY_URL }}" -U "$ADMIN_USER" -P "$ADMIN_PASSWORD" -N n -Q "SELECT @@VERSION" || echo "Connection failed: check server, user, or password"
 
       # Execute the combined SQL script (SetupAll.sql) using the admin user
       - name: Setup Database, User, Table, Procedure, and Data
@@ -47,7 +47,7 @@ jobs:
           ADMIN_USER: ${{ secrets.ADMIN_USER }}
           ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
         run: |
-          sqlcmd -S "${{ secrets.PINGGY_URL }}" -U "$ADMIN_USER" -P "$ADMIN_PASSWORD" -i "DatabaseAdministration/SQLStatements/SetupAll.sql"
+          sqlcmd -S "${{ secrets.PINGGY_URL }}" -U "$ADMIN_USER" -P "$ADMIN_PASSWORD" -N n -i "DatabaseAdministration/SQLStatements/SetupAll.sql"
 
       # Test the setup by querying the user table using Auto_user
       - name: Test Connection and Data
