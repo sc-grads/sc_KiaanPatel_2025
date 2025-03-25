@@ -1,4 +1,4 @@
-USE AutoTest;
+USE AutoTest1;
 GO
 EXEC [dbo].[InsertUser] 'John', 'Doe', 'john.doe@example.com';
 EXEC [dbo].[InsertUser] 'Jane', 'Smith', 'jane.smith@example.com';
