@@ -3,7 +3,7 @@ BEGIN
     CREATE LOGIN Auto_user WITH PASSWORD = 'Password123';
 END
 GO
-USE AutoTest;
+USE AutoTest1;
 GO
 IF NOT EXISTS (SELECT * FROM sys.database_principals WHERE name = 'Auto_user')
 BEGIN
