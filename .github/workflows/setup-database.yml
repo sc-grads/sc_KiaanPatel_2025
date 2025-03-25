@@ -9,33 +9,41 @@ on:
 
 jobs:
   setup-database:
-    runs-on: self-hosted  # Use your self-hosted runner
+    runs-on: ubuntu-latest  # Use GitHub-hosted runner
 
     steps:
       # Checkout the repository
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Install sqlcmd (if not already installed on your machine)
-      - name: Install sqlcmd (Windows)
+      # Add Microsoft repository for SQL Server tools
+      - name: Add Microsoft repository for SQL Server tools
         run: |
-          where sqlcmd || (
-            echo "Installing sqlcmd..."
-            curl -o msodbcsql.msi https://go.microsoft.com/fwlink/?linkid=2230310
-            msiexec /i msodbcsql.msi /quiet /qn /norestart IACCEPTMSODBCSSQLLICENSETERMS=YES
-            set "PATH=%PATH%;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn"
-          )
-        shell: cmd
-        if: runner.os == 'Windows'
+          sudo apt-get update
+          sudo apt-get install -y curl
+          curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+          curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list
+          sudo apt-get update
 
-      # Execute the combined SQL script using the pre-provided Pinggy URL
+      # Install SQL Server client (sqlcmd)
+      - name: Install SQL Server client
+        run: sudo apt-get install -y mssql-tools unixodbc-dev
+
+      # Add SQL Server tools to PATH
+      - name: Add SQL Server tools to PATH
+        run: echo "/opt/mssql-tools/bin" >> $GITHUB_PATH
+
+      # Test connection to SQL Server
+      - name: Test Connection to SQL Server
+        run: |
+          sqlcmd -S "${{ secrets.PINGGY_URL }}" -U Auto_user -P "${{ secrets.SQL_PASSWORD }}" -Q "SELECT @@VERSION" || echo "Connection failed: check server, user, or password"
+
+      # Execute the combined SQL script (SetupAll.sql)
       - name: Setup Database, User, Table, Procedure, and Data
         run: |
-          sqlcmd -S "${{ secrets.PINGGY_URL }}" -U Auto_user -P ${{ secrets.SQL_PASSWORD }} -i DatabaseAdministration/SQLStatements/SetupAll.sql
-        shell: cmd
+          sqlcmd -S "${{ secrets.PINGGY_URL }}" -U Auto_user -P "${{ secrets.SQL_PASSWORD }}" -i "DatabaseAdministration/SQLStatements/SetupAll.sql"
 
-      # Test the setup
+      # Test the setup by querying the user table
       - name: Test Connection and Data
         run: |
-          sqlcmd -S "${{ secrets.PINGGY_URL }}" -U Auto_user -P ${{ secrets.SQL_PASSWORD }} -d AutoTest -Q "SELECT * FROM [dbo].[user];"
-        shell: cmd
+          sqlcmd -S "${{ secrets.PINGGY_URL }}" -U Auto_user -P "${{ secrets.SQL_PASSWORD }}" -d AutoTest -Q "SELECT * FROM [dbo].[user];"
