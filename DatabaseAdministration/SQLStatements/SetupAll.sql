@@ -1,31 +1,31 @@
 -- Step 1: Drop the AutoTest database if it exists (to start fresh)
-IF EXISTS (SELECT * FROM sys.databases WHERE name = 'AutoTest')
+IF EXISTS (SELECT * FROM sys.databases WHERE name = 'AutoTestDB')
 BEGIN
-    ALTER DATABASE AutoTest SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
-    DROP DATABASE AutoTest;
+    ALTER DATABASE AutoTestDB SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+    DROP DATABASE AutoTestDB;
 END
 GO
 
 -- Step 2: Create the AutoTest database
-IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'AutoTest')
+IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'AutoTestDB')
 BEGIN
-    CREATE DATABASE AutoTest;
+    CREATE DATABASE AutoTestDB;
 END
 GO
 
 -- Step 3: Create the Auto_user login with Password123 and set default database to AutoTest
 IF NOT EXISTS (SELECT * FROM sys.server_principals WHERE name = 'Auto_user')
 BEGIN
-    CREATE LOGIN Auto_user WITH PASSWORD = 'Password123', DEFAULT_DATABASE = AutoTest;
+    CREATE LOGIN Auto_user WITH PASSWORD = 'Password123', DEFAULT_DATABASE = AutoTestDB;
 END
 ELSE
 BEGIN
-    ALTER LOGIN Auto_user WITH PASSWORD = 'Password123', DEFAULT_DATABASE = AutoTest;
+    ALTER LOGIN Auto_user WITH PASSWORD = 'Password123', DEFAULT_DATABASE = AutoTestDB;
 END
 GO
 
 -- Step 4: Map the Auto_user login to the AutoTest database and grant db_owner
-USE AutoTest;
+USE AutoTestDB;
 GO
 IF NOT EXISTS (SELECT * FROM sys.database_principals WHERE name = 'Auto_user')
 BEGIN
@@ -42,7 +42,7 @@ ALTER SERVER ROLE sysadmin ADD MEMBER Auto_user;
 GO
 
 -- Step 6: Create the user table in the AutoTest database
-USE AutoTest;
+USE AutoTestDB;
 GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[user]') AND type in (N'U'))
 BEGIN
