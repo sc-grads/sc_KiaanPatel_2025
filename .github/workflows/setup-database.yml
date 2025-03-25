@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ main ]
   workflow_dispatch:
+    inputs:
+      pinggy_url:
+        description: 'Pinggy Tunnel URL (e.g., rncig-105-184-3-50.a.free.pinggy.link:45777)'
+        required: true
 
 jobs:
   setup-database:
@@ -28,24 +32,23 @@ jobs:
           echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
           source ~/.bashrc
 
-      # Execute SQL scripts using the pre-provided Pinggy URL
+      # Execute SQL scripts using the provided Pinggy URL
       - name: Create Database
         run: |
-          sqlcmd -S "${{ secrets.PINGGY_URL }}" -U Auto_user -P ${{ secrets.SQL_PASSWORD }} -i sql_scripts/create_database.sql
+          sqlcmd -S "${{ github.event.inputs.pinggy_url }}" -U Auto_user -P ${{ secrets.SQL_PASSWORD }} -i sql_scripts/create_database.sql
 
       - name: Create User
         run: |
-          sqlcmd -S "${{ secrets.PINGGY_URL }}" -U Auto_user -P ${{ secrets.SQL_PASSWORD }} -i sql_scripts/create_user.sql
+          sqlcmd -S "${{ github.event.inputs.pinggy_url }}" -U Auto_user -P ${{ secrets.SQL_PASSWORD }} -i sql_scripts/create_user.sql
 
       - name: Create Table and Stored Procedure
         run: |
-          sqlcmd -S "${{ secrets.PINGGY_URL }}" -U Auto_user -P ${{ secrets.SQL_PASSWORD }} -i sql_scripts/create_table_and_procedure.sql
+          sqlcmd -S "${{ github.event.inputs.pinggy_url }}" -U Auto_user -P ${{ secrets.SQL_PASSWORD }} -i sql_scripts/create_table_and_procedure.sql
 
       - name: Insert Data
         run: |
-          sqlcmd -S "${{ secrets.PINGGY_URL }}" -U Auto_user -P ${{ secrets.SQL_PASSWORD }} -i sql_scripts/insert_data.sql
+          sqlcmd -S "${{ github.event.inputs.pinggy_url }}" -U Auto_user -P ${{ secrets.SQL_PASSWORD }} -i sql_scripts/insert_data.sql
 
-      # Test the setup
       - name: Test Connection and Data
         run: |
-          sqlcmd -S "${{ secrets.PINGGY_URL }}" -U Auto_user -P ${{ secrets.SQL_PASSWORD }} -d AutoTest -Q "SELECT * FROM [dbo].[user];"
+          sqlcmd -S "${{ github.event.inputs.pinggy_url }}" -U Auto_user -P ${{ secrets.SQL_PASSWORD }} -d AutoTest -Q "SELECT * FROM [dbo].[user];"
