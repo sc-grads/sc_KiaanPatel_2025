@@ -1,0 +1,51 @@
+name: Setup SQL Server Database
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  setup-database:
+    runs-on: ubuntu-latest  # GitHub-hosted runner
+
+    steps:
+      # Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Install sqlcmd
+      - name: Install sqlcmd
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y curl
+          curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+          curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list
+          sudo apt-get update
+          sudo apt-get install -y mssql-tools unixodbc-dev
+          echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
+          source ~/.bashrc
+
+      # Execute SQL scripts using the pre-provided Pinggy URL
+      - name: Create Database
+        run: |
+          sqlcmd -S "${{ secrets.PINGGY_URL }}" -U Auto_user -P ${{ secrets.SQL_PASSWORD }} -i sql_scripts/create_database.sql
+
+      - name: Create User
+        run: |
+          sqlcmd -S "${{ secrets.PINGGY_URL }}" -U Auto_user -P ${{ secrets.SQL_PASSWORD }} -i sql_scripts/create_user.sql
+
+      - name: Create Table and Stored Procedure
+        run: |
+          sqlcmd -S "${{ secrets.PINGGY_URL }}" -U Auto_user -P ${{ secrets.SQL_PASSWORD }} -i sql_scripts/create_table_and_procedure.sql
+
+      - name: Insert Data
+        run: |
+          sqlcmd -S "${{ secrets.PINGGY_URL }}" -U Auto_user -P ${{ secrets.SQL_PASSWORD }} -i sql_scripts/insert_data.sql
+
+      # Test the setup
+      - name: Test Connection and Data
+        run: |
+          sqlcmd -S "${{ secrets.PINGGY_URL }}" -U Auto_user -P ${{ secrets.SQL_PASSWORD }} -d AutoTest -Q "SELECT * FROM [dbo].[user];"
