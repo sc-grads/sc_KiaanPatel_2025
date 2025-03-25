@@ -28,25 +28,10 @@ jobs:
         shell: cmd
         if: runner.os == 'Windows'
 
-      # Execute SQL scripts using the pre-provided Pinggy URL
-      - name: Create Database
+      # Execute the combined SQL script using the pre-provided Pinggy URL
+      - name: Setup Database, User, Table, Procedure, and Data
         run: |
-          sqlcmd -S "${{ secrets.PINGGY_URL }}" -U Auto_user -P ${{ secrets.SQL_PASSWORD }} -i sql_scripts/create_database.sql
-        shell: cmd
-
-      - name: Create User
-        run: |
-          sqlcmd -S "${{ secrets.PINGGY_URL }}" -U Auto_user -P ${{ secrets.SQL_PASSWORD }} -i sql_scripts/create_user.sql
-        shell: cmd
-
-      - name: Create Table and Stored Procedure
-        run: |
-          sqlcmd -S "${{ secrets.PINGGY_URL }}" -U Auto_user -P ${{ secrets.SQL_PASSWORD }} -i sql_scripts/create_table_and_procedure.sql
-        shell: cmd
-
-      - name: Insert Data
-        run: |
-          sqlcmd -S "${{ secrets.PINGGY_URL }}" -U Auto_user -P ${{ secrets.SQL_PASSWORD }} -i sql_scripts/insert_data.sql
+          sqlcmd -S "${{ secrets.PINGGY_URL }}" -U Auto_user -P ${{ secrets.SQL_PASSWORD }} -i sql_scripts/setup_all.sql
         shell: cmd
 
       # Test the setup
