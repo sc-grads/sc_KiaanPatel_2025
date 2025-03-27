@@ -1,4 +1,4 @@
-name: Setup SQL Server Database
+name: Setup SQL Server Database (Production and Deployment)
 
 on:
   push:
@@ -61,6 +61,7 @@ jobs:
 
   dev-deployment:
     runs-on: ubuntu-latest  # Use GitHub-hosted runner
+    needs: dev-production  # Ensures this job runs only after dev-production completes successfully
 
     steps:
       # Checkout the repository
@@ -103,7 +104,7 @@ jobs:
           sqlcmd -S "$FRIEND_SERVER_URL" -U "$FRIEND_ADMIN_USER" -P "$FRIEND_ADMIN_PASSWORD" -C -i "DatabaseAdministration/SQLStatements/SetupAll.sql"
 
       # Test the setup by querying the user table using Auto_user
-      - name: Test Friend's Connection and Data
+      - name: Test Connection and Data
         env:
           FRIEND_SERVER_URL: ${{ secrets.FRIEND_SERVER_URL }}
           FRIEND_SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}  # Password for Auto_user
