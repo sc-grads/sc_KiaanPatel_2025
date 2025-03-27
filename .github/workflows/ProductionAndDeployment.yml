@@ -33,29 +33,27 @@ jobs:
       - name: Add SQL Server tools to PATH
         run: echo "/opt/mssql-tools/bin" >> $GITHUB_PATH
 
-      # Test connection to local SQL Server via TCP tunnel using admin user
+      # Test connection to local SQL Server using Auto_user
       - name: Test Connection to Local SQL Server
         env:
-          ADMIN_USER: ${{ secrets.ADMIN_USER }}
-          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
-          LOCAL_PINGGY_URL: ${{ secrets.PINGGY_URL }}  # Your local TCP tunnel URL
+          SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
+          LOCAL_PINGGY_URL: ${{ secrets.LOCAL_PINGGY_URL }}
         run: |
-          sqlcmd -S "$LOCAL_PINGGY_URL" -U "$ADMIN_USER" -P "$ADMIN_PASSWORD" -C -Q "SELECT @@VERSION" || echo "Connection failed: check server, user, or password"
+          sqlcmd -S "$LOCAL_PINGGY_URL" -U Auto_user -P "$SQL_PASSWORD" -C -Q "SELECT @@VERSION" || echo "Connection failed: check server, user, or password"
 
-      # Execute the combined SQL script (SetupAll.sql) using the admin user
+      # Execute the SQL script using Auto_user
       - name: Setup Local Database
         env:
-          ADMIN_USER: ${{ secrets.ADMIN_USER }}
-          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
-          LOCAL_PINGGY_URL: ${{ secrets.PINGGY_URL }}
+          SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
+          LOCAL_PINGGY_URL: ${{ secrets.LOCAL_PINGGY_URL }}
         run: |
-          sqlcmd -S "$LOCAL_PINGGY_URL" -U "$ADMIN_USER" -P "$ADMIN_PASSWORD" -C -i "DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql"
+          sqlcmd -S "$LOCAL_PINGGY_URL" -U Auto_user -P "$SQL_PASSWORD" -C -i "DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql"
 
       # Test the setup by querying the user table using Auto_user
       - name: Test Local Connection and Data
         env:
-          LOCAL_PINGGY_URL: ${{ secrets.PINGGY_URL }}
-          SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}  # Password for Auto_user
+          SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
+          LOCAL_PINGGY_URL: ${{ secrets.LOCAL_PINGGY_URL }}
         run: |
           sqlcmd -S "$LOCAL_PINGGY_URL" -U Auto_user -P "$SQL_PASSWORD" -C -d AutoTestKiaan -Q "SELECT * FROM [dbo].[user];"
 
@@ -85,28 +83,26 @@ jobs:
       - name: Add SQL Server tools to PATH
         run: echo "/opt/mssql-tools/bin" >> $GITHUB_PATH
 
-      # Test connection to friend's SQL Server using admin user
+      # Test connection to friend's SQL Server using Auto_user
       - name: Test Connection to Friend's SQL Server
         env:
-          FRIEND_ADMIN_USER: ${{ secrets.FRIEND_ADMIN_USER }}
-          FRIEND_ADMIN_PASSWORD: ${{ secrets.FRIEND_ADMIN_PASSWORD }}
-          FRIEND_SERVER_URL: ${{ secrets.FRIEND_SERVER_URL }}  # Your friend's DB server URL
-        run: |
-          sqlcmd -S "$FRIEND_SERVER_URL" -U "$FRIEND_ADMIN_USER" -P "$FRIEND_ADMIN_PASSWORD" -C -Q "SELECT @@VERSION" || echo "Connection failed: check server, user, or password"
-
-      # Execute the combined SQL script (SetupAll.sql) using the admin user
-      - name: Setup Friend's Database
-        env:
-          FRIEND_ADMIN_USER: ${{ secrets.FRIEND_ADMIN_USER }}
-          FRIEND_ADMIN_PASSWORD: ${{ secrets.FRIEND_ADMIN_PASSWORD }}
+          FRIEND_SQL_PASSWORD: ${{ secrets.FRIEND_SQL_PASSWORD }}
           FRIEND_SERVER_URL: ${{ secrets.FRIEND_SERVER_URL }}
         run: |
-          sqlcmd -S "$FRIEND_SERVER_URL" -U "$FRIEND_ADMIN_USER" -P "$FRIEND_ADMIN_PASSWORD" -C -i "DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql"
+          sqlcmd -S "$FRIEND_SERVER_URL" -U Auto_user -P "$FRIEND_SQL_PASSWORD" -C -Q "SELECT @@VERSION" || echo "Connection failed: check server, user, or password"
+
+      # Execute the SQL script using Auto_user
+      - name: Setup Friend's Database
+        env:
+          FRIEND_SQL_PASSWORD: ${{ secrets.FRIEND_SQL_PASSWORD }}
+          FRIEND_SERVER_URL: ${{ secrets.FRIEND_SERVER_URL }}
+        run: |
+          sqlcmd -S "$FRIEND_SERVER_URL" -U Auto_user -P "$FRIEND_SQL_PASSWORD" -C -i "DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql"
 
       # Test the setup by querying the user table using Auto_user
       - name: Test Connection and Data
         env:
           FRIEND_SERVER_URL: ${{ secrets.FRIEND_SERVER_URL }}
-          FRIEND_SQL_PASSWORD: ${{ secrets.FRIEND_SQL_PASSWORD }}  # Password for Auto_user
+          FRIEND_SQL_PASSWORD: ${{ secrets.FRIEND_SQL_PASSWORD }}
         run: |
           sqlcmd -S "$FRIEND_SERVER_URL" -U Auto_user -P "$FRIEND_SQL_PASSWORD" -C -d AutoTestKiaan -Q "SELECT * FROM [dbo].[user];"
