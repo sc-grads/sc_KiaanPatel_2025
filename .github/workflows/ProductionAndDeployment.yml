@@ -2,9 +2,13 @@ name: Setup SQL Server Database (Production and Deployment)
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
+    paths:
+      - 'DatabaseAdministration/SQLStatements/**'  # Trigger only on changes to SQL files
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
@@ -12,97 +16,106 @@ jobs:
     runs-on: ubuntu-latest  # Use GitHub-hosted runner
 
     steps:
-      # Checkout the repository
+      # Checkout the repository to access SQL script
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Fetch full history for consistency
 
       # Add Microsoft repository for SQL Server tools
       - name: Add Microsoft repository for SQL Server tools
         run: |
           sudo apt-get update
-          sudo apt-get install -y curl
-          curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
-          curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list
-          sudo apt-get update
+          sudo apt-get install -y curl gnupg  # Install curl and gnupg for repo setup
+          curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -  # Add Microsoft key
+          curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list  # Add Microsoft repo
+          sudo apt-get update  # Update package list
 
       # Install SQL Server client (sqlcmd)
       - name: Install SQL Server client
-        run: sudo apt-get install -y mssql-tools unixodbc-dev
+        run: |
+          sudo ACCEPT_EULA=Y apt-get install -y mssql-tools unixodbc-dev  # Install sqlcmd and ODBC driver, accepting EULA
 
-      # Add SQL Server tools to PATH
+      # Add SQL Server tools to PATH for command-line access
       - name: Add SQL Server tools to PATH
-        run: echo "/opt/mssql-tools/bin" >> $GITHUB_PATH
+        run: |
+          echo "/opt/mssql-tools/bin" >> $GITHUB_PATH  # Ensure sqlcmd is available in PATH
 
-      # Test connection to local SQL Server using Auto_user
+      # Test connection to local SQL Server via TCP tunnel using Auto_user
       - name: Test Connection to Local SQL Server
         env:
-          SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
-          LOCAL_PINGGY_URL: ${{ secrets.LOCAL_PINGGY_URL }}
+          SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}  # Password for Auto_user on local server
+          LOCAL_PINGGY_URL: ${{ secrets.LOCAL_PINGGY_URL }}  # Local TCP tunnel URL
         run: |
-          sqlcmd -S "$LOCAL_PINGGY_URL" -U Auto_user -P "$SQL_PASSWORD" -C -Q "SELECT @@VERSION" || echo "Connection failed: check server, user, or password"
+          sqlcmd -S "$LOCAL_PINGGY_URL" -U Auto_user -P "$SQL_PASSWORD" -C -Q "SELECT @@VERSION" || echo "Connection failed: check server, user, or password"  # Test connection and print version
 
-      # Execute the SQL script using Auto_user
+      # Execute the SQL script to set up database, table, procedure, and data
       - name: Setup Local Database
         env:
-          SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
-          LOCAL_PINGGY_URL: ${{ secrets.LOCAL_PINGGY_URL }}
+          SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}  # Password for Auto_user on local server
+          LOCAL_PINGGY_URL: ${{ secrets.LOCAL_PINGGY_URL }}  # Local TCP tunnel URL
         run: |
-          sqlcmd -S "$LOCAL_PINGGY_URL" -U Auto_user -P "$SQL_PASSWORD" -C -i "DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql"
+          sqlcmd -S "$LOCAL_PINGGY_URL" -U Auto_user -P "$SQL_PASSWORD" -C -i "DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql"  # Run setup script
 
-      # Test the setup by querying the user table using Auto_user
+      # Test the setup by querying the user table
       - name: Test Local Connection and Data
         env:
-          SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
-          LOCAL_PINGGY_URL: ${{ secrets.LOCAL_PINGGY_URL }}
+          SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}  # Password for Auto_user on local server
+          LOCAL_PINGGY_URL: ${{ secrets.LOCAL_PINGGY_URL }}  # Local TCP tunnel URL
         run: |
-          sqlcmd -S "$LOCAL_PINGGY_URL" -U Auto_user -P "$SQL_PASSWORD" -C -d AutoTestKiaan -Q "SELECT * FROM [dbo].[user];"
+          sqlcmd -S "$LOCAL_PINGGY_URL" -U Auto_user -P "$SQL_PASSWORD" -C -d AutoTestKiaan -Q "SELECT * FROM [dbo].[user];"  # Verify data in user table
 
   dev-deployment:
     runs-on: ubuntu-latest  # Use GitHub-hosted runner
     needs: dev-production  # Ensures this job runs only after dev-production completes successfully
 
     steps:
-      # Checkout the repository
+      # Checkout the repository to access SQL script
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Fetch full history for consistency
 
       # Add Microsoft repository for SQL Server tools
       - name: Add Microsoft repository for SQL Server tools
         run: |
           sudo apt-get update
-          sudo apt-get install -y curl
-          curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
-          curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list
-          sudo apt-get update
+          sudo apt-get install -y curl gnupg  # Install curl and gnupg for repo setup
+          curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -  # Add Microsoft key
+          curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list  # Add Microsoft repo
+          sudo apt-get update  # Update package list
 
       # Install SQL Server client (sqlcmd)
       - name: Install SQL Server client
-        run: sudo apt-get install -y mssql-tools unixodbc-dev
+        run: |
+          sudo ACCEPT_EULA=Y apt-get install -y mssql-tools unixodbc-dev  # Install sqlcmd and ODBC driver, accepting EULA
 
-      # Add SQL Server tools to PATH
+      # Add SQL Server tools to PATH for command-line access
       - name: Add SQL Server tools to PATH
-        run: echo "/opt/mssql-tools/bin" >> $GITHUB_PATH
+        run: |
+          echo "/opt/mssql-tools/bin" >> $GITHUB_PATH  # Ensure sqlcmd is available in PATH
 
       # Test connection to friend's SQL Server using Auto_user
       - name: Test Connection to Friend's SQL Server
         env:
-          FRIEND_SQL_PASSWORD: ${{ secrets.FRIEND_SQL_PASSWORD }}
-          FRIEND_SERVER_URL: ${{ secrets.FRIEND_SERVER_URL }}
+          FRIEND_SQL_PASSWORD: ${{ secrets.FRIEND_SQL_PASSWORD }}  # Password for Auto_user on friend's server
+          FRIEND_SERVER_URL: ${{ secrets.FRIEND_SERVER_URL }}  # Friend's server URL
         run: |
-          sqlcmd -S "$FRIEND_SERVER_URL" -U Auto_user -P "$FRIEND_SQL_PASSWORD" -C -Q "SELECT @@VERSION" || echo "Connection failed: check server, user, or password"
+          sqlcmd -S "$FRIEND_SERVER_URL" -U Auto_user -P "$FRIEND_SQL_PASSWORD" -C -Q "SELECT @@VERSION" || echo "Connection failed: check server, user, or password"  # Test connection and print version
 
-      # Execute the SQL script using Auto_user
+      # Execute the SQL script to set up database, table, procedure, and data
       - name: Setup Friend's Database
         env:
-          FRIEND_SQL_PASSWORD: ${{ secrets.FRIEND_SQL_PASSWORD }}
-          FRIEND_SERVER_URL: ${{ secrets.FRIEND_SERVER_URL }}
+          FRIEND_SQL_PASSWORD: ${{ secrets.FRIEND_SQL_PASSWORD }}  # Password for Auto_user on friend's server
+          FRIEND_SERVER_URL: ${{ secrets.FRIEND_SERVER_URL }}  # Friend's server URL
         run: |
-          sqlcmd -S "$FRIEND_SERVER_URL" -U Auto_user -P "$FRIEND_SQL_PASSWORD" -C -i "DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql"
+          sqlcmd -S "$FRIEND_SERVER_URL" -U Auto_user -P "$FRIEND_SQL_PASSWORD" -C -i "DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql"  # Run setup script
 
-      # Test the setup by querying the user table using Auto_user
+      # Test the setup by querying the user table
       - name: Test Connection and Data
         env:
-          FRIEND_SERVER_URL: ${{ secrets.FRIEND_SERVER_URL }}
-          FRIEND_SQL_PASSWORD: ${{ secrets.FRIEND_SQL_PASSWORD }}
+          FRIEND_SERVER_URL: ${{ secrets.FRIEND_SERVER_URL }}  # Friend's server URL
+          FRIEND_SQL_PASSWORD: ${{ secrets.FRIEND_SQL_PASSWORD }}  # Password for Auto_user on friend's server
         run: |
-          sqlcmd -S "$FRIEND_SERVER_URL" -U Auto_user -P "$FRIEND_SQL_PASSWORD" -C -d AutoTestKiaan -Q "SELECT * FROM [dbo].[user];"
+          sqlcmd -S "$FRIEND_SERVER_URL" -U Auto_user -P "$FRIEND_SQL_PASSWORD" -C -d AutoTestKiaan -Q "SELECT * FROM [dbo].[user];"  # Verify data in user table
+ 
