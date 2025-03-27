@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  dev-production:
+  development:
     runs-on: ubuntu-latest  # Use GitHub-hosted runner
 
     steps:
@@ -57,8 +57,8 @@ jobs:
         run: |
           sqlcmd -S "$LOCAL_PINGGY_URL" -U Auto_user -P "$SQL_PASSWORD" -C -Q "SELECT @@VERSION" || echo "Connection failed: check server, user, or password"  # Test connection and print version
 
-  dev-deployment:
-    needs: dev-production  # Ensures this job runs only after dev-production completes successfully
+  production:
+    needs: development  # Ensures this job runs only after development completes successfully
     runs-on: ubuntu-latest  # Use GitHub-hosted runner
     environment: Need-Siphenathi-Approval
     
