@@ -49,7 +49,7 @@ jobs:
           ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
           LOCAL_PINGGY_URL: ${{ secrets.PINGGY_URL }}
         run: |
-          sqlcmd -S "$LOCAL_PINGGY_URL" -U "$ADMIN_USER" -P "$ADMIN_PASSWORD" -C -i "DatabaseAdministration/SQLStatements/SetupAll.sql"
+          sqlcmd -S "$LOCAL_PINGGY_URL" -U "$ADMIN_USER" -P "$ADMIN_PASSWORD" -C -i "DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql"
 
       # Test the setup by querying the user table using Auto_user
       - name: Test Local Connection and Data
@@ -57,7 +57,7 @@ jobs:
           LOCAL_PINGGY_URL: ${{ secrets.PINGGY_URL }}
           SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}  # Password for Auto_user
         run: |
-          sqlcmd -S "$LOCAL_PINGGY_URL" -U Auto_user -P "$SQL_PASSWORD" -C -d AutoTestDB -Q "SELECT * FROM [dbo].[user];"
+          sqlcmd -S "$LOCAL_PINGGY_URL" -U Auto_user -P "$SQL_PASSWORD" -C -d AutoTestKiaan -Q "SELECT * FROM [dbo].[user];"
 
   dev-deployment:
     runs-on: ubuntu-latest  # Use GitHub-hosted runner
@@ -101,7 +101,7 @@ jobs:
           FRIEND_ADMIN_PASSWORD: ${{ secrets.FRIEND_ADMIN_PASSWORD }}
           FRIEND_SERVER_URL: ${{ secrets.FRIEND_SERVER_URL }}
         run: |
-          sqlcmd -S "$FRIEND_SERVER_URL" -U "$FRIEND_ADMIN_USER" -P "$FRIEND_ADMIN_PASSWORD" -C -i "DatabaseAdministration/SQLStatements/SetupAll.sql"
+          sqlcmd -S "$FRIEND_SERVER_URL" -U "$FRIEND_ADMIN_USER" -P "$FRIEND_ADMIN_PASSWORD" -C -i "DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql"
 
       # Test the setup by querying the user table using Auto_user
       - name: Test Connection and Data
@@ -109,4 +109,4 @@ jobs:
           FRIEND_SERVER_URL: ${{ secrets.FRIEND_SERVER_URL }}
           FRIEND_SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}  # Password for Auto_user
         run: |
-          sqlcmd -S "$FRIEND_SERVER_URL" -U Auto_user -P "$SQL_PASSWORD" -C -d AutoTestDB -Q "SELECT * FROM [dbo].[user];"
+          sqlcmd -S "$FRIEND_SERVER_URL" -U Auto_user -P "$SQL_PASSWORD" -C -d AutoTestKiaan -Q "SELECT * FROM [dbo].[user];"
