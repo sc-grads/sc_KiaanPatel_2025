@@ -69,6 +69,7 @@ BEGIN
 END
 GO
 
+--Comment
 -- Verify the data (optional, for confirmation)
 SELECT * FROM [dbo].[user];
 GO
