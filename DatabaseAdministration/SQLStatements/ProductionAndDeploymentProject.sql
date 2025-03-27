@@ -2,18 +2,18 @@ USE master;
 GO
 
 -- Create database if not exists
-IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = 'AutoTestKiaan')
+IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = 'AutoTest_KP27March')
 BEGIN
-    CREATE DATABASE AutoTestKiaan;
-    PRINT 'Database AutoTestKiaan created successfully.';
+    CREATE DATABASE AutoTest_KP27March;
+    PRINT 'Database AutoTest_KP27March created successfully.';
 END
 ELSE
 BEGIN
-    PRINT 'Database AutoTestKiaan already exists.';
+    PRINT 'Database AutoTest_KP27March already exists.';
 END
 GO
 
-USE AutoTestKiaan;
+USE AutoTest_KP27March;
 GO
 
 -- Create the user table if not exists
