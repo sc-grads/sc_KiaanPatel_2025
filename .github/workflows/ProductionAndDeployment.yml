@@ -1,14 +1,6 @@
 name: Setup SQL Server Database (Production and Deployment)
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'DatabaseAdministration/SQLStatements/**'  # Trigger only on changes to SQL files
-  pull_request:
-    branches:
-      - main
   workflow_dispatch:
 
 jobs:
