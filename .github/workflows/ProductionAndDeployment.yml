@@ -107,6 +107,6 @@ jobs:
       - name: Test Connection and Data
         env:
           FRIEND_SERVER_URL: ${{ secrets.FRIEND_SERVER_URL }}
-          FRIEND_SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}  # Password for Auto_user
+          FRIEND_SQL_PASSWORD: ${{ secrets.FRIEND_SQL_PASSWORD }}  # Password for Auto_user
         run: |
-          sqlcmd -S "$FRIEND_SERVER_URL" -U Auto_user -P "$SQL_PASSWORD" -C -d AutoTestKiaan -Q "SELECT * FROM [dbo].[user];"
+          sqlcmd -S "$FRIEND_SERVER_URL" -U Auto_user -P "$FRIEND_SQL_PASSWORD" -C -d AutoTestKiaan -Q "SELECT * FROM [dbo].[user];"
