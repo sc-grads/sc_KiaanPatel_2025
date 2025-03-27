@@ -1,0 +1,111 @@
+name: Setup SQL Server Database
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  dev-production:
+    runs-on: ubuntu-latest  # Use GitHub-hosted runner
+
+    steps:
+      # Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Add Microsoft repository for SQL Server tools
+      - name: Add Microsoft repository for SQL Server tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y curl
+          curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+          curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list
+          sudo apt-get update
+
+      # Install SQL Server client (sqlcmd)
+      - name: Install SQL Server client
+        run: sudo apt-get install -y mssql-tools unixodbc-dev
+
+      # Add SQL Server tools to PATH
+      - name: Add SQL Server tools to PATH
+        run: echo "/opt/mssql-tools/bin" >> $GITHUB_PATH
+
+      # Test connection to local SQL Server via TCP tunnel using admin user
+      - name: Test Connection to Local SQL Server
+        env:
+          ADMIN_USER: ${{ secrets.ADMIN_USER }}
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+          LOCAL_PINGGY_URL: ${{ secrets.PINGGY_URL }}  # Your local TCP tunnel URL
+        run: |
+          sqlcmd -S "$LOCAL_PINGGY_URL" -U "$ADMIN_USER" -P "$ADMIN_PASSWORD" -C -Q "SELECT @@VERSION" || echo "Connection failed: check server, user, or password"
+
+      # Execute the combined SQL script (SetupAll.sql) using the admin user
+      - name: Setup Local Database
+        env:
+          ADMIN_USER: ${{ secrets.ADMIN_USER }}
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+          LOCAL_PINGGY_URL: ${{ secrets.PINGGY_URL }}
+        run: |
+          sqlcmd -S "$LOCAL_PINGGY_URL" -U "$ADMIN_USER" -P "$ADMIN_PASSWORD" -C -i "DatabaseAdministration/SQLStatements/SetupAll.sql"
+
+      # Test the setup by querying the user table using Auto_user
+      - name: Test Local Connection and Data
+        env:
+          LOCAL_PINGGY_URL: ${{ secrets.PINGGY_URL }}
+          SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}  # Password for Auto_user
+        run: |
+          sqlcmd -S "$LOCAL_PINGGY_URL" -U Auto_user -P "$SQL_PASSWORD" -C -d AutoTestDB -Q "SELECT * FROM [dbo].[user];"
+
+  dev-deployment:
+    runs-on: ubuntu-latest  # Use GitHub-hosted runner
+
+    steps:
+      # Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Add Microsoft repository for SQL Server tools
+      - name: Add Microsoft repository for SQL Server tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y curl
+          curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+          curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list
+          sudo apt-get update
+
+      # Install SQL Server client (sqlcmd)
+      - name: Install SQL Server client
+        run: sudo apt-get install -y mssql-tools unixodbc-dev
+
+      # Add SQL Server tools to PATH
+      - name: Add SQL Server tools to PATH
+        run: echo "/opt/mssql-tools/bin" >> $GITHUB_PATH
+
+      # Test connection to friend's SQL Server using admin user
+      - name: Test Connection to Friend's SQL Server
+        env:
+          FRIEND_ADMIN_USER: ${{ secrets.FRIEND_ADMIN_USER }}
+          FRIEND_ADMIN_PASSWORD: ${{ secrets.FRIEND_ADMIN_PASSWORD }}
+          FRIEND_SERVER_URL: ${{ secrets.FRIEND_SERVER_URL }}  # Your friend's DB server URL
+        run: |
+          sqlcmd -S "$FRIEND_SERVER_URL" -U "$FRIEND_ADMIN_USER" -P "$FRIEND_ADMIN_PASSWORD" -C -Q "SELECT @@VERSION" || echo "Connection failed: check server, user, or password"
+
+      # Execute the combined SQL script (SetupAll.sql) using the admin user
+      - name: Setup Friend's Database
+        env:
+          FRIEND_ADMIN_USER: ${{ secrets.FRIEND_ADMIN_USER }}
+          FRIEND_ADMIN_PASSWORD: ${{ secrets.FRIEND_ADMIN_PASSWORD }}
+          FRIEND_SERVER_URL: ${{ secrets.FRIEND_SERVER_URL }}
+        run: |
+          sqlcmd -S "$FRIEND_SERVER_URL" -U "$FRIEND_ADMIN_USER" -P "$FRIEND_ADMIN_PASSWORD" -C -i "DatabaseAdministration/SQLStatements/SetupAll.sql"
+
+      # Test the setup by querying the user table using Auto_user
+      - name: Test Friend's Connection and Data
+        env:
+          FRIEND_SERVER_URL: ${{ secrets.FRIEND_SERVER_URL }}
+          FRIEND_SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}  # Password for Auto_user
+        run: |
+          sqlcmd -S "$FRIEND_SERVER_URL" -U Auto_user -P "$SQL_PASSWORD" -C -d AutoTestDB -Q "SELECT * FROM [dbo].[user];"
