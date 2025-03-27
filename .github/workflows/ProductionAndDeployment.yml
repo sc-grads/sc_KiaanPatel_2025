@@ -66,8 +66,10 @@ jobs:
           sqlcmd -S "$LOCAL_PINGGY_URL" -U Auto_user -P "$SQL_PASSWORD" -C -d AutoTestKiaan -Q "SELECT * FROM [dbo].[user];"  # Verify data in user table
 
   dev-deployment:
-    runs-on: ubuntu-latest  # Use GitHub-hosted runner
     needs: dev-production  # Ensures this job runs only after dev-production completes successfully
+    runs-on: ubuntu-latest  # Use GitHub-hosted runner
+    environment: Need-Siphenathi-Approval
+    
 
     steps:
       # Checkout the repository to access SQL script
