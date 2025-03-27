@@ -45,7 +45,7 @@ jobs:
       - name: Test Connection to Local SQL Server
         env:
           SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}  # Password for Auto_user on local server
-          LOCAL_PINGGY_URL: ${{ secrets.LOCAL_PINGGY_URL }}  # Local TCP tunnel URL
+          LOCAL_PINGGY_URL: ${{ secrets.PINGGY_URL }}  # Local TCP tunnel URL
         run: |
           sqlcmd -S "$LOCAL_PINGGY_URL" -U Auto_user -P "$SQL_PASSWORD" -C -Q "SELECT @@VERSION" || echo "Connection failed: check server, user, or password"  # Test connection and print version
 
@@ -53,7 +53,7 @@ jobs:
       - name: Setup Local Database
         env:
           SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}  # Password for Auto_user on local server
-          LOCAL_PINGGY_URL: ${{ secrets.LOCAL_PINGGY_URL }}  # Local TCP tunnel URL
+          LOCAL_PINGGY_URL: ${{ secrets.PINGGY_URL }}  # Local TCP tunnel URL
         run: |
           sqlcmd -S "$LOCAL_PINGGY_URL" -U Auto_user -P "$SQL_PASSWORD" -C -i "DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql"  # Run setup script
 
@@ -61,7 +61,7 @@ jobs:
       - name: Test Local Connection and Data
         env:
           SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}  # Password for Auto_user on local server
-          LOCAL_PINGGY_URL: ${{ secrets.LOCAL_PINGGY_URL }}  # Local TCP tunnel URL
+          LOCAL_PINGGY_URL: ${{ secrets.PINGGY_URL }}  # Local TCP tunnel URL
         run: |
           sqlcmd -S "$LOCAL_PINGGY_URL" -U Auto_user -P "$SQL_PASSWORD" -C -d AutoTestKiaan -Q "SELECT * FROM [dbo].[user];"  # Verify data in user table
 
