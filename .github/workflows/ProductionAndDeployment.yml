@@ -55,7 +55,7 @@ jobs:
           SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}  # Password for Auto_user on local server
           LOCAL_PINGGY_URL: ${{ secrets.PINGGY_URL }}  # Local TCP tunnel URL
         run: |
-          sqlcmd -S "$LOCAL_PINGGY_URL" -U Auto_user -P "$SQL_PASSWORD" -C -d AutoTestKiaan -Q "SELECT * FROM [dbo].[user];"  # Verify data in user table
+          sqlcmd -S "$LOCAL_PINGGY_URL" -U Auto_user -P "$SQL_PASSWORD" -C -d AutoTest_KP27March -Q "SELECT * FROM [dbo].[user];"  # Verify data in user table
 
   dev-deployment:
     needs: dev-production  # Ensures this job runs only after dev-production completes successfully
@@ -111,5 +111,5 @@ jobs:
           FRIEND_SERVER_URL: ${{ secrets.FRIEND_SERVER_URL }}  # Friend's server URL
           FRIEND_SQL_PASSWORD: ${{ secrets.FRIEND_SQL_PASSWORD }}  # Password for Auto_user on friend's server
         run: |
-          sqlcmd -S "$FRIEND_SERVER_URL" -U Auto_user -P "$FRIEND_SQL_PASSWORD" -C -d AutoTestKiaan -Q "SELECT * FROM [dbo].[user];"  # Verify data in user table
+          sqlcmd -S "$FRIEND_SERVER_URL" -U Auto_user -P "$FRIEND_SQL_PASSWORD" -C -d AutoTest_KP27March -Q "SELECT * FROM [dbo].[user];"  # Verify data in user table
  
