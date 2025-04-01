@@ -34,10 +34,10 @@ name: SQL Linter CI
 
 on:  
   workflow_dispatch:  # Allows manual triggering  
-  push:  
+
    # paths:
    #   - 'DatabaseAdministration/SQLStatements/GitActionsDatabaseTestQuery.sql'  # Only triggers on changes to this file
-  pull_request:  
+  
    # paths:
    #   - 'DatabaseAdministration/SQLStatements/GitActionsDatabaseTestQuery.sql'  # Only triggers on changes to this file
   
