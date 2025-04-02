@@ -19,6 +19,9 @@ on:
         description: Path to SQL script
         required: true
         type: string
+    secrets:
+      SQL_PASSWORD:
+        required: true
 
 jobs:
   deploy:
