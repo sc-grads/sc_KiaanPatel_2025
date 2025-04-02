@@ -1,37 +1,35 @@
-name: SQL Server Deployment Template
+name: SQL Deployment Template
 
 on:
   workflow_call:
     inputs:
-      environment-type:
-        description: Type of environment (development/production)
-        required: true
-        type: string
-      sql-server-url:
-        description: SQL Server connection URL
-        required: true
-        type: string
-      sql-password:
-        description: SQL Server password
+      environment:
         required: true
         type: string
       sql-script-path:
-        description: Path to SQL script
         required: true
         type: string
     secrets:
+      SQL_SERVER:
+        required: true
       SQL_PASSWORD:
         required: true
 
 jobs:
   deploy:
+    name: Deploy to ${{ inputs.environment }}
     runs-on: ubuntu-latest
+    environment: ${{ inputs.environment == 'production' && 'Need-Siphenathi-Approval' || '' }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
-      - name: Setup SQL Server Tools
+      - name: Install sqlcmd
         run: |
+          echo "Installing sqlcmd on Ubuntu..."
+          set -e
           sudo apt-get update
           sudo apt-get install -y curl gnupg
           curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
@@ -40,29 +38,32 @@ jobs:
           sudo ACCEPT_EULA=Y apt-get install -y mssql-tools unixodbc-dev
           echo "/opt/mssql-tools/bin" >> $GITHUB_PATH
 
-      - name: Test Database Connection
+      - name: Deploy to ${{ inputs.environment }}
         env:
-          SQL_PASSWORD: ${{ inputs.sql-password }}
+          SQL_SERVER: ${{ secrets.SQL_SERVER }}
+          SQL_USER: Auto_user
+          SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
         run: |
-          if ! sqlcmd -S "${{ inputs.sql-server-url }}" -U Auto_user -P "$SQL_PASSWORD" -C -Q "SELECT @@VERSION"; then
-            echo "::error::Connection failed"
+          echo "Deploying to ${{ inputs.environment }} ($SQL_SERVER)..."
+          {
+            sqlcmd -S "$SQL_SERVER" -U "$SQL_USER" -P "$SQL_PASSWORD" -i "${{ inputs.sql-script-path }}" -l 60
+            echo "Deployment to ${{ inputs.environment }} successful."
+          } || {
+            echo "::error::Deployment to ${{ inputs.environment }} failed!"
             exit 1
-          fi
-
-      - name: Execute SQL Script
-        env:
-          SQL_PASSWORD: ${{ inputs.sql-password }}
-        run: |
-          if ! sqlcmd -S "${{ inputs.sql-server-url }}" -U Auto_user -P "$SQL_PASSWORD" -C -i "${{ inputs.sql-script-path }}"; then
-            echo "::error::Script execution failed"
-            exit 1
-          fi
+          }
 
       - name: Verify Deployment
         env:
-          SQL_PASSWORD: ${{ inputs.sql-password }}
+          SQL_SERVER: ${{ secrets.SQL_SERVER }}
+          SQL_USER: Auto_user
+          SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
         run: |
-          if ! sqlcmd -S "${{ inputs.sql-server-url }}" -U Auto_user -P "$SQL_PASSWORD" -C -Q "SELECT * FROM [dbo].[user]"; then
-            echo "::error::Verification failed"
+          echo "Verifying deployment in ${{ inputs.environment }}..."
+          {
+            sqlcmd -S "$SQL_SERVER" -U "$SQL_USER" -P "$SQL_PASSWORD" -Q "SELECT * FROM [dbo].[user]" -l 60
+            echo "Verification successful in ${{ inputs.environment }}."
+          } || {
+            echo "::error::Verification failed in ${{ inputs.environment }}!"
             exit 1
-          fi
+          }
