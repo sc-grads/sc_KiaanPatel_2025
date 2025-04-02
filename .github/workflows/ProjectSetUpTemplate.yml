@@ -12,7 +12,7 @@ jobs:
         with:
           server_url: ${{ secrets.PINGGY_URL }}
           sql_password: ${{ secrets.SQL_PASSWORD }}
-          script_path: "DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql"
+          script_path: "sc_KiaanPatel_2025/DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql"
 
   production:
     needs: development
@@ -24,4 +24,4 @@ jobs:
         with:
           server_url: ${{ secrets.FRIEND_SERVER_URL }}
           sql_password: ${{ secrets.FRIEND_SQL_PASSWORD }}
-          script_path: "DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql"
+          script_path: "sc_KiaanPatel_2025/DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql"
