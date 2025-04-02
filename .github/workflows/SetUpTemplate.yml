@@ -1,74 +1,68 @@
+# This is now a reusable workflow file
 name: SQL Server Deployment Template
-description: Reusable template for SQL Server database deployments
 
-inputs:
-  environment-type:
-    description: Type of environment (development/production)
-    required: true
-    default: 'development'
-  sql-server-url:
-    description: SQL Server connection URL
-    required: true
-  sql-password:
-    description: SQL Server password
-    required: true
-  sql-script-path:
-    description: Path to SQL script
-    required: true
-    default: 'DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql'
+on:
+  workflow_call:
+    inputs:
+      environment-type:
+        description: Type of environment (development/production)
+        required: true
+        type: string
+        default: 'development'
+      sql-server-url:
+        description: SQL Server connection URL
+        required: true
+        type: string
+      sql-password:
+        description: SQL Server password
+        required: true
+        type: string
+      sql-script-path:
+        description: Path to SQL script
+        required: true
+        type: string
+        default: 'DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql'
 
-runs:
-  using: "composite"
-  steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Setup SQL Server Tools
-      shell: bash
-      run: |
-        echo "Setting up SQL Server tools for ${{ inputs.environment-type }} environment..."
-        sudo apt-get update
-        sudo apt-get install -y curl gnupg
-        curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
-        curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list
-        sudo apt-get update
-        sudo ACCEPT_EULA=Y apt-get install -y mssql-tools unixodbc-dev
-        echo "/opt/mssql-tools/bin" >> $GITHUB_PATH
+      - name: Setup SQL Server Tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y curl gnupg
+          curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+          curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list
+          sudo apt-get update
+          sudo ACCEPT_EULA=Y apt-get install -y mssql-tools unixodbc-dev
+          echo "/opt/mssql-tools/bin" >> $GITHUB_PATH
 
-    - name: Test Database Connection
-      shell: bash
-      env:
-        SQL_PASSWORD: ${{ inputs.sql-password }}
-      run: |
-        echo "Testing connection to ${{ inputs.environment-type }} SQL Server..."
-        if ! sqlcmd -S "${{ inputs.sql-server-url }}" -U Auto_user -P "$SQL_PASSWORD" -C -Q "SELECT @@VERSION"; then
-          echo "::error::Connection failed to ${{ inputs.environment-type }} SQL Server"
-          exit 1
-        fi
-        echo "Connection successful!"
+      - name: Test Database Connection
+        env:
+          SQL_PASSWORD: ${{ inputs.sql-password }}
+        run: |
+          if ! sqlcmd -S "${{ inputs.sql-server-url }}" -U Auto_user -P "$SQL_PASSWORD" -C -Q "SELECT @@VERSION"; then
+            echo "::error::Connection failed"
+            exit 1
+          fi
 
-    - name: Execute Database Setup
-      shell: bash
-      env:
-        SQL_PASSWORD: ${{ inputs.sql-password }}
-      run: |
-        echo "Executing SQL script on ${{ inputs.environment-type }} environment..."
-        if ! sqlcmd -S "${{ inputs.sql-server-url }}" -U Auto_user -P "$SQL_PASSWORD" -C -i "${{ inputs.sql-script-path }}"; then
-          echo "::error::Failed to execute SQL script on ${{ inputs.environment-type }} environment"
-          exit 1
-        fi
-        echo "Database setup completed successfully!"
+      - name: Execute SQL Script
+        env:
+          SQL_PASSWORD: ${{ inputs.sql-password }}
+        run: |
+          if ! sqlcmd -S "${{ inputs.sql-server-url }}" -U Auto_user -P "$SQL_PASSWORD" -C -i "${{ inputs.sql-script-path }}"; then
+            echo "::error::Script execution failed"
+            exit 1
+          fi
 
-    - name: Verify Deployment
-      shell: bash
-      env:
-        SQL_PASSWORD: ${{ inputs.sql-password }}
-      run: |
-        echo "Verifying deployment on ${{ inputs.environment-type }} environment..."
-        if ! sqlcmd -S "${{ inputs.sql-server-url }}" -U Auto_user -P "$SQL_PASSWORD" -C -Q "SELECT * FROM [dbo].[user]"; then
-          echo "::error::Verification failed for ${{ inputs.environment-type }} environment"
-          exit 1
-        fi
-        echo "Verification successful!"
+      - name: Verify Deployment
+        env:
+          SQL_PASSWORD: ${{ inputs.sql-password }}
+        run: |
+          if ! sqlcmd -S "${{ inputs.sql-server-url }}" -U Auto_user -P "$SQL_PASSWORD" -C -Q "SELECT * FROM [dbo].[user]"; then
+            echo "::error::Verification failed"
+            exit 1
+          fi
