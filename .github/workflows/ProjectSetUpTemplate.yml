@@ -1,27 +1,40 @@
-name: Using Template for Setup SQL Server Database (Production and Deployment)
+name: SQL Server Database Setup
 
 on:
   workflow_dispatch:
+    inputs:
+      skip-production:
+        description: 'Skip production deployment?'
+        required: false
+        default: 'false'
+        type: boolean
 
 jobs:
   development:
+    name: Development Environment Setup
     runs-on: ubuntu-latest
+    
     steps:
-      - name: Run SQL Setup for Development
+      - name: Run Development Deployment
         uses: ./.github/workflows/SetUpTemplate.yml
         with:
-          server_url: ${{ secrets.PINGGY_URL }}
-          sql_password: ${{ secrets.SQL_PASSWORD }}
-          script_path: "sc_KiaanPatel_2025/DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql"
+          environment-type: 'development'
+          sql-server-url: ${{ secrets.PINGGY_URL }}
+          sql-password: ${{ secrets.SQL_PASSWORD }}
+          sql-script-path: 'DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql'
 
   production:
+    name: Production Environment Deployment
     needs: development
+    if: ${{ !inputs.skip-production }}
     runs-on: ubuntu-latest
     environment: Need-Siphenathi-Approval
+    
     steps:
-      - name: Run SQL Setup for Production
+      - name: Run Production Deployment
         uses: ./.github/workflows/SetUpTemplate.yml
         with:
-          server_url: ${{ secrets.FRIEND_SERVER_URL }}
-          sql_password: ${{ secrets.FRIEND_SQL_PASSWORD }}
-          script_path: "sc_KiaanPatel_2025/DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql"
+          environment-type: 'production'
+          sql-server-url: ${{ secrets.FRIEND_SERVER_URL }}
+          sql-password: ${{ secrets.FRIEND_SQL_PASSWORD }}
+          sql-script-path: 'DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql'
