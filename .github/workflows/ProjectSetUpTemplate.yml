@@ -11,27 +11,20 @@ on:
 
 jobs:
   development:
-    name: Development Environment Setup
-    runs-on: ubuntu-latest
-    
-    steps:
-      - name: Run Development Deployment
-        uses: ./.github/workflows/SetUpTemplate.yml
-        with:
-          environment-type: 'development'
-          sql-server-url: ${{ secrets.PINGGY_URL }}
-          sql-password: ${{ secrets.SQL_PASSWORD }}
-          sql-script-path: 'DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql'
+    uses: ./.github/workflows/SetUpTemplate.yml
+    with:
+      environment-type: 'development'
+      sql-server-url: ${{ secrets.PINGGY_URL }}
+      sql-password: ${{ secrets.SQL_PASSWORD }}
+      sql-script-path: 'DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql'
 
   production:
-    name: Production Environment Deployment
     needs: development
     if: ${{ !inputs.skip-production }}
     runs-on: ubuntu-latest
     environment: Need-Siphenathi-Approval
-    
     steps:
-      - name: Run Production Deployment
+      - name: Call production deployment
         uses: ./.github/workflows/SetUpTemplate.yml
         with:
           environment-type: 'production'
