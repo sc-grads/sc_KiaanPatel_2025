@@ -1,4 +1,4 @@
-name: Template SQL Server Database Setup 
+name: SQL Server Database Setup
 
 on:
   workflow_dispatch:
@@ -9,30 +9,23 @@ on:
         default: 'false'
         type: boolean
 
-env:
-  DEV_SQL_URL: ${{ secrets.PINGGY_URL }}
-  DEV_SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
-  PROD_SQL_URL: ${{ secrets.FRIEND_SERVER_URL }}
-  PROD_SQL_PASSWORD: ${{ secrets.FRIEND_SQL_PASSWORD }}
-
 jobs:
   development:
     uses: ./.github/workflows/SetUpTemplate.yml
-    secrets: inherit
     with:
-      environment-type: 'development'
-      sql-server-url: ${{ env.DEV_SQL_URL }}
-      sql-password: ${{ env.DEV_SQL_PASSWORD }}
+      environment: 'development'
       sql-script-path: 'DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql'
+    secrets:
+      SQL_SERVER: ${{ secrets.PINGGY_URL }}
+      SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
 
   production:
     needs: development
     if: ${{ !inputs.skip-production }}
     uses: ./.github/workflows/SetUpTemplate.yml
-    secrets: inherit
-    environment: Need-Siphenathi-Approval
     with:
-      environment-type: 'production'
-      sql-server-url: ${{ env.PROD_SQL_URL }}
-      sql-password: ${{ env.PROD_SQL_PASSWORD }}
+      environment: 'production'
       sql-script-path: 'DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql'
+    secrets:
+      SQL_SERVER: ${{ secrets.FRIEND_SERVER_URL }}
+      SQL_PASSWORD: ${{ secrets.FRIEND_SQL_PASSWORD }}
