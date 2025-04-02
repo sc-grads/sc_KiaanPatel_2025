@@ -1,4 +1,4 @@
-name: Setup SQL Server Database (Production and Deployment)
+name: Using Template for Setup SQL Server Database (Production and Deployment)
 
 on:
   workflow_dispatch:
