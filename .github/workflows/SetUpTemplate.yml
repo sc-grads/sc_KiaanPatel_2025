@@ -1,4 +1,3 @@
-# This is now a reusable workflow file
 name: SQL Server Deployment Template
 
 on:
@@ -8,7 +7,6 @@ on:
         description: Type of environment (development/production)
         required: true
         type: string
-        default: 'development'
       sql-server-url:
         description: SQL Server connection URL
         required: true
@@ -21,7 +19,6 @@ on:
         description: Path to SQL script
         required: true
         type: string
-        default: 'DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql'
 
 jobs:
   deploy:
