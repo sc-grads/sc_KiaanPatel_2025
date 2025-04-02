@@ -1,0 +1,31 @@
+name: Setup SQL Server Database (Production and Deployment)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  development:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run SQL Setup for Development
+        uses: ./.github/workflows/SetUpTemplate.yml
+        with:
+          server_url: ${{ secrets.PINGGY_URL }}
+          sql_password: ${{ secrets.SQL_PASSWORD }}
+          script_path: "DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql"
+        secrets:
+          sql_password: ${{ secrets.SQL_PASSWORD }}
+
+  production:
+    needs: development
+    runs-on: ubuntu-latest
+    environment: Need-Siphenathi-Approval
+    steps:
+      - name: Run SQL Setup for Production
+        uses: ./.github/workflows/SetUpTemplate.yml
+        with:
+          server_url: ${{ secrets.FRIEND_SERVER_URL }}
+          sql_password: ${{ secrets.FRIEND_SQL_PASSWORD }}
+          script_path: "DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql"
+        secrets:
+          sql_password: ${{ secrets.FRIEND_SQL_PASSWORD }}
