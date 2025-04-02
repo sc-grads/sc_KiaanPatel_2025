@@ -7,10 +7,6 @@ on:
         description: 'SQL Server URL to connect to'
         required: true
         type: string
-      sql_password:
-        description: 'Password for SQL Server user'
-        required: true
-        type: string
       script_path:
         description: 'Path to the SQL script to execute'
         required: true
@@ -53,7 +49,7 @@ jobs:
         id: test-connection
         env:
           SERVER_URL: ${{ inputs.server_url }}
-          SQL_PASSWORD: ${{ inputs.sql_password }}
+          SQL_PASSWORD: ${{ secrets.sql_password }}
         run: |
           sqlcmd -S "$SERVER_URL" -U Auto_user -P "$SQL_PASSWORD" -C -Q "SELECT @@VERSION" || echo "Connection failed: check server, user, or password"
         continue-on-error: true
@@ -75,7 +71,7 @@ jobs:
         id: setup-db
         env:
           SERVER_URL: ${{ inputs.server_url }}
-          SQL_PASSWORD: ${{ inputs.sql_password }}
+          SQL_PASSWORD: ${{ secrets.sql_password }}
         run: |
           sqlcmd -S "$SERVER_URL" -U Auto_user -P "$SQL_PASSWORD" -C -i "${{ inputs.script_path }}"
         continue-on-error: true
@@ -97,7 +93,7 @@ jobs:
         id: test-data
         env:
           SERVER_URL: ${{ inputs.server_url }}
-          SQL_PASSWORD: ${{ inputs.sql_password }}
+          SQL_PASSWORD: ${{ secrets.sql_password }}
         run: |
           sqlcmd -S "$SERVER_URL" -U Auto_user -P "$SQL_PASSWORD" -C -Q "SELECT @@VERSION" || echo "Connection failed: check server, user, or password"
         continue-on-error: true
