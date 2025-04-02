@@ -11,9 +11,8 @@ jobs:
         uses: ./.github/workflows/SetUpTemplate.yml
         with:
           server_url: ${{ secrets.PINGGY_URL }}
-          script_path: "DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql"
-        secrets:
           sql_password: ${{ secrets.SQL_PASSWORD }}
+          script_path: "DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql"
 
   production:
     needs: development
@@ -24,6 +23,5 @@ jobs:
         uses: ./.github/workflows/SetUpTemplate.yml
         with:
           server_url: ${{ secrets.FRIEND_SERVER_URL }}
-          script_path: "DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql"
-        secrets:
           sql_password: ${{ secrets.FRIEND_SQL_PASSWORD }}
+          script_path: "DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql"
