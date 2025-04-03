@@ -9,6 +9,11 @@ on:
       sql-script-path:
         required: true
         type: string
+      sql-user:
+        description: "SQL username for authentication"
+        required: false
+        default: "Auto_user"
+        type: string
     secrets:
       SQL_SERVER:
         required: true
@@ -48,7 +53,7 @@ jobs:
       - name: Test Connection to SQL Server
         env:
           SQL_SERVER: ${{ secrets.SQL_SERVER }}
-          SQL_USER: Auto_user
+          SQL_USER: ${{ inputs.sql-user }}
           SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
         run: |
           echo "Testing connection to ${{ inputs.environment }} ($SQL_SERVER)..."
@@ -63,7 +68,7 @@ jobs:
       - name: ${{ inputs.environment }}
         env:
           SQL_SERVER: ${{ secrets.SQL_SERVER }}
-          SQL_USER: Auto_user
+          SQL_USER: ${{ inputs.sql-user }}
           SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
         run: |
           echo "Deploying to ${{ inputs.environment }} ($SQL_SERVER)..."
@@ -78,7 +83,7 @@ jobs:
       - name: Verify Deployment
         env:
           SQL_SERVER: ${{ secrets.SQL_SERVER }}
-          SQL_USER: Auto_user
+          SQL_USER: ${{ inputs.sql-user }}
           SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
         run: |
           echo "Verifying deployment in ${{ inputs.environment }}..."
