@@ -16,10 +16,10 @@ concurrency:
 
 jobs:
   deploy-development:
-    uses: ./.github/workflows/sql-deploy-template.yml
+    uses: ./.github/workflows/TestTemplate.yml
     with:
       environment: development
-      DB_NAME: AutoTest_SN27.db
+      DB_NAME: AutoTestKiaan
     secrets:
       SQL_SERVER: ${{ secrets.PINGGY_URL }}  # Use your secrets for development
       SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
@@ -27,10 +27,10 @@ jobs:
   deploy-production:
     needs: deploy-development  # Ensures production runs only after development succeeds
     if: ${{ !inputs.skip-production }}  # Skip production if the input is true
-    uses: ./.github/workflows/sql-deploy-template.yml
+    uses: ./.github/workflows/TestTemplate.yml
     with:
       environment: production
-      DB_NAME: AutoDBSiphenathi.db
+      DB_NAME: AutoTestKiaan
     secrets:
       SQL_SERVER: ${{ secrets.FRIEND_SERVER_URL }}  # Use your friend's secrets for production
       SQL_PASSWORD: ${{ secrets.FRIEND_SQL_PASSWORD }}
