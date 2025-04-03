@@ -7,10 +7,12 @@ on:
         description: "Type of server (development or production)"
         required: true
         default: "development"
+        type: string 
       sql_script_path:
         description: "Path to SQL script to execute"
         required: true
         default: "DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql"
+        type: string 
     secrets:
       sql_password:
         description: "SQL password for authentication"
