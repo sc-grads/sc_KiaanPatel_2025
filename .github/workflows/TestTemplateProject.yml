@@ -1,4 +1,4 @@
-name: SQL Server Database Setup Template
+name: Multi-Environment SQL Deployment
 
 on:
   workflow_dispatch:
@@ -9,29 +9,28 @@ on:
         default: 'false'
         type: boolean
 
-# Add concurrency to allow parallel runs
+# Add concurrency to avoid runner delays (as done previously)
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.inputs.environment || 'default' }}
-  cancel-in-progress: false  # Allows multiple runs without canceling previous ones
+  cancel-in-progress: false
 
 jobs:
-  development:
-    uses: ./.github/workflows/SetUpTemplate.yml
+  deploy-development:
+    uses: ./.github/workflows/sql-deploy-template.yml
     with:
-      environment: 'development'
-      sql-script-path: 'DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql'
+      environment: development
+      DB_NAME: AutoTest_SN27.db
     secrets:
-      SQL_SERVER: ${{ secrets.PINGGY_URL }}
+      SQL_SERVER: ${{ secrets.PINGGY_URL }}  # Use your secrets for development
       SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
 
-  production:
-    needs: development
-    if: ${{ !inputs.skip-production }}
-    uses: ./.github/workflows/SetUpTemplate.yml
+  deploy-production:
+    needs: deploy-development  # Ensures production runs only after development succeeds
+    if: ${{ !inputs.skip-production }}  # Skip production if the input is true
+    uses: ./.github/workflows/sql-deploy-template.yml
     with:
-      environment: 'production'
-      sql-script-path: 'DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql'
-      sql-user: "Friend_user"  # Add this if your friend's username differs from Auto_user
+      environment: production
+      DB_NAME: AutoDBSiphenathi.db
     secrets:
-      SQL_SERVER: ${{ secrets.FRIEND_SERVER_URL }}
+      SQL_SERVER: ${{ secrets.FRIEND_SERVER_URL }}  # Use your friend's secrets for production
       SQL_PASSWORD: ${{ secrets.FRIEND_SQL_PASSWORD }}
