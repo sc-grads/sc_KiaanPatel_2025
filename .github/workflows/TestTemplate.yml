@@ -3,20 +3,20 @@ name: Database Setup Template
 on:
   workflow_call:
     inputs:
-      server_type:
+        server_type:
         description: "Type of server (development or production)"
         required: true
         default: "development"
-      server_url:
-        description: "SQL Server URL"
-        required: true
-      sql_script_path:
-        description: "Path to SQL script to execute"
-        required: true
-        default: "DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql"
+        sql_script_path:
+          description: "Path to SQL script to execute"
+          required: true
+          default: "DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql"
     secrets:
       sql_password:
         description: "SQL password for authentication"
+        required: true
+      server_url:
+        description: "SQL Server connection URL"
         required: true
 
 jobs:
@@ -26,52 +26,41 @@ jobs:
       name: ${{ inputs.server_type == 'production' && 'Need-Siphenathi-Approval' || 'development' }}
     
     steps:
-      # Checkout the repository to access SQL script
+      # Checkout the repository
       - name: Checkout repository
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
 
-      # Add Microsoft repository for SQL Server tools
-      - name: Add Microsoft repository
+      # Install SQL Server tools
+      - name: Install dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y curl gnupg
           curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
           curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list
           sudo apt-get update
-
-      # Install SQL Server client (sqlcmd)
-      - name: Install SQL Server tools
-        run: |
           sudo ACCEPT_EULA=Y apt-get install -y mssql-tools unixodbc-dev
-
-      # Add SQL Server tools to PATH
-      - name: Add to PATH
-        run: |
           echo "/opt/mssql-tools/bin" >> $GITHUB_PATH
 
-      # Test connection to SQL Server
+      # Test connection
       - name: Test Connection
         env:
           SQL_PASSWORD: ${{ secrets.sql_password }}
+          SERVER_URL: ${{ secrets.server_url }}
         run: |
-          sqlcmd -S "${{ inputs.server_url }}" -U Auto_user -P "$SQL_PASSWORD" -C -Q "SELECT @@VERSION" || \
-          { echo "Connection failed"; exit 1; }
+          sqlcmd -S "$SERVER_URL" -U Auto_user -P "$SQL_PASSWORD" -C -Q "SELECT @@VERSION"
 
-      # Execute the SQL script
+      # Execute SQL script
       - name: Setup Database
         env:
           SQL_PASSWORD: ${{ secrets.sql_password }}
+          SERVER_URL: ${{ secrets.server_url }}
         run: |
-          sqlcmd -S "${{ inputs.server_url }}" -U Auto_user -P "$SQL_PASSWORD" -C -i "${{ inputs.sql_script_path }}" || \
-          { echo "SQL script execution failed"; exit 1; }
+          sqlcmd -S "$SERVER_URL" -U Auto_user -P "$SQL_PASSWORD" -C -i "${{ inputs.sql_script_path }}"
 
-      # Final verification
-      - name: Verify Setup
+      # Verify setup
+      - name: Verify Database
         env:
           SQL_PASSWORD: ${{ secrets.sql_password }}
+          SERVER_URL: ${{ secrets.server_url }}
         run: |
-          sqlcmd -S "${{ inputs.server_url }}" -U Auto_user -P "$SQL_PASSWORD" -C \
-          -Q "IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'YourDatabaseName') BEGIN RAISERROR('Database not created', 16, 1) END" || \
-          { echo "Verification failed"; exit 1; }
+          sqlcmd -S "$SERVER_URL" -U Auto_user -P "$SQL_PASSWORD" -C -Q "USE YourDatabaseName; SELECT name FROM sys.tables"
