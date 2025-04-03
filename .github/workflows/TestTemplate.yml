@@ -6,7 +6,7 @@ on:
       environment:
         required: true
         type: string
-      sql-script-path:
+      DB_NAME:
         required: true
         type: string
       sql-user:
@@ -55,10 +55,11 @@ jobs:
           SQL_SERVER: ${{ secrets.SQL_SERVER }}
           SQL_USER: ${{ inputs.sql-user }}
           SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
+          DB_NAME: ${{ inputs.DB_NAME }}
         run: |
           echo "Testing connection to ${{ inputs.environment }} ($SQL_SERVER)..."
           {
-            sqlcmd -S "$SQL_SERVER" -U "$SQL_USER" -P "$SQL_PASSWORD" -C -Q "SELECT @@VERSION" -l 60
+            sqlcmd -S "$SQL_SERVER" -U "$SQL_USER" -P "$SQL_PASSWORD" -d "$DB_NAME" -C -Q "SELECT @@VERSION" -l 60
             echo "Connection to ${{ inputs.environment }} successful."
           } || {
             echo "::error::Connection to ${{ inputs.environment }} failed! Check server, user, or password."
@@ -70,10 +71,12 @@ jobs:
           SQL_SERVER: ${{ secrets.SQL_SERVER }}
           SQL_USER: ${{ inputs.sql-user }}
           SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
+          DB_NAME: ${{ inputs.DB_NAME }}
         run: |
-          echo "Deploying to ${{ inputs.environment }} ($SQL_SERVER)..."
+          echo "Deploying to ${{ inputs.environment }} ($SQL_SERVER) on database $DB_NAME..."
           {
-            sqlcmd -S "$SQL_SERVER" -U "$SQL_USER" -P "$SQL_PASSWORD" -C -i "${{ inputs.sql-script-path}}" -l 60
+            # Assuming the script is designed to work with the specified database
+            sqlcmd -S "$SQL_SERVER" -U "$SQL_USER" -P "$SQL_PASSWORD" -d "$DB_NAME" -C -i "DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql" -l 60
             echo "Deployment to ${{ inputs.environment }} successful."
           } || {
             echo "::error::Deployment to ${{ inputs.environment }} failed!"
@@ -85,10 +88,11 @@ jobs:
           SQL_SERVER: ${{ secrets.SQL_SERVER }}
           SQL_USER: ${{ inputs.sql-user }}
           SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
+          DB_NAME: ${{ inputs.DB_NAME }}
         run: |
           echo "Verifying deployment in ${{ inputs.environment }}..."
           {
-            sqlcmd -S "$SQL_SERVER" -U "$SQL_USER" -P "$SQL_PASSWORD" -C -Q "SELECT * FROM [dbo].[user]" -l 60
+            sqlcmd -S "$SQL_SERVER" -U "$SQL_USER" -P "$SQL_PASSWORD" -d "$DB_NAME" -C -Q "SELECT * FROM [dbo].[user]" -l 60
             echo "Verification successful in ${{ inputs.environment }}."
           } || {
             echo "::error::Verification failed in ${{ inputs.environment }}!"
