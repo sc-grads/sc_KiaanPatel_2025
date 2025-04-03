@@ -5,7 +5,6 @@ on:
 
 jobs:
   development:
-    name: Development Deployment
     uses: ./.github/workflows/TestTemplate.yml
     with:
       server_type: "development"
@@ -15,7 +14,6 @@ jobs:
       server_url: ${{ secrets.PINGGY_URL }}
 
   production:
-    name: Production Deployment
     needs: development
     uses: ./.github/workflows/TestTemplate.yml
     with:
