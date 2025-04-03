@@ -1,20 +1,31 @@
-name: SQL Server Deployment Pipeline
+name: SQL Server Database Setup Template
 
 on:
   workflow_dispatch:
+    inputs:
+      skip-production:
+        description: 'Skip production deployment?'
+        required: false
+        default: 'false'
+        type: boolean
 
 jobs:
   development:
-    uses: ./.github/workflows/TestTemplate.yml
+    uses: ./.github/workflows/SetUpTemplate.yml
     with:
-      server_type: "development"
-      sql_script_path: "DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql"
-    secrets: inherit  # Ensures all secrets are passed automatically
+      environment: 'development'
+      sql-script-path: 'DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql'
+    secrets:
+      SQL_SERVER: ${{ secrets.PINGGY_URL }}
+      SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
 
   production:
     needs: development
-    uses: ./.github/workflows/TestTemplate.yml
+    if: ${{ !inputs.skip-production }}
+    uses: ./.github/workflows/SetUpTemplate.yml
     with:
-      server_type: "production"
-      sql_script_path: "DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql"
-    secrets: inherit  # Ensures all secrets are passed automatically
+      environment: 'production'
+      sql-script-path: 'DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql'
+    secrets:
+      SQL_SERVER: ${{ secrets.FRIEND_SERVER_URL }}
+      SQL_PASSWORD: ${{ secrets.FRIEND_SQL_PASSWORD }}
