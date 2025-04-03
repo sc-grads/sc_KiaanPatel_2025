@@ -9,9 +9,7 @@ jobs:
     with:
       server_type: "development"
       sql_script_path: "DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql"
-    secrets:
-      sql_password: ${{ secrets.SQL_PASSWORD }}
-      server_url: ${{ secrets.PINGGY_URL }}
+    secrets: inherit  # Ensures all secrets are passed automatically
 
   production:
     needs: development
@@ -19,6 +17,4 @@ jobs:
     with:
       server_type: "production"
       sql_script_path: "DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql"
-    secrets:
-      sql_password: ${{ secrets.FRIEND_SQL_PASSWORD }}
-      server_url: ${{ secrets.FRIEND_SERVER_URL }}
+    secrets: inherit  # Ensures all secrets are passed automatically
