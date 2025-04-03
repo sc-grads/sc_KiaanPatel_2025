@@ -17,7 +17,7 @@ on:
 
 jobs:
   deploy:
-    name: Deploy to ${{ inputs.environment }}
+    name: ${{ inputs.environment }}
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment == 'production' && 'Need-Siphenathi-Approval' || '' }}
     steps:
@@ -38,7 +38,7 @@ jobs:
           sudo ACCEPT_EULA=Y apt-get install -y mssql-tools unixodbc-dev
           echo "/opt/mssql-tools/bin" >> $GITHUB_PATH
 
-      - name: Deploy to ${{ inputs.environment }}
+      - name: ${{ inputs.environment }}
         env:
           SQL_SERVER: ${{ secrets.SQL_SERVER }}
           SQL_USER: Auto_user
