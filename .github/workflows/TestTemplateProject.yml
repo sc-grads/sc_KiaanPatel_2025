@@ -11,7 +11,7 @@ on:
 
 jobs:
   development:
-    uses: ./.github/workflows/SetUpTemplate.yml
+    uses: ./.github/workflows/TestTemplate.yml
     with:
       environment: 'development'
       sql-script-path: 'DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql'
@@ -22,7 +22,7 @@ jobs:
   production:
     needs: development
     if: ${{ !inputs.skip-production }}
-    uses: ./.github/workflows/SetUpTemplate.yml
+    uses: ./.github/workflows/TestTemplate.yml
     with:
       environment: 'production'
       sql-script-path: 'DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql'
