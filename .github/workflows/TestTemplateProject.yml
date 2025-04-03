@@ -1,4 +1,4 @@
-name: Test Template
+name: SQL Server Database Setup Template
 
 on:
   workflow_dispatch:
@@ -9,9 +9,14 @@ on:
         default: 'false'
         type: boolean
 
+# Add concurrency to allow parallel runs
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.inputs.environment || 'default' }}
+  cancel-in-progress: false  # Allows multiple runs without canceling previous ones
+
 jobs:
   development:
-    uses: ./.github/workflows/TestTemplate.yml
+    uses: ./.github/workflows/SetUpTemplate.yml
     with:
       environment: 'development'
       sql-script-path: 'DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql'
@@ -22,10 +27,11 @@ jobs:
   production:
     needs: development
     if: ${{ !inputs.skip-production }}
-    uses: ./.github/workflows/TestTemplate.yml
+    uses: ./.github/workflows/SetUpTemplate.yml
     with:
       environment: 'production'
       sql-script-path: 'DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql'
+      sql-user: "Friend_user"  # Add this if your friend's username differs from Auto_user
     secrets:
       SQL_SERVER: ${{ secrets.FRIEND_SERVER_URL }}
       SQL_PASSWORD: ${{ secrets.FRIEND_SQL_PASSWORD }}
