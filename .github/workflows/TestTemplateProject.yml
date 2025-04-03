@@ -1,4 +1,4 @@
-name: SQL Server Database Setup Template
+name: Test Template
 
 on:
   workflow_dispatch:
