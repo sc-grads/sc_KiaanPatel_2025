@@ -1,0 +1,26 @@
+name: Test template run
+
+on:
+  workflow_dispatch:
+
+jobs:
+  development_setup:
+    name: Development Environment Setup
+    uses: ./.github/workflows/SetUpTemplate.yml
+    with:
+      server_type: "development"
+      server_url: ${{ secrets.PINGGY_URL }}
+      sql_script_path: "DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql"
+    secrets:
+      sql_password: ${{ secrets.SQL_PASSWORD }}
+
+  production_setup:
+    name: Production Environment Setup
+    needs: development_setup
+    uses: ./.github/workflows/SetUpTemplate.yml
+    with:
+      server_type: "production"
+      server_url: ${{ secrets.FRIEND_SERVER_URL }}
+      sql_script_path: "DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql"
+    secrets:
+      sql_password: ${{ secrets.FRIEND_SQL_PASSWORD }}
