@@ -3,14 +3,14 @@ name: Database Setup Template
 on:
   workflow_call:
     inputs:
-        server_type:
+      server_type:
         description: "Type of server (development or production)"
         required: true
         default: "development"
-        sql_script_path:
-          description: "Path to SQL script to execute"
-          required: true
-          default: "DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql"
+      sql_script_path:
+        description: "Path to SQL script to execute"
+        required: true
+        default: "DatabaseAdministration/SQLStatements/ProductionAndDeploymentProject.sql"
     secrets:
       sql_password:
         description: "SQL password for authentication"
@@ -20,18 +20,15 @@ on:
         required: true
 
 jobs:
-  database_setup:
+  setup_database:
     runs-on: ubuntu-latest
-    environment: 
-      name: ${{ inputs.server_type == 'production' && 'Need-Siphenathi-Approval' || 'development' }}
+    environment: ${{ inputs.server_type == 'production' && 'Need-Siphenathi-Approval' || 'development' }}
     
     steps:
-      # Checkout the repository
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Install SQL Server tools
-      - name: Install dependencies
+      - name: Install SQL tools
         run: |
           sudo apt-get update
           sudo apt-get install -y curl gnupg
@@ -41,26 +38,9 @@ jobs:
           sudo ACCEPT_EULA=Y apt-get install -y mssql-tools unixodbc-dev
           echo "/opt/mssql-tools/bin" >> $GITHUB_PATH
 
-      # Test connection
-      - name: Test Connection
+      - name: Execute SQL script
         env:
-          SQL_PASSWORD: ${{ secrets.sql_password }}
           SERVER_URL: ${{ secrets.server_url }}
-        run: |
-          sqlcmd -S "$SERVER_URL" -U Auto_user -P "$SQL_PASSWORD" -C -Q "SELECT @@VERSION"
-
-      # Execute SQL script
-      - name: Setup Database
-        env:
           SQL_PASSWORD: ${{ secrets.sql_password }}
-          SERVER_URL: ${{ secrets.server_url }}
         run: |
           sqlcmd -S "$SERVER_URL" -U Auto_user -P "$SQL_PASSWORD" -C -i "${{ inputs.sql_script_path }}"
-
-      # Verify setup
-      - name: Verify Database
-        env:
-          SQL_PASSWORD: ${{ secrets.sql_password }}
-          SERVER_URL: ${{ secrets.server_url }}
-        run: |
-          sqlcmd -S "$SERVER_URL" -U Auto_user -P "$SQL_PASSWORD" -C -Q "USE YourDatabaseName; SELECT name FROM sys.tables"
