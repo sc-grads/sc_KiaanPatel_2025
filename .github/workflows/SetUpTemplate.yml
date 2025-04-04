@@ -61,7 +61,7 @@ jobs:
         run: |
           echo "Verifying deployment in ${{ inputs.environment }}..."
           {
-            sqlcmd -S "$SQL_SERVER" -U "$SQL_USER" -P "$SQL_PASSWORD" -Q "SELECT * FROM [dbo].[user]" -l 60
+            sqlcmd -S "$SQL_SERVER" -U "$SQL_USER" -P "$SQL_PASSWORD" -Q "SELECT * FROM AutoTestKiaan.[dbo].[user]" -l 60
             echo "Verification successful in ${{ inputs.environment }}."
           } || {
             echo "::error::Verification failed in ${{ inputs.environment }}!"
