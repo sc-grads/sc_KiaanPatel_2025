@@ -206,3 +206,19 @@ weather: dict = {'time': '12:00'
                                'evening': 'more rain'}
                  }
 print(weather['time'])
+print(weather['weather']['morning'])
+
+#add
+users[3] = 'Mario'
+
+#modify
+users[1] = 'James'
+print(users)
+
+#clear
+users.clear()
+
+#None type
+None
+noValue: None = None
+#used in dictionaries when a key has no value
