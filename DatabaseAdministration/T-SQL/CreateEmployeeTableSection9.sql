@@ -7,3 +7,8 @@ EmployeeLastName VARCHAR(50) NOT NULL,
 EmployeeGovernmentID CHAR(10) NULL,
 DateOfBirth DATE NOT NULL
 )
+
+ALTER TABLE tblEmployee
+ADD Department VARCHAR(10);
+
+select * from tblEmployee
