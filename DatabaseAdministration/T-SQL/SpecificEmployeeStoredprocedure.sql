@@ -13,10 +13,11 @@ begin
 	end
 end
 go
+
 NameEmployees 4
 execute NameEmployees 223
 exec NameEmployees 323
-select EmployeeNumber from NameEmployees
+select EmployeeNumber from NameEmployees --wont work
 
 DECLARE @EmployeeName int = 123
 select @EmployeeName
