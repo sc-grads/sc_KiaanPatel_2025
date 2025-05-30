@@ -233,6 +233,36 @@
           <FullPath>42_DataReaderDestination.dtsx</FullPath>
           <References />
         </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>43_CDCInitalLoad.dtsx</Name>
+          <FullPath>43_CDCInitalLoad.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>45_CDCIncrementalLoadDemo.dtsx</Name>
+          <FullPath>45_CDCIncrementalLoadDemo.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>50_CDC_InitialLoadDemo.dtsx</Name>
+          <FullPath>50_CDC_InitialLoadDemo.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>51_CDC_IncrementalLoadDemo.dtsx</Name>
+          <FullPath>51_CDC_IncrementalLoadDemo.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>51_CDCIncrementalDemo.dtsx</Name>
+          <FullPath>51_CDCIncrementalDemo.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Package1.dtsx</Name>
+          <FullPath>Package1.dtsx</FullPath>
+          <References />
+        </DtsPackage>
       </DTSPackages>
     </Manifest>
   </DeploymentModelSpecificContent>

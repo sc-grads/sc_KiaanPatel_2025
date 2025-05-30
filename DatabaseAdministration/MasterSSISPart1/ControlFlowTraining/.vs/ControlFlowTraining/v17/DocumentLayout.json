@@ -3,28 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\Kiaan Patel\\Git\\sc_KiaanPatel_2025\\DatabaseAdministration\\MasterSSISPart1\\ControlFlowTraining\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{774A1C24-9EC3-C964-8B7C-32ACB2784446}|ControlFlowTraining.dtproj|C:\\Users\\Kiaan Patel\\Git\\sc_KiaanPatel_2025\\DatabaseAdministration\\MasterSSISPart1\\ControlFlowTraining\\42_DataReaderDestination.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
-      "RelativeMoniker": "D:0:0:{774A1C24-9EC3-C964-8B7C-32ACB2784446}|ControlFlowTraining.dtproj|solutionrelative:42_DataReaderDestination.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
+      "AbsoluteMoniker": "D:0:0:{774A1C24-9EC3-C964-8B7C-32ACB2784446}|ControlFlowTraining.dtproj|C:\\Users\\Kiaan Patel\\Git\\sc_KiaanPatel_2025\\DatabaseAdministration\\MasterSSISPart1\\ControlFlowTraining\\Package1.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
+      "RelativeMoniker": "D:0:0:{774A1C24-9EC3-C964-8B7C-32ACB2784446}|ControlFlowTraining.dtproj|solutionrelative:Package1.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{774A1C24-9EC3-C964-8B7C-32ACB2784446}|ControlFlowTraining.dtproj|C:\\Users\\Kiaan Patel\\Git\\sc_KiaanPatel_2025\\DatabaseAdministration\\MasterSSISPart1\\ControlFlowTraining\\41_RecordSetDestinationDemo.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
-      "RelativeMoniker": "D:0:0:{774A1C24-9EC3-C964-8B7C-32ACB2784446}|ControlFlowTraining.dtproj|solutionrelative:41_RecordSetDestinationDemo.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
+      "AbsoluteMoniker": "D:0:0:{774A1C24-9EC3-C964-8B7C-32ACB2784446}|ControlFlowTraining.dtproj|C:\\Users\\Kiaan Patel\\Git\\sc_KiaanPatel_2025\\DatabaseAdministration\\MasterSSISPart1\\ControlFlowTraining\\45_CDCIncrementalLoadDemo.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
+      "RelativeMoniker": "D:0:0:{774A1C24-9EC3-C964-8B7C-32ACB2784446}|ControlFlowTraining.dtproj|solutionrelative:45_CDCIncrementalLoadDemo.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{774A1C24-9EC3-C964-8B7C-32ACB2784446}|ControlFlowTraining.dtproj|C:\\Users\\Kiaan Patel\\Git\\sc_KiaanPatel_2025\\DatabaseAdministration\\MasterSSISPart1\\ControlFlowTraining\\40_ADO.NETSourceAndADO.NETDestinationDemo.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
-      "RelativeMoniker": "D:0:0:{774A1C24-9EC3-C964-8B7C-32ACB2784446}|ControlFlowTraining.dtproj|solutionrelative:40_ADO.NETSourceAndADO.NETDestinationDemo.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{774A1C24-9EC3-C964-8B7C-32ACB2784446}|ControlFlowTraining.dtproj|C:\\Users\\Kiaan Patel\\Git\\sc_KiaanPatel_2025\\DatabaseAdministration\\MasterSSISPart1\\ControlFlowTraining\\39_RawFileSourceAndSQLDestination.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
-      "RelativeMoniker": "D:0:0:{774A1C24-9EC3-C964-8B7C-32ACB2784446}|ControlFlowTraining.dtproj|solutionrelative:39_RawFileSourceAndSQLDestination.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{774A1C24-9EC3-C964-8B7C-32ACB2784446}|ControlFlowTraining.dtproj|C:\\Users\\Kiaan Patel\\Git\\sc_KiaanPatel_2025\\DatabaseAdministration\\MasterSSISPart1\\ControlFlowTraining\\38_XMLSourceAndRawFileDestination.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
-      "RelativeMoniker": "D:0:0:{774A1C24-9EC3-C964-8B7C-32ACB2784446}|ControlFlowTraining.dtproj|solutionrelative:38_XMLSourceAndRawFileDestination.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{774A1C24-9EC3-C964-8B7C-32ACB2784446}|ControlFlowTraining.dtproj|C:\\Users\\Kiaan Patel\\Git\\sc_KiaanPatel_2025\\DatabaseAdministration\\MasterSSISPart1\\ControlFlowTraining\\37_CheckPointsDemo.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
-      "RelativeMoniker": "D:0:0:{774A1C24-9EC3-C964-8B7C-32ACB2784446}|ControlFlowTraining.dtproj|solutionrelative:37_CheckPointsDemo.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
+      "AbsoluteMoniker": "D:0:0:{774A1C24-9EC3-C964-8B7C-32ACB2784446}|ControlFlowTraining.dtproj|C:\\Users\\Kiaan Patel\\Git\\sc_KiaanPatel_2025\\DatabaseAdministration\\MasterSSISPart1\\ControlFlowTraining\\43_CDCInitalLoad.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
+      "RelativeMoniker": "D:0:0:{774A1C24-9EC3-C964-8B7C-32ACB2784446}|ControlFlowTraining.dtproj|solutionrelative:43_CDCInitalLoad.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
     }
   ],
   "DocumentGroupContainers": [
@@ -39,73 +27,37 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "42_DataReaderDestination.dtsx [Design]",
-              "DocumentMoniker": "C:\\Users\\Kiaan Patel\\Git\\sc_KiaanPatel_2025\\DatabaseAdministration\\MasterSSISPart1\\ControlFlowTraining\\42_DataReaderDestination.dtsx",
-              "RelativeDocumentMoniker": "42_DataReaderDestination.dtsx",
-              "ToolTip": "C:\\Users\\Kiaan Patel\\Git\\sc_KiaanPatel_2025\\DatabaseAdministration\\MasterSSISPart1\\ControlFlowTraining\\42_DataReaderDestination.dtsx [Design]",
-              "RelativeToolTip": "42_DataReaderDestination.dtsx [Design]",
+              "Title": "Package1.dtsx [Design]",
+              "DocumentMoniker": "C:\\Users\\Kiaan Patel\\Git\\sc_KiaanPatel_2025\\DatabaseAdministration\\MasterSSISPart1\\ControlFlowTraining\\Package1.dtsx",
+              "RelativeDocumentMoniker": "Package1.dtsx",
+              "ToolTip": "C:\\Users\\Kiaan Patel\\Git\\sc_KiaanPatel_2025\\DatabaseAdministration\\MasterSSISPart1\\ControlFlowTraining\\Package1.dtsx [Design]",
+              "RelativeToolTip": "Package1.dtsx [Design]",
               "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMlSURBVDhPjZQ7bJtVGIaf41vsOk7ihICdxK1wiWiTFhW1QBEDapEQAnVoOzGUAalDNybECgsINqQOrBUDGzAgIUCVijoUqAQoTuM4JW4dO3Yuvvz2/9v//TC4/mM7ROGVPumc73zvq/d85yIAPvniq9/S8ydf4hComk5lZ/fHv\u002B7fu/nd11/\u002BMLyOlDLQG59Mz5CamRosGMLdP1ZZWlk9r1mIK\u002B99wM/f37rTUmqqVyCE8ANcePPS9RdfWJidS0xxJDxyYOSL21iOGx6NRie3qsrs9NOJWkdt1rSW0u5p\u002Bjz1/wm/348r5eT2bu1iPJG\u002BFhmdmO9fHxDUTYfthuGFptsY1l5O1V0e5ov8nckSG42GipvlKy1Ve65fw\u002BshQHajxbf3Kt78jTPTTI\u002BF\u002BObXEgAtxSCeSPPOsyksy\u002Ban23f62F0MOHQl6K6P9vgM2sQsVjjWzTnQHksg506wcPYsr7\u002B8SDAYRAjRT4dhQQCkizA0hK4hbPNJTiKMDgHLIBYOMTE\u002BNszyMCA4Hg2yOBflVNzmdNxiOuwSiwRYTI1yatJmcdwiHnLoOP2sQQz08HgyyvFktD8FwLULKSSgW6BaUKjUhks87N/yAdAtaFmgGNC2wR8MAYf08J\u002Byxq3bG14sPW7iuNCxu86ahqRhSFRTIBFw2KEomsVyUSNTD7JUD1Jp\u002B9EdaJmgGJKG0XWomRLp2CBlPx2GBQEQPuRIBBmOYooAqtlzBnUdqk2TmqKju0Fik0mS6dML8dSZixw5dm6foE9A2OcSaZSJ1Es4quqJNXRodCSlrSaPNhq0gzMsnH\u002BbS\u002B9//OG5q5//wtF3bzJ8yidSMW5MRTAsUG1whZ\u002Bm2d1m0wTNAsuFuaciXH0tyW5Dp7SlUSlU90z1Btn1Te7ef8DSgxwrqznW13KsraywtpxhM5ehsZ5BLy7jNre6RCnptC2q9Q4t7ckD6Dk0TZs/Mzl2qgffrx4CE0cZOfY8hbLKWkEh\u002B1ihUvV\u002Br65gPv9webepy0Kh2M/9Tzwz/2rSFImU1Drkyy0elVVKO3uC\u002By/SYUi89RGzlz8dTqPlfyf72Sv/AiuphR\u002BNLPK3AAAAAElFTkSuQmCC",
-              "WhenOpened": "2025-05-29T13:13:09.795Z",
+              "WhenOpened": "2025-05-30T08:02:33.181Z",
               "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "41_RecordSetDestinationDemo.dtsx [Design]",
-              "DocumentMoniker": "C:\\Users\\Kiaan Patel\\Git\\sc_KiaanPatel_2025\\DatabaseAdministration\\MasterSSISPart1\\ControlFlowTraining\\41_RecordSetDestinationDemo.dtsx",
-              "RelativeDocumentMoniker": "41_RecordSetDestinationDemo.dtsx",
-              "ToolTip": "C:\\Users\\Kiaan Patel\\Git\\sc_KiaanPatel_2025\\DatabaseAdministration\\MasterSSISPart1\\ControlFlowTraining\\41_RecordSetDestinationDemo.dtsx [Design]",
-              "RelativeToolTip": "41_RecordSetDestinationDemo.dtsx [Design]",
+              "Title": "45_CDCIncrementalLoadDemo.dtsx [Design]",
+              "DocumentMoniker": "C:\\Users\\Kiaan Patel\\Git\\sc_KiaanPatel_2025\\DatabaseAdministration\\MasterSSISPart1\\ControlFlowTraining\\45_CDCIncrementalLoadDemo.dtsx",
+              "RelativeDocumentMoniker": "45_CDCIncrementalLoadDemo.dtsx",
+              "ToolTip": "C:\\Users\\Kiaan Patel\\Git\\sc_KiaanPatel_2025\\DatabaseAdministration\\MasterSSISPart1\\ControlFlowTraining\\45_CDCIncrementalLoadDemo.dtsx [Design]",
+              "RelativeToolTip": "45_CDCIncrementalLoadDemo.dtsx [Design]",
               "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMlSURBVDhPjZQ7bJtVGIaf41vsOk7ihICdxK1wiWiTFhW1QBEDapEQAnVoOzGUAalDNybECgsINqQOrBUDGzAgIUCVijoUqAQoTuM4JW4dO3Yuvvz2/9v//TC4/mM7ROGVPumc73zvq/d85yIAPvniq9/S8ydf4hComk5lZ/fHv\u002B7fu/nd11/\u002BMLyOlDLQG59Mz5CamRosGMLdP1ZZWlk9r1mIK\u002B99wM/f37rTUmqqVyCE8ANcePPS9RdfWJidS0xxJDxyYOSL21iOGx6NRie3qsrs9NOJWkdt1rSW0u5p\u002Bjz1/wm/348r5eT2bu1iPJG\u002BFhmdmO9fHxDUTYfthuGFptsY1l5O1V0e5ov8nckSG42GipvlKy1Ve65fw\u002BshQHajxbf3Kt78jTPTTI\u002BF\u002BObXEgAtxSCeSPPOsyksy\u002Ban23f62F0MOHQl6K6P9vgM2sQsVjjWzTnQHksg506wcPYsr7\u002B8SDAYRAjRT4dhQQCkizA0hK4hbPNJTiKMDgHLIBYOMTE\u002BNszyMCA4Hg2yOBflVNzmdNxiOuwSiwRYTI1yatJmcdwiHnLoOP2sQQz08HgyyvFktD8FwLULKSSgW6BaUKjUhks87N/yAdAtaFmgGNC2wR8MAYf08J\u002Byxq3bG14sPW7iuNCxu86ahqRhSFRTIBFw2KEomsVyUSNTD7JUD1Jp\u002B9EdaJmgGJKG0XWomRLp2CBlPx2GBQEQPuRIBBmOYooAqtlzBnUdqk2TmqKju0Fik0mS6dML8dSZixw5dm6foE9A2OcSaZSJ1Es4quqJNXRodCSlrSaPNhq0gzMsnH\u002BbS\u002B9//OG5q5//wtF3bzJ8yidSMW5MRTAsUG1whZ\u002Bm2d1m0wTNAsuFuaciXH0tyW5Dp7SlUSlU90z1Btn1Te7ef8DSgxwrqznW13KsraywtpxhM5ehsZ5BLy7jNre6RCnptC2q9Q4t7ckD6Dk0TZs/Mzl2qgffrx4CE0cZOfY8hbLKWkEh\u002B1ihUvV\u002Br65gPv9webepy0Kh2M/9Tzwz/2rSFImU1Drkyy0elVVKO3uC\u002By/SYUi89RGzlz8dTqPlfyf72Sv/AiuphR\u002BNLPK3AAAAAElFTkSuQmCC",
-              "WhenOpened": "2025-05-29T13:07:29.45Z",
+              "WhenOpened": "2025-05-30T07:52:15.078Z",
               "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "40_ADO.NETSourceAndADO.NETDestinationDemo.dtsx [Design]",
-              "DocumentMoniker": "C:\\Users\\Kiaan Patel\\Git\\sc_KiaanPatel_2025\\DatabaseAdministration\\MasterSSISPart1\\ControlFlowTraining\\40_ADO.NETSourceAndADO.NETDestinationDemo.dtsx",
-              "RelativeDocumentMoniker": "40_ADO.NETSourceAndADO.NETDestinationDemo.dtsx",
-              "ToolTip": "C:\\Users\\Kiaan Patel\\Git\\sc_KiaanPatel_2025\\DatabaseAdministration\\MasterSSISPart1\\ControlFlowTraining\\40_ADO.NETSourceAndADO.NETDestinationDemo.dtsx [Design]",
-              "RelativeToolTip": "40_ADO.NETSourceAndADO.NETDestinationDemo.dtsx [Design]",
+              "Title": "43_CDCInitalLoad.dtsx [Design]",
+              "DocumentMoniker": "C:\\Users\\Kiaan Patel\\Git\\sc_KiaanPatel_2025\\DatabaseAdministration\\MasterSSISPart1\\ControlFlowTraining\\43_CDCInitalLoad.dtsx",
+              "RelativeDocumentMoniker": "43_CDCInitalLoad.dtsx",
+              "ToolTip": "C:\\Users\\Kiaan Patel\\Git\\sc_KiaanPatel_2025\\DatabaseAdministration\\MasterSSISPart1\\ControlFlowTraining\\43_CDCInitalLoad.dtsx [Design]",
+              "RelativeToolTip": "43_CDCInitalLoad.dtsx [Design]",
               "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMlSURBVDhPjZQ7bJtVGIaf41vsOk7ihICdxK1wiWiTFhW1QBEDapEQAnVoOzGUAalDNybECgsINqQOrBUDGzAgIUCVijoUqAQoTuM4JW4dO3Yuvvz2/9v//TC4/mM7ROGVPumc73zvq/d85yIAPvniq9/S8ydf4hComk5lZ/fHv\u002B7fu/nd11/\u002BMLyOlDLQG59Mz5CamRosGMLdP1ZZWlk9r1mIK\u002B99wM/f37rTUmqqVyCE8ANcePPS9RdfWJidS0xxJDxyYOSL21iOGx6NRie3qsrs9NOJWkdt1rSW0u5p\u002Bjz1/wm/348r5eT2bu1iPJG\u002BFhmdmO9fHxDUTYfthuGFptsY1l5O1V0e5ov8nckSG42GipvlKy1Ve65fw\u002BshQHajxbf3Kt78jTPTTI\u002BF\u002BObXEgAtxSCeSPPOsyksy\u002Ban23f62F0MOHQl6K6P9vgM2sQsVjjWzTnQHksg506wcPYsr7\u002B8SDAYRAjRT4dhQQCkizA0hK4hbPNJTiKMDgHLIBYOMTE\u002BNszyMCA4Hg2yOBflVNzmdNxiOuwSiwRYTI1yatJmcdwiHnLoOP2sQQz08HgyyvFktD8FwLULKSSgW6BaUKjUhks87N/yAdAtaFmgGNC2wR8MAYf08J\u002Byxq3bG14sPW7iuNCxu86ahqRhSFRTIBFw2KEomsVyUSNTD7JUD1Jp\u002B9EdaJmgGJKG0XWomRLp2CBlPx2GBQEQPuRIBBmOYooAqtlzBnUdqk2TmqKju0Fik0mS6dML8dSZixw5dm6foE9A2OcSaZSJ1Es4quqJNXRodCSlrSaPNhq0gzMsnH\u002BbS\u002B9//OG5q5//wtF3bzJ8yidSMW5MRTAsUG1whZ\u002Bm2d1m0wTNAsuFuaciXH0tyW5Dp7SlUSlU90z1Btn1Te7ef8DSgxwrqznW13KsraywtpxhM5ehsZ5BLy7jNre6RCnptC2q9Q4t7ckD6Dk0TZs/Mzl2qgffrx4CE0cZOfY8hbLKWkEh\u002B1ihUvV\u002Br65gPv9webepy0Kh2M/9Tzwz/2rSFImU1Drkyy0elVVKO3uC\u002By/SYUi89RGzlz8dTqPlfyf72Sv/AiuphR\u002BNLPK3AAAAAElFTkSuQmCC",
-              "WhenOpened": "2025-05-29T13:04:41.573Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "39_RawFileSourceAndSQLDestination.dtsx [Design]",
-              "DocumentMoniker": "C:\\Users\\Kiaan Patel\\Git\\sc_KiaanPatel_2025\\DatabaseAdministration\\MasterSSISPart1\\ControlFlowTraining\\39_RawFileSourceAndSQLDestination.dtsx",
-              "RelativeDocumentMoniker": "39_RawFileSourceAndSQLDestination.dtsx",
-              "ToolTip": "C:\\Users\\Kiaan Patel\\Git\\sc_KiaanPatel_2025\\DatabaseAdministration\\MasterSSISPart1\\ControlFlowTraining\\39_RawFileSourceAndSQLDestination.dtsx [Design]",
-              "RelativeToolTip": "39_RawFileSourceAndSQLDestination.dtsx [Design]",
-              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMlSURBVDhPjZQ7bJtVGIaf41vsOk7ihICdxK1wiWiTFhW1QBEDapEQAnVoOzGUAalDNybECgsINqQOrBUDGzAgIUCVijoUqAQoTuM4JW4dO3Yuvvz2/9v//TC4/mM7ROGVPumc73zvq/d85yIAPvniq9/S8ydf4hComk5lZ/fHv\u002B7fu/nd11/\u002BMLyOlDLQG59Mz5CamRosGMLdP1ZZWlk9r1mIK\u002B99wM/f37rTUmqqVyCE8ANcePPS9RdfWJidS0xxJDxyYOSL21iOGx6NRie3qsrs9NOJWkdt1rSW0u5p\u002Bjz1/wm/348r5eT2bu1iPJG\u002BFhmdmO9fHxDUTYfthuGFptsY1l5O1V0e5ov8nckSG42GipvlKy1Ve65fw\u002BshQHajxbf3Kt78jTPTTI\u002BF\u002BObXEgAtxSCeSPPOsyksy\u002Ban23f62F0MOHQl6K6P9vgM2sQsVjjWzTnQHksg506wcPYsr7\u002B8SDAYRAjRT4dhQQCkizA0hK4hbPNJTiKMDgHLIBYOMTE\u002BNszyMCA4Hg2yOBflVNzmdNxiOuwSiwRYTI1yatJmcdwiHnLoOP2sQQz08HgyyvFktD8FwLULKSSgW6BaUKjUhks87N/yAdAtaFmgGNC2wR8MAYf08J\u002Byxq3bG14sPW7iuNCxu86ahqRhSFRTIBFw2KEomsVyUSNTD7JUD1Jp\u002B9EdaJmgGJKG0XWomRLp2CBlPx2GBQEQPuRIBBmOYooAqtlzBnUdqk2TmqKju0Fik0mS6dML8dSZixw5dm6foE9A2OcSaZSJ1Es4quqJNXRodCSlrSaPNhq0gzMsnH\u002BbS\u002B9//OG5q5//wtF3bzJ8yidSMW5MRTAsUG1whZ\u002Bm2d1m0wTNAsuFuaciXH0tyW5Dp7SlUSlU90z1Btn1Te7ef8DSgxwrqznW13KsraywtpxhM5ehsZ5BLy7jNre6RCnptC2q9Q4t7ckD6Dk0TZs/Mzl2qgffrx4CE0cZOfY8hbLKWkEh\u002B1ihUvV\u002Br65gPv9webepy0Kh2M/9Tzwz/2rSFImU1Drkyy0elVVKO3uC\u002By/SYUi89RGzlz8dTqPlfyf72Sv/AiuphR\u002BNLPK3AAAAAElFTkSuQmCC",
-              "WhenOpened": "2025-05-29T13:01:17.823Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "38_XMLSourceAndRawFileDestination.dtsx [Design]",
-              "DocumentMoniker": "C:\\Users\\Kiaan Patel\\Git\\sc_KiaanPatel_2025\\DatabaseAdministration\\MasterSSISPart1\\ControlFlowTraining\\38_XMLSourceAndRawFileDestination.dtsx",
-              "RelativeDocumentMoniker": "38_XMLSourceAndRawFileDestination.dtsx",
-              "ToolTip": "C:\\Users\\Kiaan Patel\\Git\\sc_KiaanPatel_2025\\DatabaseAdministration\\MasterSSISPart1\\ControlFlowTraining\\38_XMLSourceAndRawFileDestination.dtsx [Design]",
-              "RelativeToolTip": "38_XMLSourceAndRawFileDestination.dtsx [Design]",
-              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMlSURBVDhPjZQ7bJtVGIaf41vsOk7ihICdxK1wiWiTFhW1QBEDapEQAnVoOzGUAalDNybECgsINqQOrBUDGzAgIUCVijoUqAQoTuM4JW4dO3Yuvvz2/9v//TC4/mM7ROGVPumc73zvq/d85yIAPvniq9/S8ydf4hComk5lZ/fHv\u002B7fu/nd11/\u002BMLyOlDLQG59Mz5CamRosGMLdP1ZZWlk9r1mIK\u002B99wM/f37rTUmqqVyCE8ANcePPS9RdfWJidS0xxJDxyYOSL21iOGx6NRie3qsrs9NOJWkdt1rSW0u5p\u002Bjz1/wm/348r5eT2bu1iPJG\u002BFhmdmO9fHxDUTYfthuGFptsY1l5O1V0e5ov8nckSG42GipvlKy1Ve65fw\u002BshQHajxbf3Kt78jTPTTI\u002BF\u002BObXEgAtxSCeSPPOsyksy\u002Ban23f62F0MOHQl6K6P9vgM2sQsVjjWzTnQHksg506wcPYsr7\u002B8SDAYRAjRT4dhQQCkizA0hK4hbPNJTiKMDgHLIBYOMTE\u002BNszyMCA4Hg2yOBflVNzmdNxiOuwSiwRYTI1yatJmcdwiHnLoOP2sQQz08HgyyvFktD8FwLULKSSgW6BaUKjUhks87N/yAdAtaFmgGNC2wR8MAYf08J\u002Byxq3bG14sPW7iuNCxu86ahqRhSFRTIBFw2KEomsVyUSNTD7JUD1Jp\u002B9EdaJmgGJKG0XWomRLp2CBlPx2GBQEQPuRIBBmOYooAqtlzBnUdqk2TmqKju0Fik0mS6dML8dSZixw5dm6foE9A2OcSaZSJ1Es4quqJNXRodCSlrSaPNhq0gzMsnH\u002BbS\u002B9//OG5q5//wtF3bzJ8yidSMW5MRTAsUG1whZ\u002Bm2d1m0wTNAsuFuaciXH0tyW5Dp7SlUSlU90z1Btn1Te7ef8DSgxwrqznW13KsraywtpxhM5ehsZ5BLy7jNre6RCnptC2q9Q4t7ckD6Dk0TZs/Mzl2qgffrx4CE0cZOfY8hbLKWkEh\u002B1ihUvV\u002Br65gPv9webepy0Kh2M/9Tzwz/2rSFImU1Drkyy0elVVKO3uC\u002By/SYUi89RGzlz8dTqPlfyf72Sv/AiuphR\u002BNLPK3AAAAAElFTkSuQmCC",
-              "WhenOpened": "2025-05-29T12:35:16.911Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "37_CheckPointsDemo.dtsx [Design]",
-              "DocumentMoniker": "C:\\Users\\Kiaan Patel\\Git\\sc_KiaanPatel_2025\\DatabaseAdministration\\MasterSSISPart1\\ControlFlowTraining\\37_CheckPointsDemo.dtsx",
-              "RelativeDocumentMoniker": "37_CheckPointsDemo.dtsx",
-              "ToolTip": "C:\\Users\\Kiaan Patel\\Git\\sc_KiaanPatel_2025\\DatabaseAdministration\\MasterSSISPart1\\ControlFlowTraining\\37_CheckPointsDemo.dtsx [Design]",
-              "RelativeToolTip": "37_CheckPointsDemo.dtsx [Design]",
-              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMlSURBVDhPjZQ7bJtVGIaf41vsOk7ihICdxK1wiWiTFhW1QBEDapEQAnVoOzGUAalDNybECgsINqQOrBUDGzAgIUCVijoUqAQoTuM4JW4dO3Yuvvz2/9v//TC4/mM7ROGVPumc73zvq/d85yIAPvniq9/S8ydf4hComk5lZ/fHv\u002B7fu/nd11/\u002BMLyOlDLQG59Mz5CamRosGMLdP1ZZWlk9r1mIK\u002B99wM/f37rTUmqqVyCE8ANcePPS9RdfWJidS0xxJDxyYOSL21iOGx6NRie3qsrs9NOJWkdt1rSW0u5p\u002Bjz1/wm/348r5eT2bu1iPJG\u002BFhmdmO9fHxDUTYfthuGFptsY1l5O1V0e5ov8nckSG42GipvlKy1Ve65fw\u002BshQHajxbf3Kt78jTPTTI\u002BF\u002BObXEgAtxSCeSPPOsyksy\u002Ban23f62F0MOHQl6K6P9vgM2sQsVjjWzTnQHksg506wcPYsr7\u002B8SDAYRAjRT4dhQQCkizA0hK4hbPNJTiKMDgHLIBYOMTE\u002BNszyMCA4Hg2yOBflVNzmdNxiOuwSiwRYTI1yatJmcdwiHnLoOP2sQQz08HgyyvFktD8FwLULKSSgW6BaUKjUhks87N/yAdAtaFmgGNC2wR8MAYf08J\u002Byxq3bG14sPW7iuNCxu86ahqRhSFRTIBFw2KEomsVyUSNTD7JUD1Jp\u002B9EdaJmgGJKG0XWomRLp2CBlPx2GBQEQPuRIBBmOYooAqtlzBnUdqk2TmqKju0Fik0mS6dML8dSZixw5dm6foE9A2OcSaZSJ1Es4quqJNXRodCSlrSaPNhq0gzMsnH\u002BbS\u002B9//OG5q5//wtF3bzJ8yidSMW5MRTAsUG1whZ\u002Bm2d1m0wTNAsuFuaciXH0tyW5Dp7SlUSlU90z1Btn1Te7ef8DSgxwrqznW13KsraywtpxhM5ehsZ5BLy7jNre6RCnptC2q9Q4t7ckD6Dk0TZs/Mzl2qgffrx4CE0cZOfY8hbLKWkEh\u002B1ihUvV\u002Br65gPv9webepy0Kh2M/9Tzwz/2rSFImU1Drkyy0elVVKO3uC\u002By/SYUi89RGzlz8dTqPlfyf72Sv/AiuphR\u002BNLPK3AAAAAElFTkSuQmCC",
-              "WhenOpened": "2025-05-29T12:30:12.936Z",
+              "WhenOpened": "2025-05-30T07:34:34.111Z",
               "EditorCaption": " [Design]"
             }
           ]
