@@ -2,18 +2,18 @@
 <BuildLog xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <ProjectInfo>
     <Name>SSISProject</Name>
-    <LastWriteTime>2025-06-04T06:34:40.1493245Z</LastWriteTime>
+    <LastWriteTime>2025-06-04T09:43:39.5765024Z</LastWriteTime>
     <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
   </ProjectInfo>
   <LastBuildInfos>
     <ProjectBuildItemInfo>
       <Name>Package.dtsx</Name>
-      <LastWriteTime>2025-06-04T06:26:26.7171545Z</LastWriteTime>
+      <LastWriteTime>2025-06-04T09:32:58.6243266Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>TestingInsert.dtsx</Name>
-      <LastWriteTime>2025-06-04T06:34:40.1371388Z</LastWriteTime>
+      <LastWriteTime>2025-06-04T09:49:22.9238458Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
   </LastBuildInfos>
