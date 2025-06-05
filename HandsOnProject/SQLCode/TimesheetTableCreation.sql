@@ -1,4 +1,4 @@
-CREATE TABLE TimeSheets (
+CREATE TABLE Timesheet (
     EntryID INT PRIMARY KEY IDENTITY(1,1),
     EmployeeName NVARCHAR(50) ,
     Date DATE ,
@@ -6,7 +6,7 @@ CREATE TABLE TimeSheets (
     Client NVARCHAR(50) ,
     ClientProjectName NVARCHAR(100) ,
     Description NVARCHAR(100) ,
-    Billable NVARCHAR(50) , -- 1 = Billable, 0 = Non-billable
+    Billable NVARCHAR(50) ,
     Comments NVARCHAR(255),
     TotalHours DECIMAL(5,2) ,
     StartTime TIME(0) ,
@@ -16,7 +16,7 @@ CREATE TABLE TimeSheets (
     CONSTRAINT TimesheetUniqueEntry UNIQUE (EmployeeName, Date, StartTime, EndTime)
 );
 
-drop table TimeSheets
+drop table Timesheet
 
 CREATE TABLE AuditLog (
     LogID INT PRIMARY KEY IDENTITY(1,1),
@@ -36,5 +36,9 @@ CREATE TABLE ErrorLog (
     Timestamp DATETIME DEFAULT GETDATE()
 );
 
-CREATE NONCLUSTERED INDEX IX_TimeSheets_Date_Employee
-ON TimeSheets(Date, EmployeeName);
+CREATE NONCLUSTERED INDEX IX_Timesheets_Date_Employee
+ON Timesheet(Date, EmployeeName);
+
+select * from Timesheet
+
+truncate table Timesheet
