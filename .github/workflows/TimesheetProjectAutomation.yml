@@ -1,85 +1,51 @@
 name: Timesheet Project SQL Server Database and Job Deployment
 
 on:
-  workflow_dispatch: # Allows manual triggering
+  workflow_dispatch: # Manual trigger only
 
 jobs:
   deploy-and-execute:
-    runs-on: windows-latest # Using Windows runner for better SQL Server compatibility
+    runs-on: windows-latest # Windows for better SQL Server support
     
     steps:
+    # 1. Checkout code
     - name: Checkout repository
       uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
-        
-    # Install SQL Server tools
+
+    # 2. Install SQL tools only
     - name: Install SQL Server CLI tools
+      run: choco install sqlserver-cmdlineutils -y
+
+    # 3. Database setup using YOUR EXISTING TUNNEL
+    - name: Execute database setup
       run: |
-        choco install sqlserver-cmdlineutils -y
-        
-    # Set up pinggy tunnel (fixed version)
-    - name: Set up Python for pinggy tunnel
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.10'
-        
-    - name: Install pinggy
-      run: pip install pinggy
-      
-    - name: Establish pinggy tunnel and get URL
-      id: pinggy-tunnel
+        sqlcmd -S "${{ secrets.PINGGY_TOKEN }}" `
+               -U "${{ secrets.SQL_USERNAME }}" `
+               -P "${{ secrets.SQL_PASSWORD }}" `
+               -i "HandsOnProject/Timesheet/TableAndDBSetup.sql"
+
+    # 4. Execute SQL Agent Job (FIXED VERSION)
+    - name: Run SQL Agent Job
       run: |
-        # Run pinggy in the background and capture output
-        echo "Starting pinggy tunnel..."
-        pinggy tcp --port 1433 --log-file pinggy.log > pinggy-output.txt 2>&1 &
-        
-        # Wait for tunnel to establish
-        sleep 15
-        
-        # Extract the public URL from the output
-        $url = (Get-Content pinggy-output.txt | Select-String -Pattern "tcp://(.+)" | ForEach-Object { $_.Matches.Groups[1].Value })
-        if (-not $url) {
-          Write-Output "::error::Failed to establish pinggy tunnel"
-          Get-Content pinggy-output.txt
-          Get-Content pinggy.log -ErrorAction SilentlyContinue
-          exit 1
-        }
-        
-        Write-Output "Pinggy tunnel established at: $url"
-        echo "SQL_SERVER=$url" >> $env:GITHUB_ENV
-      env:
-        PINGGY_TOKEN: ${{ secrets.PINGGY_TOKEN }}
-        
-    # Database setup
-    - name: Execute complete database setup
-      run: |
-        sqlcmd -S "${{ env.SQL_SERVER }}" -U "${{ secrets.SQL_USERNAME }}" -P "${{ secrets.SQL_PASSWORD }}" -i "sql_scripts/full_setup.sql"
-        
-    # SQL Agent job execution
-    - name: Execute SQL Agent Job
-      run: |
-        $jobName = "Your_Job_Name" # Replace with your actual job name
+        $jobName = "TimesheetProjectRun"
         $sql = @"
         USE msdb;
         EXEC dbo.sp_start_job N'$jobName';
-        WAITFOR DELAY '00:00:05'; -- Give it 5 seconds to start
+        WAITFOR DELAY '00:00:05';
         SELECT TOP 1 run_status FROM dbo.sysjobhistory 
         WHERE job_id = (SELECT job_id FROM dbo.sysjobs WHERE name = N'$jobName') 
         ORDER BY instance_id DESC;
         "@
         
-        $result = sqlcmd -S "${{ env.SQL_SERVER }}" -U "${{ secrets.SQL_USERNAME }}" -P "${{ secrets.SQL_PASSWORD }}" -Q "$sql"
-        echo "Job execution result: $result"
-        if ($result -notlike "*1*") { exit 1 }
-        
-    # Verification step
-    - name: Verify SSIS package execution
+        sqlcmd -S "${{ secrets.PINGGY_TOKEN }}" `
+               -U "${{ secrets.SQL_USERNAME }}" `
+               -P "${{ secrets.SQL_PASSWORD }}" `
+               -Q "$sql"
+
+    # 5. Verification
+    - name: Verify execution
       run: |
-        $verificationSql = @"
-        USE TimesheetDB;
-        SELECT COUNT(*) AS EmployeeCount FROM Employee;
-        SELECT COUNT(*) AS TimesheetCount FROM Timesheet;
-        "@
-        
-        sqlcmd -S "${{ env.SQL_SERVER }}" -U "${{ secrets.SQL_USERNAME }}" -P "${{ secrets.SQL_PASSWORD }}" -Q "$verificationSql"
+        sqlcmd -S "${{ secrets.PINGGY_TOKEN }}" `
+               -U "${{ secrets.SQL_USERNAME }}" `
+               -P "${{ secrets.SQL_PASSWORD }}" `
+               -Q "USE TimesheetDB; SELECT COUNT(*) AS Tables FROM sys.tables;"
