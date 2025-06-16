@@ -38,18 +38,18 @@ jobs:
     # Database setup
     - name: Execute complete database setup
       run: |
-        sqlcmd -S "${{ secrets.SQL_SERVER }}" -U "${{ secrets.SQL_USERNAME }}" -P "${{ secrets.SQL_PASSWORD }}" -i "sql_scripts/full_setup.sql"
+        sqlcmd -S "${{ secrets.SQL_SERVER }}" -U "${{ secrets.SQL_USERNAME }}" -P "${{ secrets.SQL_PASSWORD }}" -i "HandsOnProject/Timesheet/TableAndDBSetup.sql"
         
     # SQL Agent job execution
     - name: Execute SQL Agent Job
       run: |
-        $jobName = "Your_Job_Name" # Replace with your actual job name
+        $jobName = "TimesheetProjectJob" # Replace with your actual job name
         $sql = @"
         USE msdb;
-        EXEC dbo.sp_start_job N'$jobName';
+        EXEC dbo.sp_start_job N'$TimesheetProjectJob';
         WAITFOR DELAY '00:00:05'; -- Give it 5 seconds to start
         SELECT TOP 1 run_status FROM dbo.sysjobhistory 
-        WHERE job_id = (SELECT job_id FROM dbo.sysjobs WHERE name = N'$jobName') 
+        WHERE job_id = (SELECT job_id FROM dbo.sysjobs WHERE name = N'$TimesheetProjectJob') 
         ORDER BY instance_id DESC;
         "@
         
