@@ -1,0 +1,71 @@
+name: SQL Server Database and Job Deployment
+
+on:
+  workflow_dispatch: # Allows manual triggering
+
+jobs:
+  deploy-and-execute:
+    runs-on: windows-latest # Using Windows runner for better SQL Server compatibility
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        
+    # Install SQL Server tools
+    - name: Install SQL Server CLI tools
+      run: |
+        choco install sqlserver-cmdlineutils -y
+        
+    # Set up pinggy tunnel
+    - name: Set up Python for pinggy tunnel
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+        
+    - name: Install pinggy
+      run: pip install pinggy
+      
+    - name: Establish pinggy tunnel
+      run: |
+        pinggy tcp --port 1433 --log-file pinggy.log &
+        sleep 10 # Wait for tunnel to establish
+        cat pinggy.log
+      env:
+        PINGGY_TOKEN: ${{ secrets.PINGGY_TOKEN }}
+        
+    # Database setup
+    - name: Execute complete database setup
+      run: |
+        sqlcmd -S "${{ secrets.SQL_SERVER }}" -U "${{ secrets.SQL_USERNAME }}" -P "${{ secrets.SQL_PASSWORD }}" -i "sql_scripts/full_setup.sql"
+        
+    # SQL Agent job execution
+    - name: Execute SQL Agent Job
+      run: |
+        $jobName = "Your_Job_Name" # Replace with your actual job name
+        $sql = @"
+        USE msdb;
+        EXEC dbo.sp_start_job N'$jobName';
+        WAITFOR DELAY '00:00:05'; -- Give it 5 seconds to start
+        SELECT TOP 1 run_status FROM dbo.sysjobhistory 
+        WHERE job_id = (SELECT job_id FROM dbo.sysjobs WHERE name = N'$jobName') 
+        ORDER BY instance_id DESC;
+        "@
+        
+        $result = sqlcmd -S "${{ secrets.SQL_SERVER }}" -U "${{ secrets.SQL_USERNAME }}" -P "${{ secrets.SQL_PASSWORD }}" -Q "$sql"
+        echo "Job execution result: $result"
+        if ($result -notlike "*1*") { exit 1 } # Exit with error if job didn't run successfully
+        
+    # Verification step
+    - name: Verify SSIS package execution
+      run: |
+        $verificationSql = @"
+        USE TimesheetDB;
+        -- Add verification queries specific to your SSIS package
+        -- For example, check if data was loaded:
+        SELECT COUNT(*) AS EmployeeCount FROM Employee;
+        SELECT COUNT(*) AS TimesheetCount FROM Timesheet;
+        "@
+        
+        sqlcmd -S "${{ secrets.SQL_SERVER }}" -U "${{ secrets.SQL_USERNAME }}" -P "${{ secrets.SQL_PASSWORD }}" -Q "$verificationSql"
