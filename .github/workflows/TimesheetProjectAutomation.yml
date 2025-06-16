@@ -1,4 +1,4 @@
-name: SQL Server Database and Job Deployment
+name: Timesheet Project SQL Server Database and Job Deployment
 
 on:
   workflow_dispatch: # Allows manual triggering
