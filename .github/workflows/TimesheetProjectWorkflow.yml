@@ -23,30 +23,33 @@ jobs:
       - name: Deploy SSIS Package
         run: >
           $ispacPath = "HandsOnProject/Timesheet/SSISProject - Copy/bin/Development/SSISProject.ispac"
-
+      
           if (-not (Test-Path $ispacPath)) {
             Write-Error "ISPAC file not found at: $ispacPath"
             exit 1
           }
-
+      
           $projectBytes = [System.IO.File]::ReadAllBytes($ispacPath)
-
+      
           $deploySql = @"
           USE SSISDB;
+      
           DECLARE @folder_name NVARCHAR(128) = 'SSISProjectRun';
           DECLARE @project_name NVARCHAR(128) = 'SSISProject';
           DECLARE @project_stream VARBINARY(MAX) = 0x$([System.BitConverter]::ToString($projectBytes).Replace('-',''));
+      
           IF NOT EXISTS (SELECT 1 FROM catalog.folders WHERE name = @folder_name)
           BEGIN
             EXEC catalog.create_folder @folder_name;
           END
+      
           EXEC catalog.deploy_project @folder_name, @project_name, @project_stream;
           "@
-
+      
           $deploySql | Out-File -FilePath "deploy_ssis.sql" -Encoding UTF8
-
+      
           sqlcmd -b -S "${{ secrets.PINGGY_TOKEN }}" -U "${{ secrets.SQL_USERNAME }}" -P "${{ secrets.SQL_PASSWORD }}" -i "deploy_ssis.sql"
-
+      
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
         shell: pwsh
 
