@@ -28,7 +28,7 @@ jobs:
                -i "HandsOnProject/Timesheet/TableAndDBSetup.sql"
         if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
-    # 3. Deploy SSIS package (EXACT PATH CONFIGURATION)
+    # 3. Deploy SSIS
     - name: Deploy SSIS Package
       run: |
         $ispacPath = "HandsOnProject/Timesheet/${{ env.SSIS_PROJECT_PATH }}/bin/Development/SSISProject.ispac"
@@ -42,7 +42,7 @@ jobs:
         Write-Output "Source: $ispacPath"
         Write-Output "Destination: /SSISDB/${{ env.SSIS_FOLDER_NAME }}/SSISProject"
         
-        & "${env:ProgramFiles(x86)}\Microsoft SQL Server Management Studio 19\Common7\IDE\ISDeploymentWizard.exe" `
+        & "C:\Program Files (x86)\Microsoft SQL Server\160\DTS\Binn\ISDeploymentWizard.exe" `
           /Silent `
           /ModelType:Project `
           /SourcePath:"$ispacPath" `
