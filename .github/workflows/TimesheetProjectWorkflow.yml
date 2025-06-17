@@ -31,30 +31,7 @@ jobs:
                -i "HandsOnProject/Timesheet/TableAndDBSetup.sql"
         if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
-    - name: Grant SSIS Permissions
-      run: |
-        $permissionSql = @"
-        USE [SSISDB];
-        
-        IF NOT EXISTS (
-            SELECT 1 
-            FROM sys.database_principals 
-            WHERE name = '${{ secrets.SQL_USERNAME }}'
-        )
-        BEGIN
-            CREATE USER [${{ secrets.SQL_USERNAME }}] FOR LOGIN [${{ secrets.SQL_USERNAME }}];
-        END
-        
-        ALTER ROLE [ssis_admin] ADD MEMBER [${{ secrets.SQL_USERNAME }}];
-        "@
-        
-        $permissionSql | Out-File -FilePath "grant_permissions.sql" -Encoding UTF8
-        sqlcmd -b -S "${{ secrets.PINGGY_TOKEN }}" `
-               -U "${{ secrets.SQL_USERNAME }}" `
-               -P "${{ secrets.SQL_PASSWORD }}" `
-               -i "grant_permissions.sql"
-    
-    # 4. Deploy SSIS package using T-SQL
+    # 4. Deploy SSIS package using corrected T-SQL
     - name: Deploy SSIS Package
       run: |
         $ispacPath = "HandsOnProject/Timesheet/SSISProject - Copy/bin/Development/SSISProject.ispac"
@@ -67,7 +44,7 @@ jobs:
         # Convert ISPAC to hex string
         $hexString = [System.BitConverter]::ToString([System.IO.File]::ReadAllBytes($ispacPath)) -replace '-',''
 
-        # Create deployment script
+        # Create corrected deployment script
         $deploySql = @"
         USE [SSISDB];
         
@@ -89,15 +66,21 @@ jobs:
             @project_stream = @project_binary,
             @operation_id = @operation_id OUTPUT;
             
-        -- Check deployment status
+        -- Check deployment status (using correct column names)
         SELECT 
             [operation_id],
             [status],
             [start_time],
             [end_time],
-            [errormessage]
+            [error_message]  -- CORRECTED COLUMN NAME
         FROM [catalog].[operations]
         WHERE [operation_id] = @operation_id;
+        
+        -- Fail deployment if not successful
+        IF (SELECT [status] FROM [catalog].[operations] WHERE [operation_id] = @operation_id) <> 6
+        BEGIN
+            RAISERROR('SSIS deployment failed', 16, 1);
+        END
         "@
 
         $deploySql | Out-File -FilePath "deploy_ssis.sql" -Encoding UTF8
