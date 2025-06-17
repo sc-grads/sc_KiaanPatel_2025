@@ -39,7 +39,7 @@ select * from Timesheet
 truncate table Timesheet
 drop table Timesheet
 
-
+/*
 CREATE TABLE AuditLog (
     LogID INT PRIMARY KEY IDENTITY(1,1),
     TableName NVARCHAR(50) NOT NULL,
@@ -48,7 +48,29 @@ CREATE TABLE AuditLog (
     UserName NVARCHAR(50) NOT NULL,
     Details NVARCHAR(255)
 );
+*/
 
+CREATE TABLE AuditLog (
+    AuditID INT PRIMARY KEY IDENTITY(1,1),
+	Type NVARCHAR(225) NOT NULL,
+	Month NVARCHAR(50),
+    EmployeeID INT,
+    Timestamp DATETIME NULL DEFAULT GETDATE(),
+	Details NVARCHAR(4000),
+	
+);
+
+CREATE TABLE AuditLog_Staging (
+    AuditID INT PRIMARY KEY IDENTITY(1,1),
+	Type NVARCHAR(225) NOT NULL,
+	Month NVARCHAR(50),
+    EmployeeID NVARCHAR(100),
+    Timestamp DATETIME NULL DEFAULT GETDATE(),
+	Details NVARCHAR(4000),
+	
+);
+
+/*
 CREATE TABLE AuditLog_Staging (
     LogID INT PRIMARY KEY IDENTITY(1,1),
     TableName NVARCHAR(50) NOT NULL,
@@ -57,12 +79,13 @@ CREATE TABLE AuditLog_Staging (
     UserName NVARCHAR(50) NOT NULL,
     Details NVARCHAR(255)
 );
-
+*/
 select * from AuditLog_Staging
 
 
 select * from AuditLog
 drop table AuditLog
+drop table AuditLog_Staging
 
 CREATE TABLE ErrorLog (
     ErrorID INT PRIMARY KEY IDENTITY(1,1),
