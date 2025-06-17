@@ -17,11 +17,11 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    # 2. Install only essential tools
+    # 2. Install required tools
     - name: Install SQL tools
       run: |
         choco install sqlserver-cmdlineutils -y --no-progress
-
+        
     # 3. Database setup
     - name: Execute database setup
       run: |
@@ -31,51 +31,49 @@ jobs:
                -i "HandsOnProject/Timesheet/TableAndDBSetup.sql"
         if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
-    # 4. Direct SSIS deployment using SQLCMD
+    # 4. Deploy SSIS package using PowerShell method
     - name: Deploy SSIS Package
       run: |
+        # Load required assemblies
+        Add-Type -AssemblyName "Microsoft.SqlServer.Management.IntegrationServices, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+        Add-Type -AssemblyName "Microsoft.SqlServer.ConnectionInfo"
+        Add-Type -AssemblyName "Microsoft.SqlServer.Management.Sdk.Sfc"
+
         $ispacPath = "HandsOnProject/Timesheet/SSISProject - Copy/bin/Development/SSISProject.ispac"
-        
         if (-not (Test-Path $ispacPath)) {
           Write-Error "ISPAC file not found at: $ispacPath"
           Get-ChildItem -Recurse -Path . -Include *.ispac
           exit 1
         }
-        
-        # Convert ISPAC to hex
-        $hexString = [System.BitConverter]::ToString([System.IO.File]::ReadAllBytes($ispacPath)) -replace '-',''
-        
-        # SQL deployment script
-        $deploySql = @"
-        USE SSISDB;
-        
-        -- Create folder if not exists
-        IF NOT EXISTS (SELECT 1 FROM catalog.folders WHERE name = '${{ env.SSIS_FOLDER_NAME }}')
-        BEGIN
-            EXEC catalog.create_folder '${{ env.SSIS_FOLDER_NAME }}', '${{ env.SSIS_FOLDER_NAME }}';
-        END
-        
-        -- Deploy project
-        DECLARE @project_binary VARBINARY(MAX) = 0x$hexString;
-        EXEC catalog.deploy_project 
-            @folder_name = '${{ env.SSIS_FOLDER_NAME }}',
-            @project_name = '${{ env.SSIS_PROJECT_NAME }}',
-            @project_stream = @project_binary;
-        
-        SELECT 'SSIS project deployed successfully' AS Result;
-        "@
-        
-        $deploySql | Out-File -FilePath "deploy_ssis.sql" -Encoding UTF8
-        
-        # Execute deployment
-        sqlcmd -b -S "${{ secrets.PINGGY_TOKEN }}" `
-               -U "${{ secrets.SQL_USERNAME }}" `
-               -P "${{ secrets.SQL_PASSWORD }}" `
-               -i "deploy_ssis.sql"
-        
-        if ($LASTEXITCODE -ne 0) {
-          Write-Error "SSIS deployment failed with exit code: $LASTEXITCODE"
-          exit $LASTEXITCODE
+
+        # Create connection
+        $sqlConnectionString = "Data Source=${{ secrets.PINGGY_TOKEN }};User ID=${{ secrets.SQL_USERNAME }};Password=${{ secrets.SQL_PASSWORD }};"
+        $sqlConnection = New-Object System.Data.SqlClient.SqlConnection $sqlConnectionString
+        $integrationServices = New-Object Microsoft.SqlServer.Management.IntegrationServices.IntegrationServices $sqlConnection
+
+        try {
+            # Get or create folder
+            $catalog = $integrationServices.Catalogs["SSISDB"]
+            $folder = $catalog.Folders[$env:SSIS_FOLDER_NAME]
+            
+            if (-not $folder) {
+                $folder = New-Object Microsoft.SqlServer.Management.IntegrationServices.CatalogFolder($catalog, $env:SSIS_FOLDER_NAME, $env:SSIS_FOLDER_NAME)
+                $folder.Create()
+            }
+            
+            # Read ISPAC file
+            $projectBytes = [System.IO.File]::ReadAllBytes($ispacPath)
+            
+            # Deploy project
+            $folder.DeployProject($env:SSIS_PROJECT_NAME, $projectBytes)
+            Write-Output "SSIS project deployed successfully to $($env:SSIS_FOLDER_NAME)/$($env:SSIS_PROJECT_NAME)"
+        }
+        catch {
+            Write-Error "SSIS deployment failed: $_"
+            exit 1
+        }
+        finally {
+            $sqlConnection.Close()
         }
 
     # 5. Create or update SQL Agent job
@@ -121,7 +119,7 @@ jobs:
                -i "setup_job.sql"
         if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
-    # 6. Execute and verify with extended timeout
+    # 6. Execute and verify
     - name: Execute and Verify
       timeout-minutes: 20
       run: |
@@ -138,7 +136,7 @@ jobs:
         DECLARE @waitTime INT = 0;
         DECLARE @maxWait INT = 900; -- 15 minute timeout
         
-        WHILE @waitTime < @maxWait AND @finalStatus IS NULL
+        WHILE @waitTime < @maxWait
         BEGIN
           SELECT TOP 1 @finalStatus = run_status 
           FROM sysjobhistory 
@@ -149,7 +147,11 @@ jobs:
           BEGIN
             WAITFOR DELAY '00:00:15';
             SET @waitTime = @waitTime + 15;
-            SET @finalStatus = NULL; -- Reset to continue waiting
+            SET @finalStatus = NULL;
+          END
+          ELSE
+          BEGIN
+            BREAK;
           END
         END
         
@@ -168,7 +170,8 @@ jobs:
         USE TimesheetDB;
         SELECT 
           (SELECT COUNT(*) FROM Employee) AS EmployeeCount,
-          (SELECT COUNT(*) FROM Timesheet) AS TimesheetCount;
+          (SELECT COUNT(*) FROM Timesheet) AS TimesheetCount,
+          (SELECT COUNT(*) FROM AuditLog) AS AuditLogCount;
         "@
         
         $verifySql | Out-File -FilePath "verify_job.sql" -Encoding UTF8
