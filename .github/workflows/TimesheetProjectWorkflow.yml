@@ -1,7 +1,12 @@
 name: Timesheet Project Full Deployment
 
 on:
-  workflow_dispatch: # Manual trigger only
+  workflow_dispatch: # Manual trigger
+
+env:
+  SSIS_PROJECT_PATH: "SSISProject - Copy" # Adjust if folder name differs
+  SSIS_PACKAGE_NAME: "TimesheetEntry.dtsx" # Replace with your package name
+  SSIS_FOLDER_NAME: "SSISProjectRun" # Folder in SSISDB
 
 jobs:
   deploy-and-execute:
@@ -14,25 +19,22 @@ jobs:
       with:
         fetch-depth: 0
 
-    # 2. Install SQL Server PowerShell module
+    # 2. Install SqlServer PowerShell module
     - name: Install SqlServer module
       run: |
         Install-Module -Name SqlServer -Force -AllowClobber -Scope CurrentUser
-        Import-Module SqlServer
+      shell: pwsh
 
-    # 3. Execute database setup script
+    # 3. Execute database setup
     - name: Execute database setup
       run: |
-        sqlcmd -b -t 600 -S "${{ secrets.PINGGY_TOKEN }}" `
-               -U "${{ secrets.SQL_USERNAME }}" `
-               -P "${{ secrets.SQL_PASSWORD }}" `
-               -i "HandsOnProject/Timesheet/TableAndDBSetup.sql"
-        if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+        sqlcmd -b -t 600 -S "${{ secrets.PINGGY_TOKEN }}" -U "${{ secrets.SQL_USERNAME }}" -P "${{ secrets.SQL_PASSWORD }}" -i "HandsOnProject/Timesheet/TableAndDBSetup.sql"
+      shell: cmd
 
-    # 4. Deploy SSIS package using PowerShell
+    # 4. Deploy SSIS Package
     - name: Deploy SSIS Package
       run: |
-        $ispacPath = "HandsOnProject/Timesheet/SSISProject - Copy/bin/Development/SSISProject.ispac"
+        $ispacPath = "HandsOnProject/Timesheet/${{ env.SSIS_PROJECT_PATH }}/bin/Development/SSISProject.ispac"
         if (-not (Test-Path $ispacPath)) {
           Write-Error "ISPAC file not found at: $ispacPath"
           Get-ChildItem -Recurse -Include *.ispac
@@ -41,7 +43,7 @@ jobs:
 
         Write-Output "=== Deploying SSIS package ==="
         Write-Output "Source: $ispacPath"
-        Write-Output "Destination: /SSISDB/SSISProjectRun/SSISProject"
+        Write-Output "Destination: /SSISDB/${{ env.SSIS_FOLDER_NAME }}/SSISProject"
 
         # Load the IntegrationServices assembly
         [System.Reflection.Assembly]::LoadWithPartialName("Microsoft.SqlServer.Management.IntegrationServices") | Out-Null
@@ -51,15 +53,15 @@ jobs:
         $sqlConnection = New-Object System.Data.SqlClient.SqlConnection $connectionString
         $integrationServices = New-Object Microsoft.SqlServer.Management.IntegrationServices.IntegrationServices $sqlConnection
 
-        # Get or create SSISDB catalog
+        # Get the SSISDB catalog
         $catalog = $integrationServices.Catalogs["SSISDB"]
         if ($catalog -eq $null) {
-          Write-Error "SSISDB catalog not found. Please ensure SSIS is installed and catalog is created."
+          Write-Error "SSISDB catalog not found. Ensure SSIS is installed and catalog is created."
           exit 1
         }
 
         # Get or create folder
-        $folderName = "SSISProjectRun"
+        $folderName = "${{ env.SSIS_FOLDER_NAME }}"
         $folder = $catalog.Folders[$folderName]
         if ($folder -eq $null) {
           $folder = New-Object Microsoft.SqlServer.Management.IntegrationServices.Folder($catalog, $folderName, "SSIS Project Folder")
@@ -69,13 +71,12 @@ jobs:
         # Deploy the project
         $projectFile = [System.IO.File]::ReadAllBytes($ispacPath)
         $project = $folder.DeployProject("SSISProject", $projectFile)
-
         if ($project -eq $null) {
           Write-Error "Failed to deploy SSIS project."
           exit 1
         }
-
         Write-Output "SSIS project deployed successfully."
+      shell: pwsh
 
     # 5. Create/Update SQL Agent Job
     - name: Setup SQL Agent Job
@@ -94,7 +95,7 @@ jobs:
               @job_name = N'TimesheetProjectRun',
               @step_name = N'Run SSIS Package',
               @subsystem = N'SSIS',
-              @command = N'/ISSERVER "\"\SSISDB\SSISProjectRun\SSISProject\TimesheetEntry.dtsx\"" /SERVER ""${{ secrets.PINGGY_TOKEN }}"" /Par "\"$ServerOption::LOGGING_LEVEL(Int16)\"";1 /Par "\"$ServerOption::SYNCHRONIZED(Boolean)\"";True /CALLERINFO SQLAGENT /REPORTING E',
+              @command = N'/ISSERVER "\"\SSISDB\${{ env.SSIS_FOLDER_NAME }}\SSISProject\${{ env.SSIS_PACKAGE_NAME }}\"" /SERVER ""${{ secrets.PINGGY_TOKEN }}"" /Par "\"$ServerOption::LOGGING_LEVEL(Int16)\"";1 /Par "\"$ServerOption::SYNCHRONIZED(Boolean)\"";True /CALLERINFO SQLAGENT /REPORTING E',
               @database_name = N'master';
               
             EXEC dbo.sp_add_jobschedule
@@ -114,7 +115,7 @@ jobs:
             EXEC sp_update_jobstep
               @job_name = N'TimesheetProjectRun',
               @step_id = 1,
-              @command = N'/ISSERVER "\"\SSISDB\SSISProjectRun\SSISProject\TimesheetEntry.dtsx\"" /SERVER ""${{ secrets.PINGGY_TOKEN }}"" /Par "\"$ServerOption::LOGGING_LEVEL(Int16)\"";1 /Par "\"$ServerOption::SYNCHRONIZED(Boolean)\"";True /CALLERINFO SQLAGENT /REPORTING E';
+              @command = N'/ISSERVER "\"\SSISDB\${{ env.SSIS_FOLDER_NAME }}\SSISProject\${{ env.SSIS_PACKAGE_NAME }}\"" /SERVER ""${{ secrets.PINGGY_TOKEN }}"" /Par "\"$ServerOption::LOGGING_LEVEL(Int16)\"";1 /Par "\"$ServerOption::SYNCHRONIZED(Boolean)\"";True /CALLERINFO SQLAGENT /REPORTING E';
             SELECT 'Job updated successfully' AS Result;
           END
         END TRY
@@ -125,21 +126,15 @@ jobs:
         END CATCH
         "@
         
-        sqlcmd -b -S "${{ secrets.PINGGY_TOKEN }}" `
-               -U "${{ secrets.SQL_USERNAME }}" `
-               -P "${{ secrets.SQL_PASSWORD }}" `
-               -Q "$jobScript"
-        if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+        sqlcmd -b -S "${{ secrets.PINGGY_TOKEN }}" -U "${{ secrets.SQL_USERNAME }}" -P "${{ secrets.SQL_PASSWORD }}" -Q "$jobScript"
+      shell: cmd
 
     # 6. Execute and Verify
     - name: Execute and Verify
       timeout-minutes: 15
       run: |
         # Start the job
-        sqlcmd -b -S "${{ secrets.PINGGY_TOKEN }}" `
-               -U "${{ secrets.SQL_USERNAME }}" `
-               -P "${{ secrets.SQL_PASSWORD }}" `
-               -Q "USE msdb; EXEC dbo.sp_start_job N'TimesheetProjectRun';"
+        sqlcmd -b -S "${{ secrets.PINGGY_TOKEN }}" -U "${{ secrets.SQL_USERNAME }}" -P "${{ secrets.SQL_PASSWORD }}" -Q "USE msdb; EXEC dbo.sp_start_job N'TimesheetProjectRun';"
         
         # Monitor job execution
         $verifySql = @"
@@ -198,8 +193,5 @@ jobs:
           (SELECT COUNT(*) FROM Timesheet) AS TimesheetRecords;
         "@
         
-        sqlcmd -b -t 900 -S "${{ secrets.PINGGY_TOKEN }}" `
-               -U "${{ secrets.SQL_USERNAME }}" `
-               -P "${{ secrets.SQL_PASSWORD }}" `
-               -Q "$verifySql"
-        if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+        sqlcmd -b -t 900 -S "${{ secrets.PINGGY_TOKEN }}" -U "${{ secrets.SQL_USERNAME }}" -P "${{ secrets.SQL_PASSWORD }}" -Q "$verifySql"
+      shell: cmd
