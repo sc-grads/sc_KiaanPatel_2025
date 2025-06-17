@@ -50,7 +50,7 @@ jobs:
 
         -- Deploy the project
         EXEC catalog.deploy_project @folder_name, @project_name, @project_stream;
-"@
+        "@
 
         # Save and execute the SQL script
         $deploySql | Out-File -FilePath "deploy_ssis.sql" -Encoding UTF8
