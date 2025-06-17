@@ -67,12 +67,7 @@ jobs:
             @operation_id = @operation_id OUTPUT;
             
         -- Check deployment status (using correct column names)
-        SELECT 
-            [operation_id],
-            [status],
-            [start_time],
-            [end_time],
-            
+        SELECT *            
         FROM [catalog].[operations]
         WHERE [operation_id] = @operation_id;
         
