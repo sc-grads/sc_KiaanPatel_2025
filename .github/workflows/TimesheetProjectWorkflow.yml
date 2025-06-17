@@ -19,17 +19,7 @@ jobs:
       with:
         fetch-depth: 0
 
-    # 2. Install required tools
-    - name: Install SQL and SSIS tools
-      run: |
-        choco install sqlserver-cmdlineutils -y --no-progress
-        choco install sql-server-management-studio -y --no-progress --params="'/InstallType=All'"
-        if (-not (Test-Path "${env:ProgramFiles(x86)}\Microsoft SQL Server Management Studio 19\Common7\IDE\ISDeploymentWizard.exe")) {
-          Write-Error "SSIS tools installation failed"
-          exit 1
-        }
-
-    # 3. Database setup
+    # 2. Database setup
     - name: Execute database setup
       run: |
         sqlcmd -b -t 600 -S "${{ secrets.PINGGY_TOKEN }}" `
@@ -38,7 +28,7 @@ jobs:
                -i "HandsOnProject/Timesheet/TableAndDBSetup.sql"
         if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
-    # 4. Deploy SSIS package (EXACT PATH CONFIGURATION)
+    # 3. Deploy SSIS package (EXACT PATH CONFIGURATION)
     - name: Deploy SSIS Package
       run: |
         $ispacPath = "HandsOnProject/Timesheet/${{ env.SSIS_PROJECT_PATH }}/bin/Development/SSISProject.ispac"
@@ -63,7 +53,7 @@ jobs:
         
         if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
-    # 5. Create/Update SQL Agent Job (CONFIRMED PACKAGE NAME)
+    # 4. Create/Update SQL Agent Job (CONFIRMED PACKAGE NAME)
     - name: Setup SQL Agent Job
       run: |
         $jobScript = @"
@@ -117,7 +107,7 @@ jobs:
                -Q "$jobScript"
         if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
-    # 6. Execute and verify with extended timeout
+    # 5. Execute and verify with extended timeout
     - name: Execute and Verify
       timeout-minutes: 15 # Overall timeout
       run: |
