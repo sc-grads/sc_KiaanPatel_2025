@@ -92,7 +92,7 @@ jobs:
             @step_id = 1,
             @command = N'/ISSERVER "\"\SSISDB\${{ env.SSIS_FOLDER_NAME }}\${{ env.SSIS_PROJECT_NAME }}\${{ env.SSIS_PACKAGE_NAME }}\"" /SERVER ""${{ secrets.PINGGY_TOKEN }}"" /Par "\"$ServerOption::LOGGING_LEVEL(Int16)\"";1 /Par "\"$ServerOption::SYNCHRONIZED(Boolean)\"";True /CALLERINFO SQLAGENT /REPORTING E';
         END
-"@
+        "@
         $jobScript | Out-File -FilePath "setup_job.sql" -Encoding UTF8
         sqlcmd -b -S "${{ secrets.PINGGY_TOKEN }}" -U "${{ secrets.SQL_USERNAME }}" -P "${{ secrets.SQL_PASSWORD }}" -i "setup_job.sql"
       shell: pwsh
@@ -124,7 +124,7 @@ jobs:
           SELECT 'Job succeeded' AS Result;
         ELSE
           SELECT 'Job failed or timed out' AS Result;
-"@
+        "@
         $verifySql | Out-File -FilePath "verify_job.sql" -Encoding UTF8
         sqlcmd -b -t 900 -S "${{ secrets.PINGGY_TOKEN }}" -U "${{ secrets.SQL_USERNAME }}" -P "${{ secrets.SQL_PASSWORD }}" -i "verify_job.sql"
       shell: pwsh
