@@ -17,11 +17,24 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    # 2. Install required tools
-    - name: Install SQL tools
+    # 2. Install required tools with proper SSIS assemblies
+    - name: Install SQL and SSIS tools
       run: |
+        # Install SQL command line tools
         choco install sqlserver-cmdlineutils -y --no-progress
         
+        # Install SQL Server Integration Services assemblies
+        choco install sql-server-express -y --no-progress --params="'/FEATURES=SQLENGINE,IS'"
+        
+        # Install SQL Server Management Objects
+        choco install smo -y --no-progress
+        
+        # Verify installations
+        if (-not (Test-Path "C:\Program Files\Microsoft SQL Server\150\SDK\Assemblies\Microsoft.SqlServer.Management.IntegrationServices.dll")) {
+          Write-Error "SSIS assemblies not installed"
+          exit 1
+        }
+
     # 3. Database setup
     - name: Execute database setup
       run: |
@@ -31,14 +44,12 @@ jobs:
                -i "HandsOnProject/Timesheet/TableAndDBSetup.sql"
         if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
-    # 4. Deploy SSIS package using PowerShell method
+    # 4. Deploy SSIS package using verified method
     - name: Deploy SSIS Package
       run: |
-        # Load required assemblies
-        Add-Type -AssemblyName "Microsoft.SqlServer.Management.IntegrationServices, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
-        Add-Type -AssemblyName "Microsoft.SqlServer.ConnectionInfo"
-        Add-Type -AssemblyName "Microsoft.SqlServer.Management.Sdk.Sfc"
-
+        # Import the required module
+        Import-Module "C:\Program Files\Microsoft SQL Server\150\SDK\Assemblies\Microsoft.SqlServer.Management.IntegrationServices.dll"
+        
         $ispacPath = "HandsOnProject/Timesheet/SSISProject - Copy/bin/Development/SSISProject.ispac"
         if (-not (Test-Path $ispacPath)) {
           Write-Error "ISPAC file not found at: $ispacPath"
@@ -46,17 +57,19 @@ jobs:
           exit 1
         }
 
-        # Create connection
+        # Create SQL connection
         $sqlConnectionString = "Data Source=${{ secrets.PINGGY_TOKEN }};User ID=${{ secrets.SQL_USERNAME }};Password=${{ secrets.SQL_PASSWORD }};"
         $sqlConnection = New-Object System.Data.SqlClient.SqlConnection $sqlConnectionString
-        $integrationServices = New-Object Microsoft.SqlServer.Management.IntegrationServices.IntegrationServices $sqlConnection
-
+        
         try {
-            # Get or create folder
-            $catalog = $integrationServices.Catalogs["SSISDB"]
-            $folder = $catalog.Folders[$env:SSIS_FOLDER_NAME]
+            # Create Integration Services object
+            $integrationServices = New-Object Microsoft.SqlServer.Management.IntegrationServices.IntegrationServices $sqlConnection
             
-            if (-not $folder) {
+            # Get SSISDB catalog
+            $catalog = $integrationServices.Catalogs["SSISDB"]
+            
+            # Create folder if not exists
+            if (-not $catalog.Folders[$env:SSIS_FOLDER_NAME]) {
                 $folder = New-Object Microsoft.SqlServer.Management.IntegrationServices.CatalogFolder($catalog, $env:SSIS_FOLDER_NAME, $env:SSIS_FOLDER_NAME)
                 $folder.Create()
             }
@@ -65,7 +78,8 @@ jobs:
             $projectBytes = [System.IO.File]::ReadAllBytes($ispacPath)
             
             # Deploy project
-            $folder.DeployProject($env:SSIS_PROJECT_NAME, $projectBytes)
+            $catalog.Folders[$env:SSIS_FOLDER_NAME].DeployProject($env:SSIS_PROJECT_NAME, $projectBytes)
+            
             Write-Output "SSIS project deployed successfully to $($env:SSIS_FOLDER_NAME)/$($env:SSIS_PROJECT_NAME)"
         }
         catch {
