@@ -1,0 +1,54 @@
+name: Timesheet SSIS Deployment
+
+on:
+  workflow_dispatch: # Can be triggered manually or by the first workflow
+  workflow_run:
+    workflows: ["Timesheet Database Setup and Job Management"]
+    types: [completed]
+
+env:
+  SSIS_PACKAGE_NAME: "TimesheetEntry.dtsx" # Adjust to your package name
+  SSIS_FOLDER_NAME: "SSISProjectRun"       # Folder in SSISDB
+  SSIS_PROJECT_NAME: "SSISProject"         # Project name in SSISDB
+
+jobs:
+  deploy-ssis:
+    runs-on: self-hosted-windows # Replace with your runner label
+    
+    steps:
+    # 1. Checkout code
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    # 2. Deploy SSIS Package
+    - name: Deploy SSIS Package
+      run: |
+        $ispacPath = "HandsOnProject/Timesheet/SSISProject - Copy/bin/Development/SSISProject.ispac"
+        
+        if (-not (Test-Path $ispacPath)) {
+          Write-Error "ISPAC file not found at: $ispacPath"
+          exit 1
+        }
+        
+        $projectBytes = [System.IO.File]::ReadAllBytes($ispacPath)
+        
+        $deploySql = @"
+        USE SSISDB;
+        DECLARE @folder_name NVARCHAR(128) = '${{ env.SSIS_FOLDER_NAME }}';
+        DECLARE @project_name NVARCHAR(128) = '${{ env.SSIS_PROJECT_NAME }}';
+        DECLARE @project_stream VARBINARY(MAX) = 0x$([System.BitConverter]::ToString($projectBytes).Replace('-',''));
+        
+        IF NOT EXISTS (SELECT 1 FROM catalog.folders WHERE name = @folder_name)
+        BEGIN
+          EXEC catalog.create_folder @folder_name;
+        END
+        
+        EXEC catalog.deploy_project @folder_name, @project_name, @project_stream;
+        "@
+        
+        $deploySql | Out-File -FilePath "deploy_ssis.sql" -Encoding UTF8
+        
+        sqlcmd -b -S "${{ secrets.PINGGY_TOKEN }}" -i "deploy_ssis.sql"
+        
+        if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      shell: pwsh
