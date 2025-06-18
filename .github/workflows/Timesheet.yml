@@ -1,37 +1,38 @@
-name: SQL Server and SSIS Setup
+name: SQL Server Setup
 on:
   push:
     branches: [ main ]
   workflow_dispatch:
 
 jobs:
-  create-database:
+  setup-database:
     runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/mssql-tools
-      options: --network host  # Ensures network access for Pinggy tunnel
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-      
-    - name: Install dependencies
+
+    - name: Install SQL tools (simplified)
       run: |
-        apt-get update
-        apt-get install -y curl gnupg
-        curl -sL https://deb.nodesource.com/setup_18.x | bash -
-        apt-get install -y nodejs
-        
-    - name: Run SQL script via Pinggy
+        # Install only what we need
+        sudo apt-get update
+        sudo apt-get install -y curl
+        curl https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor > /usr/share/keyrings/microsoft.gpg
+        echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/ubuntu/$(lsb_release -rs)/prod $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/mssql-release.list
+        sudo apt-get update
+        sudo ACCEPT_EULA=Y apt-get install -y mssql-tools unixodbc-dev
+
+    - name: Run SQL script
       env:
+        SQL_SERVER: ${{ secrets.PINGGY_TCP_TUNNEL }}
         SQL_USER: ${{ secrets.SQL_USERNAME }}
         SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
-        PINGGY_TUNNEL: ${{ secrets.PINGGY_TCP_TUNNEL }}
       run: |
-        /opt/mssql-tools/bin/sqlcmd -S "$PINGGY_TUNNEL" \
+        echo "Running database setup..."
+        /opt/mssql-tools/bin/sqlcmd -S "$SQL_SERVER" \
                -U "$SQL_USER" \
                -P "$SQL_PASSWORD" \
                -d master \
-               -i ./TableAndDISSetup.sql \
+               -i ./TableAndDBSetup.sql \
                -o sqlcmd-output.log
         
         if grep -q "Error" sqlcmd-output.log; then
@@ -41,10 +42,8 @@ jobs:
         fi
         echo "Database setup completed successfully"
 
-  
-
-  trigger-ssis-deployment:
-    needs: create-database
+  trigger-ssis:
+    needs: setup-database
     runs-on: ubuntu-latest
     steps:
     - name: Trigger SSIS deployment
@@ -57,71 +56,3 @@ jobs:
             workflow_id: 'deploy-ssis.yml',
             ref: context.ref,
           });
-
-  create-sql-agent-job-script:
-    needs: trigger-ssis-deployment
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-    
-    - name: Generate SQL Agent Job Script
-      run: |
-        mkdir -p ./sql-agent-scripts
-        cat << 'EOF' > ./sql-agent-scripts/deploy-ssis-job.sql
-        USE [msdb]
-        GO
-        
-        BEGIN TRANSACTION
-        DECLARE @ReturnCode INT = 0
-        DECLARE @jobId BINARY(16)
-        
-        -- Delete existing job if needed
-        IF EXISTS (SELECT job_id FROM msdb.dbo.sysjobs WHERE name = N'Run_TimesheetEntry_Job')
-        BEGIN
-            EXEC msdb.dbo.sp_delete_job @job_name = N'Run_TimesheetEntry_Job', @delete_unused_schedule = 1
-            PRINT 'Existing job deleted'
-        END
-        
-        -- Create job
-        EXEC @ReturnCode = msdb.dbo.sp_add_job
-            @job_name = N'Run_TimesheetEntry_Job',
-            @enabled = 1,
-            @description = N'Runs TimesheetEntry.dtsx package',
-            @owner_login_name = N'${{ secrets.SQL_WINDOWS_AUTH_LOGIN }}',
-            @job_id = @jobId OUTPUT
-        
-        -- Add job step
-        EXEC @ReturnCode = msdb.dbo.sp_add_jobstep
-            @job_name = N'Run_TimesheetEntry_Job',
-            @step_name = N'Execute SSIS Package',
-            @subsystem = N'SSIS',
-            @command = N'/ISSERVER "\"\SSISDB\SSISProjectRun\SSISProject\TimesheetEntry.dtsx\"" /SERVER "\"${{ secrets.SQL_SERVER_INSTANCE }}\""',
-            @database_name = N'master'
-        
-        -- Add schedule (daily at 2:00 AM)
-        EXEC @ReturnCode = msdb.dbo.sp_add_jobschedule
-            @job_name = N'Run_TimesheetEntry_Job',
-            @name = N'Daily_2AM_Schedule',
-            @freq_type = 4,
-            @freq_interval = 1,
-            @active_start_time = 020000
-        
-        -- Assign job to server
-        EXEC @ReturnCode = msdb.dbo.sp_add_jobserver
-            @job_name = N'Run_TimesheetEntry_Job',
-            @server_name = N'(local)'
-        
-        COMMIT TRANSACTION
-        GO
-        EOF
-        
-        echo "SQL Agent job script created"
-
-    - name: Commit job script
-      run: |
-        git config --global user.name "GitHub Actions"
-        git config --global user.email "actions@github.com"
-        git add ./sql-agent-scripts/deploy-ssis-job.sql
-        git commit -m "Add SQL Agent job for TimesheetEntry"
-        git push
