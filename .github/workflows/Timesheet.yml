@@ -1,58 +1,26 @@
-name: SQL Server Setup
+name: Setup Database and Tables
+
 on:
   push:
-    branches: [ main ]
-  workflow_dispatch:
+    branches:
+      - main
 
 jobs:
-  setup-database:
+  setup:
     runs-on: ubuntu-latest
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Install SQL tools (simplified)
-      run: |
-        # Install only what we need
-        sudo apt-get update
-        sudo apt-get install -y curl
-        curl https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor > /usr/share/keyrings/microsoft.gpg
-        echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/ubuntu/$(lsb_release -rs)/prod $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/mssql-release.list
-        sudo apt-get update
-        sudo ACCEPT_EULA=Y apt-get install -y mssql-tools unixodbc-dev
+      - name: Install mssql-tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y curl apt-transport-https
+          curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+          curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list
+          sudo apt-get update
+          sudo apt-get install -y mssql-tools unixodbc-dev
 
-    - name: Run SQL script
-      env:
-        SQL_SERVER: ${{ secrets.PINGGY_TCP_TUNNEL }}
-        SQL_USER: ${{ secrets.SQL_USERNAME }}
-        SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
-      run: |
-        echo "Running database setup..."
-        /opt/mssql-tools/bin/sqlcmd -S "$SQL_SERVER" \
-               -U "$SQL_USER" \
-               -P "$SQL_PASSWORD" \
-               -d master \
-               -i ./TableAndDBSetup.sql \
-               -o sqlcmd-output.log
-        
-        if grep -q "Error" sqlcmd-output.log; then
-          echo "SQL errors detected:"
-          cat sqlcmd-output.log
-          exit 1
-        fi
-        echo "Database setup completed successfully"
-
-  trigger-ssis:
-    needs: setup-database
-    runs-on: ubuntu-latest
-    steps:
-    - name: Trigger SSIS deployment
-      uses: actions/github-script@v6
-      with:
-        script: |
-          await github.rest.actions.createWorkflowDispatch({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            workflow_id: 'deploy-ssis.yml',
-            ref: context.ref,
-          });
+      - name: Run Database Setup Script
+        run: /opt/mssql-tools/bin/sqlcmd -S ${{ secrets.SQL_SERVER_INSTANCE }} -U ${{ secrets.SQL_USERNAME }} -P ${{ secrets.SQL_PASSWORD }} -i HandsOnProject/Timesheet/TablesAndDBSetup.sql
