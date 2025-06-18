@@ -26,7 +26,7 @@ jobs:
     # 3. Trigger SSIS Deployment Workflow
     - name: Trigger SSIS Deployment
       run: |
-        gh workflow run deploy-ssis.yml --repo ${{ github.repository }}
+        gh workflow run SSISDeployment.yml --repo ${{ github.repository }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       shell: bash
