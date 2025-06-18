@@ -1,13 +1,11 @@
 name: Setup Database and Tables
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch
 
 jobs:
   setup:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
@@ -15,22 +13,21 @@ jobs:
 
       - name: Install Microsoft SQL Server Command Line Tools
         run: |
-          $toolsUrl = "https://go.microsoft.com/fwlink/?linkid=2156308" # Latest SQL Server ODBC Driver and Command Line Tools
-          $installerPath = "$env:TEMP\sqlcmd_installer.exe"
-          Write-Host "Downloading installer from $toolsUrl to $installerPath"
-          Invoke-WebRequest -Uri $toolsUrl -OutFile $installerPath -ErrorAction Stop
-          if (-not (Test-Path $installerPath)) {
-            throw "Installer download failed. File not found at $installerPath"
-          }
-          Write-Host "Starting installer execution"
-          Start-Process -FilePath $installerPath -ArgumentList "/quiet", "/norestart" -Wait -NoNewWindow -WorkingDirectory $env:TEMP
+          wget -O sqlcmd_installer.run "https://go.microsoft.com/fwlink/?linkid=2156308" # Latest SQL Server ODBC Driver and Command Line Tools
+          if [ ! -f sqlcmd_installer.run ]; then
+            echo "Installer download failed. File not found"
+            exit 1
+          fi
+          echo "Starting installer execution"
+          chmod +x sqlcmd_installer.run
+          ./sqlcmd_installer.run --quiet --norestart
           # Add sqlcmd to PATH
-          echo "C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          echo "/opt/mssql-tools/bin" >> $GITHUB_PATH
 
       - name: Test SQL Server Connection
         run: |
           sqlcmd -S "${{ secrets.PINGGY_TCP_TUNNEL }}" -U "${{ secrets.SQL_USERNAME }}" -P "${{ secrets.SQL_PASSWORD }}" -Q "SELECT @@VERSION" -o connection_test.log
-          type connection_test.log
+          cat connection_test.log
         continue-on-error: true
 
       - name: Run Database Setup Script
