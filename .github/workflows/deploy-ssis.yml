@@ -17,11 +17,11 @@ jobs:
 
       - name: Deploy SSIS Package with T-SQL
         run: |
-          sqlcmd -S . -U ${{ secrets.SQL_USERNAME }} -P ${{ secrets.SQL_PASSWORD }} -d SSISDB -Q "DECLARE @project_binary VARBINARY(MAX); SELECT @project_binary = BulkColumn FROM OPENROWSET(BULK N'${{ github.workspace }}\HandsOnProject\Timesheet\SSISProject - Copy\bin\Development\SSISProject.ispac', SINGLE_BLOB) AS ProjectFile; EXEC Catalog.deploy_project @folder_name = N'SSISProjectRun', @project_name = N'SSISProject', @project_stream = @project_binary;"
+          sqlcmd -S . -U ${{ secrets.SQL_USERNAME }} -P ${{ secrets.SQL_PASSWORD }} -d SSISDB -Q "DECLARE @project_binary VARBINARY(MAX); SET @project_binary = (SELECT BulkColumn FROM OPENROWSET(BULK N'${{ github.workspace }}/SSISProject.ispac', SINGLE_BLOB) AS ProjectFile); EXEC Catalog.deploy_project @folder_name = N'SSISProjectRun', @project_name = N'SSISProject', @project_stream = @project_binary;"
           if %ERRORLEVEL% NEQ 0 exit /b %ERRORLEVEL%
 
       - name: Create SQL Server Agent Job
-        run: sqlcmd -S . -U ${{ secrets.SQL_USERNAME }} -P ${{ secrets.SQL_PASSWORD }} -i HandsOnProject/Timesheet/CreateAgentJob.sql
+        run: sqlcmd -S . -U ${{ secrets.SQL_USERNAME }} -P ${{ secrets.SQL_PASSWORD }} -i CreateAgentJob.sql
 
       - name: Start SQL Server Agent Job
         run: sqlcmd -S . -U ${{ secrets.SQL_USERNAME }} -P ${{ secrets.SQL_PASSWORD }} -Q "EXEC msdb.dbo.sp_start_job @job_name = N'RunTimesheetEntryEveryMinute';"
