@@ -13,7 +13,7 @@ env:
 
 jobs:
   deploy-ssis:
-    runs-on: self-hosted-windows # Replace with your runner label
+    runs-on: self-hosted # Replace with your runner label
     
     steps:
     # 1. Checkout code
