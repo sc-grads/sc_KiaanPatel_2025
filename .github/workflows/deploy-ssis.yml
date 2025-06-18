@@ -21,8 +21,8 @@ jobs:
 
       - name: Deploy SSIS Package with T-SQL
         run: |
-          sqlcmd -S . -U ${{ secrets.SQL_USERNAME }} -P ${{ secrets.SQL_PASSWORD }} -d SSISDB -Q "DECLARE @project_binary VARBINARY(MAX); SET @project_binary = (SELECT BulkColumn FROM OPENROWSET(BULK N'${{ github.workspace }}/SSISProject.ispac', SINGLE_BLOB) AS ProjectFile); EXEC Catalog.deploy_project @folder_name = N'SSISProjectRun', @project_name = N'SSISProject', @project_stream = @project_binary;"
-          if %ERRORLEVEL% NEQ 0 exit /b %ERRORLEVEL%
+          $exitCode = cmd /c "sqlcmd -S . -U ${{ secrets.SQL_USERNAME }} -P ${{ secrets.SQL_PASSWORD }} -d SSISDB -Q \"DECLARE @project_binary VARBINARY(MAX); SET @project_binary = (SELECT BulkColumn FROM OPENROWSET(BULK N'${{ github.workspace }}/SSISProject.ispac', SINGLE_BLOB) AS ProjectFile); EXEC Catalog.deploy_project @folder_name = N'SSISProjectRun', @project_name = N'SSISProject', @project_stream = @project_binary;\""
+          if ($exitCode -ne 0) { exit $exitCode }
 
       - name: Create SQL Server Agent Job
         run: sqlcmd -S . -U ${{ secrets.SQL_USERNAME }} -P ${{ secrets.SQL_PASSWORD }} -i CreateAgentJob.sql
