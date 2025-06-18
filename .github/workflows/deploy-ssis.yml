@@ -1,0 +1,31 @@
+name: SSIS Deployment
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy-ssis:
+    runs-on: self-hosted
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Deploy SSIS package
+      run: |
+        $ispacPath = "HandsOnProject\Timesheet\SSISProject - Copy\bin\Development\SSISProject.ispac"
+        $sqlServer = "${{ secrets.SQL_SERVER_INSTANCE }}"
+        
+        # Deploy using dtutil
+        dtutil /FILE `"$ispacPath`" `
+               /COPY SQL;`"\SSISProjectRun\SSISProject`" `
+               /DestServer `"$sqlServer`" `
+               /DestU WindowsAuth
+        
+        if ($LASTEXITCODE -ne 0) {
+            Write-Error "SSIS deployment failed"
+            exit 1
+        }
+        Write-Host "SSIS package deployed to SSISDB/SSISProjectRun/SSISProject"
+
+    - name: Create SQL Agent Job
+      run: |
+        sqlcmd -S "${{ secrets.SQL_SERVER_INSTANCE }}" -i ./sql-agent-scripts/deploy-ssis-job.sql
