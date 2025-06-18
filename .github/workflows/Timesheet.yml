@@ -7,12 +7,21 @@ on:
 jobs:
   create-database:
     runs-on: ubuntu-latest
-    container: mcr.microsoft.com/mssql-tools
+    container:
+      image: mcr.microsoft.com/mssql-tools
+      options: --network host  # Ensures network access for Pinggy tunnel
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
       
-    - name: Run SQL script
+    - name: Install dependencies
+      run: |
+        apt-get update
+        apt-get install -y curl gnupg
+        curl -sL https://deb.nodesource.com/setup_18.x | bash -
+        apt-get install -y nodejs
+        
+    - name: Run SQL script via Pinggy
       env:
         SQL_USER: ${{ secrets.SQL_USERNAME }}
         SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
@@ -22,19 +31,7 @@ jobs:
                -U "$SQL_USER" \
                -P "$SQL_PASSWORD" \
                -d master \
-               -i ./TableAndDISSetup.sql
-    
-    - name: Run DB Setup Script via Pinggy
-      env:
-        SQL_USER: ${{ secrets.SQL_USERNAME }}
-        SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
-        PINGGY_TUNNEL: ${{ secrets.PINGGY_TCP_TUNNEL }}
-      run: |
-        sqlcmd -S "$PINGGY_TUNNEL" \
-               -U "$SQL_USER" \
-               -P "$SQL_PASSWORD" \
-               -d master \
-               -i ./TableAndDBSetup.sql \
+               -i ./TableAndDISSetup.sql \
                -o sqlcmd-output.log
         
         if grep -q "Error" sqlcmd-output.log; then
@@ -43,6 +40,8 @@ jobs:
           exit 1
         fi
         echo "Database setup completed successfully"
+
+  
 
   trigger-ssis-deployment:
     needs: create-database
