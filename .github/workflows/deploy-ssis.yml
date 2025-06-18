@@ -15,22 +15,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set PowerShell Execution Policy
+      - name: Deploy SSIS Package with T-SQL
         run: |
-          Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned -Force
-          $currentPolicy = Get-ExecutionPolicy -Scope CurrentUser
-          Write-Host "Execution policy set to: $currentPolicy"
-
-      - name: Deploy SSIS Package
-        run: |
-          & "C:\Program Files (x86)\Microsoft SQL Server\160\DTS\Binn\ISDeploymentWizard.exe" @("/Silent", "/ModelType:Project", "/SourcePath:`"${{ github.workspace }}\HandsOnProject\Timesheet\SSISProject - Copy\bin\Development\SSISProject.ispac`"", "/DestinationServer:`.", "/DestinationPath:`"/SSISDB/SSISProjectRun/SSISProject`"")
-          if ($LASTEXITCODE -ne 0) { throw "ISDeploymentWizard.exe failed with exit code $LASTEXITCODE" }
-
-      - name: Revert PowerShell Execution Policy
-        run: |
-          Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Restricted -Force
-          $currentPolicy = Get-ExecutionPolicy -Scope CurrentUser
-          Write-Host "Execution policy reverted to: $currentPolicy"
+          sqlcmd -S . -U ${{ secrets.SQL_USERNAME }} -P ${{ secrets.SQL_PASSWORD }} -d SSISDB -Q "DECLARE @project_binary VARBINARY(MAX); SELECT @project_binary = BulkColumn FROM OPENROWSET(BULK N'${{ github.workspace }}\HandsOnProject\Timesheet\SSISProject - Copy\bin\Development\SSISProject.ispac', SINGLE_BLOB) AS ProjectFile; EXEC Catalog.deploy_project @folder_name = N'SSISProjectRun', @project_name = N'SSISProject', @project_stream = @project_binary;"
+          if %ERRORLEVEL% NEQ 0 exit /b %ERRORLEVEL%
 
       - name: Create SQL Server Agent Job
         run: sqlcmd -S . -U ${{ secrets.SQL_USERNAME }} -P ${{ secrets.SQL_PASSWORD }} -i HandsOnProject/Timesheet/CreateAgentJob.sql
