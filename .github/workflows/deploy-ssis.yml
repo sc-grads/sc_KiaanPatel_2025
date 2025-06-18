@@ -23,7 +23,8 @@ jobs:
 
       - name: Deploy SSIS Package
         run: |
-          "C:\Program Files (x86)\Microsoft SQL Server\160\DTS\Binn\ISDeploymentWizard.exe" /Silent /ModelType:Project /SourcePath:"${{ github.workspace }}\HandsOnProject\Timesheet\SSISProject - Copy\bin\Development\SSISProject.ispac" /DestinationServer:"." /DestinationPath:"/SSISDB/SSISProjectRun/SSISProject"
+          & "C:\Program Files (x86)\Microsoft SQL Server\160\DTS\Binn\ISDeploymentWizard.exe" @("/Silent", "/ModelType:Project", "/SourcePath:`"${{ github.workspace }}\HandsOnProject\Timesheet\SSISProject - Copy\bin\Development\SSISProject.ispac`"", "/DestinationServer:`.", "/DestinationPath:`"/SSISDB/SSISProjectRun/SSISProject`"")
+          if ($LASTEXITCODE -ne 0) { throw "ISDeploymentWizard.exe failed with exit code $LASTEXITCODE" }
 
       - name: Revert PowerShell Execution Policy
         run: |
