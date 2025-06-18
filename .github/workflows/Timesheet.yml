@@ -1,9 +1,7 @@
 name: Setup Database and Tables
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch
 
 jobs:
   setup:
