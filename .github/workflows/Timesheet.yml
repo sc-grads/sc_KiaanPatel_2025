@@ -1,7 +1,9 @@
 name: Setup Database and Tables
 
 on:
-  workflow_dispatch
+  push:
+    branches:
+      - main
 
 jobs:
   setup:
@@ -11,11 +13,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Install mssql-tools
+      - name: Install Microsoft SQL Server Command Line Tools
         run: |
-          choco install mssql-server -y
-          choco install mssql-cli -y
-          # Ensure sqlcmd is in PATH
+          $toolsUrl = "https://go.microsoft.com/fwlink/?linkid=2156308" # Latest SQL Server ODBC Driver and Command Line Tools
+          $installerPath = "$env:TEMP\sqlcmd_installer.exe"
+          Invoke-WebRequest -Uri $toolsUrl -OutFile $installerPath
+          Start-Process -FilePath $installerPath -ArgumentList "/quiet", "/norestart" -Wait
+          # Add sqlcmd to PATH
           echo "C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
       - name: Test SQL Server Connection
