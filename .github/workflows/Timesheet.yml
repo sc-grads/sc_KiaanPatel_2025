@@ -13,14 +13,11 @@ jobs:
 
       - name: Install Microsoft SQL Server Command Line Tools
         run: |
-          wget -O sqlcmd_installer.run "https://go.microsoft.com/fwlink/?linkid=2156308" # Latest SQL Server ODBC Driver and Command Line Tools
-          if [ ! -f sqlcmd_installer.run ]; then
-            echo "Installer download failed. File not found"
-            exit 1
-          fi
-          echo "Starting installer execution"
-          chmod +x sqlcmd_installer.run
-          ./sqlcmd_installer.run --quiet --norestart
+          # Add Microsoft package repository
+          curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+          curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list
+          sudo apt-get update
+          sudo ACCEPT_EULA=Y apt-get install -y mssql-tools unixodbc-dev
           # Add sqlcmd to PATH
           echo "/opt/mssql-tools/bin" >> $GITHUB_PATH
 
