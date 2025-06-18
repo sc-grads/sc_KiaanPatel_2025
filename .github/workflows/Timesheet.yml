@@ -5,7 +5,7 @@ on:
 
 jobs:
   setup:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - name: Checkout repository
@@ -13,12 +13,16 @@ jobs:
 
       - name: Install mssql-tools
         run: |
-          sudo apt-get update
-          sudo apt-get install -y curl apt-transport-https
-          curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
-          curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list
-          sudo apt-get update
-          sudo apt-get install -y mssql-tools unixodbc-dev
+          choco install mssql-server -y
+          choco install mssql-cli -y
+          # Ensure sqlcmd is in PATH
+          echo "C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
+      - name: Test SQL Server Connection
+        run: |
+          sqlcmd -S "${{ secrets.PINGGY_TCP_TUNNEL }}" -U "${{ secrets.SQL_USERNAME }}" -P "${{ secrets.SQL_PASSWORD }}" -Q "SELECT @@VERSION" -o connection_test.log
+          type connection_test.log
+        continue-on-error: true
 
       - name: Run Database Setup Script
-        run: /opt/mssql-tools/bin/sqlcmd -S ${{ secrets.PINGGY_TCP_TUNNEL }} -U ${{ secrets.SQL_USERNAME }} -P ${{ secrets.SQL_PASSWORD }} -i HandsOnProject/Timesheet/TableAndDBSetup.sql
+        run: sqlcmd -S "${{ secrets.PINGGY_TCP_TUNNEL }}" -U "${{ secrets.SQL_USERNAME }}" -P "${{ secrets.SQL_PASSWORD }}" -i HandsOnProject/Timesheet/TableAndDBSetup.sql
