@@ -1,97 +1,37 @@
-name: Timesheet Project Full Deployment
+name: Timesheet Database Setup and Job Management
 
 on:
-  workflow_dispatch: # Manual trigger only
+  workflow_dispatch: # Manual trigger
 
 env:
-  SSIS_PACKAGE_NAME: "TimesheetEntry.dtsx"
-  SSIS_FOLDER_NAME: "SSISProjectRun"
-  SSIS_PROJECT_NAME: "SSISProject"
+  SSIS_PACKAGE_NAME: "TimesheetEntry.dtsx" # Adjust to your package name
+  SSIS_FOLDER_NAME: "SSISProjectRun"       # Folder in SSISDB
+  SSIS_PROJECT_NAME: "SSISProject"         # Project name in SSISDB
 
 jobs:
-  deploy-and-execute:
+  setup-and-trigger:
     runs-on: windows-latest
     
     steps:
-    # 1. Checkout repository
+    # 1. Checkout code
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    # 2. Install SQL tools
-    - name: Install SQL tools
-      run: |
-        choco install sqlserver-cmdlineutils -y --no-progress
-
-    # 3. Database setup
+    # 2. Execute database setup script
     - name: Execute database setup
       run: |
-        sqlcmd -b -t 600 -S "${{ secrets.PINGGY_TOKEN }}" `
-               -U "${{ secrets.SQL_USERNAME }}" `
-               -P "${{ secrets.SQL_PASSWORD }}" `
-               -i "HandsOnProject/Timesheet/TableAndDBSetup.sql"
-        if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+        sqlcmd -b -t 600 -S "${{ secrets.PINGGY_TOKEN }}" -U "${{ secrets.SQL_USERNAME }}" -P "${{ secrets.SQL_PASSWORD }}" -i "HandsOnProject/Timesheet/TableAndDBSetup.sql"
+      shell: cmd
 
-    # 4. Deploy SSIS package using corrected T-SQL
-    - name: Deploy SSIS Package
+    # 3. Trigger SSIS Deployment Workflow
+    - name: Trigger SSIS Deployment
       run: |
-        $ispacPath = "HandsOnProject/Timesheet/SSISProject - Copy/bin/Development/SSISProject.ispac"
-        if (-not (Test-Path $ispacPath)) {
-          Write-Error "ISPAC file not found at: $ispacPath"
-          Get-ChildItem -Recurse -Path . -Include *.ispac
-          exit 1
-        }
+        gh workflow run deploy-ssis.yml --repo ${{ github.repository }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      shell: bash
 
-        # Convert ISPAC to hex string
-        $hexString = [System.BitConverter]::ToString([System.IO.File]::ReadAllBytes($ispacPath)) -replace '-',''
-
-        # Create corrected deployment script
-        $deploySql = @"
-        USE [SSISDB];
-        
-        -- Create folder if not exists
-        IF NOT EXISTS (SELECT 1 FROM [catalog].[folders] WHERE [name] = '${{ env.SSIS_FOLDER_NAME }}')
-        BEGIN
-            EXEC [catalog].[create_folder] 
-                @folder_name = '${{ env.SSIS_FOLDER_NAME }}', 
-                @folder_id = NULL;
-        END
-        
-        -- Deploy project
-        DECLARE @project_binary VARBINARY(MAX) = 0x$hexString;
-        DECLARE @operation_id BIGINT;
-        
-        EXEC [catalog].[deploy_project] 
-            @folder_name = '${{ env.SSIS_FOLDER_NAME }}',
-            @project_name = '${{ env.SSIS_PROJECT_NAME }}',
-            @project_stream = @project_binary,
-            @operation_id = @operation_id OUTPUT;
-            
-        -- Check deployment status (using correct column names)
-        SELECT *            
-        FROM [catalog].[operations]
-        WHERE [operation_id] = @operation_id;
-        
-        -- Fail deployment if not successful
-        IF (SELECT [status] FROM [catalog].[operations] WHERE [operation_id] = @operation_id) <> 6
-        BEGIN
-            RAISERROR('SSIS deployment failed', 16, 1);
-        END
-        "@
-
-        $deploySql | Out-File -FilePath "deploy_ssis.sql" -Encoding UTF8
-        
-        # Execute deployment
-        sqlcmd -b -t 600 -S "${{ secrets.PINGGY_TOKEN }}" `
-               -U "${{ secrets.SQL_USERNAME }}" `
-               -P "${{ secrets.SQL_PASSWORD }}" `
-               -i "deploy_ssis.sql"
-        
-        if ($LASTEXITCODE -ne 0) {
-          Write-Error "SSIS deployment failed with exit code: $LASTEXITCODE"
-          exit $LASTEXITCODE
-        }
-
-    # 5. Create or update SQL Agent job
+    # 4. Create/Update SQL Agent Job
     - name: Setup SQL Agent Job
       run: |
         $jobScript = @"
@@ -126,72 +66,38 @@ jobs:
             @command = N'/ISSERVER "\"\SSISDB\${{ env.SSIS_FOLDER_NAME }}\${{ env.SSIS_PROJECT_NAME }}\${{ env.SSIS_PACKAGE_NAME }}\"" /SERVER ""${{ secrets.PINGGY_TOKEN }}"" /Par "\"$ServerOption::LOGGING_LEVEL(Int16)\"";1 /Par "\"$ServerOption::SYNCHRONIZED(Boolean)\"";True /CALLERINFO SQLAGENT /REPORTING E';
         END
         "@
-        
         $jobScript | Out-File -FilePath "setup_job.sql" -Encoding UTF8
-        sqlcmd -b -S "${{ secrets.PINGGY_TOKEN }}" `
-               -U "${{ secrets.SQL_USERNAME }}" `
-               -P "${{ secrets.SQL_PASSWORD }}" `
-               -i "setup_job.sql"
-        if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+        sqlcmd -b -S "${{ secrets.PINGGY_TOKEN }}" -U "${{ secrets.SQL_USERNAME }}" -P "${{ secrets.SQL_PASSWORD }}" -i "setup_job.sql"
+      shell: pwsh
 
-    # 6. Execute and verify
+    # 5. Execute and Verify Job
     - name: Execute and Verify
-      timeout-minutes: 20
+      timeout-minutes: 15
       run: |
-        # Start the job
-        sqlcmd -b -S "${{ secrets.PINGGY_TOKEN }}" `
-               -U "${{ secrets.SQL_USERNAME }}" `
-               -P "${{ secrets.SQL_PASSWORD }}" `
-               -Q "USE msdb; EXEC dbo.sp_start_job N'TimesheetProjectRun';"
+        sqlcmd -b -S "${{ secrets.PINGGY_TOKEN }}" -U "${{ secrets.SQL_USERNAME }}" -P "${{ secrets.SQL_PASSWORD }}" -Q "USE msdb; EXEC dbo.sp_start_job N'TimesheetProjectRun';"
         
-        # Enhanced monitoring
         $verifySql = @"
         USE msdb;
-        DECLARE @finalStatus INT = NULL;
+        DECLARE @finalStatus INT = 0;
         DECLARE @waitTime INT = 0;
-        DECLARE @maxWait INT = 900; -- 15 minute timeout
-        
-        WHILE @waitTime < @maxWait
+        WHILE @waitTime < 720
         BEGIN
-          SELECT TOP 1 @finalStatus = run_status 
-          FROM sysjobhistory 
-          WHERE job_id = (SELECT job_id FROM sysjobs WHERE name = N'TimesheetProjectRun')
-          ORDER BY instance_id DESC;
-          
-          IF @finalStatus IS NULL OR @finalStatus = 2 -- In Progress
+          SELECT TOP 1 @finalStatus = run_status FROM sysjobhistory WHERE job_id = (SELECT job_id FROM sysjobs WHERE name = N'TimesheetProjectRun') ORDER BY instance_id DESC;
+          IF @finalStatus IS NULL OR @finalStatus = 2
           BEGIN
             WAITFOR DELAY '00:00:15';
             SET @waitTime = @waitTime + 15;
-            SET @finalStatus = NULL;
           END
           ELSE
           BEGIN
             BREAK;
           END
         END
-        
-        -- Final status
-        SELECT 
-          CASE 
-            WHEN @finalStatus = 1 THEN 'SUCCESS'
-            WHEN @finalStatus = 0 THEN 'FAILED'
-            WHEN @finalStatus = 3 THEN 'CANCELED'
-            WHEN @finalStatus = 2 THEN 'STILL RUNNING'
-            ELSE 'TIMEOUT'
-          END AS JobStatus,
-          @waitTime AS WaitTimeSeconds;
-        
-        -- Data verification
-        USE TimesheetDB;
-        SELECT 
-          (SELECT COUNT(*) FROM Employee) AS EmployeeCount,
-          (SELECT COUNT(*) FROM Timesheet) AS TimesheetCount,
-          (SELECT COUNT(*) FROM AuditLog) AS AuditLogCount;
+        IF @finalStatus = 1
+          SELECT 'Job succeeded' AS Result;
+        ELSE
+          SELECT 'Job failed or timed out' AS Result;
         "@
-        
         $verifySql | Out-File -FilePath "verify_job.sql" -Encoding UTF8
-        sqlcmd -b -t 1200 -S "${{ secrets.PINGGY_TOKEN }}" `
-               -U "${{ secrets.SQL_USERNAME }}" `
-               -P "${{ secrets.SQL_PASSWORD }}" `
-               -i "verify_job.sql"
-        if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+        sqlcmd -b -t 900 -S "${{ secrets.PINGGY_TOKEN }}" -U "${{ secrets.SQL_USERNAME }}" -P "${{ secrets.SQL_PASSWORD }}" -i "verify_job.sql"
+      shell: pwsh
