@@ -55,5 +55,3 @@ jobs:
         sqlcmd -b -S "%PINGGY_TOKEN%" -i deploy_ssis.sql
         if errorlevel 1 exit /b %errorlevel%
       shell: cmd
-      env:
-        PINGGY_TOKEN: ${{ secrets.PINGGY_TOKEN }}
