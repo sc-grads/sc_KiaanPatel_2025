@@ -31,32 +31,29 @@ jobs:
     # 3. Deploy SSIS Package
     - name: Deploy SSIS Package
       run: |
-        $ispacPath = "HandsOnProject/Timesheet/SSISProject - Copy/bin/Development/SSISProject.ispac"
+        set ispacPath=HandsOnProject\Timesheet\SSISProject - Copy\bin\Development\SSISProject.ispac
         
-        if (-not (Test-Path $ispacPath)) {
-          Write-Error "ISPAC file not found at: $ispacPath"
-          exit 1
-        }
+        if not exist "%ispacPath%" (
+          echo ISPAC file not found at: %ispacPath%
+          exit /b 1
+        )
         
-        $projectBytes = [System.IO.File]::ReadAllBytes($ispacPath)
+        for /f "delims=" %%i in ('certutil -encodehex "%ispacPath%" ^| findstr /v "CertUtil"') do set projectBytes=%%i
+        set projectBytes=%projectBytes: =%
         
-        $deploySql = @"
-        USE SSISDB;
-        DECLARE @folder_name NVARCHAR(128) = '${{ env.SSIS_FOLDER_NAME }}';
-        DECLARE @project_name NVARCHAR(128) = '${{ env.SSIS_PROJECT_NAME }}';
-        DECLARE @project_stream VARBINARY(MAX) = 0x$([System.BitConverter]::ToString($projectBytes).Replace('-',''));
+        set deploySql=USE SSISDB;
+        set deploySql=%deploySql% DECLARE @folder_name NVARCHAR(128) = '%SSIS_FOLDER_NAME%';
+        set deploySql=%deploySql% DECLARE @project_name NVARCHAR(128) = '%SSIS_PROJECT_NAME%';
+        set deploySql=%deploySql% DECLARE @project_stream VARBINARY(MAX) = 0x%projectBytes%;
+        set deploySql=%deploySql% IF NOT EXISTS (SELECT 1 FROM catalog.folders WHERE name = @folder_name) BEGIN
+        set deploySql=%deploySql%   EXEC catalog.create_folder @folder_name;
+        set deploySql=%deploySql% END
+        set deploySql=%deploySql% EXEC catalog.deploy_project @folder_name, @project_name, @project_stream;
         
-        IF NOT EXISTS (SELECT 1 FROM catalog.folders WHERE name = @folder_name)
-        BEGIN
-          EXEC catalog.create_folder @folder_name;
-        END
+        echo %deploySql% > deploy_ssis.sql
         
-        EXEC catalog.deploy_project @folder_name, @project_name, @project_stream;
-        "@
-        
-        $deploySql | Out-File -FilePath "deploy_ssis.sql" -Encoding UTF8
-        
-        sqlcmd -b -S "${{ secrets.PINGGY_TOKEN }}" -i "deploy_ssis.sql"
-        
-        if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-      shell: pwsh
+        sqlcmd -b -S "%PINGGY_TOKEN%" -i deploy_ssis.sql
+        if errorlevel 1 exit /b %errorlevel%
+      shell: cmd
+      env:
+        PINGGY_TOKEN: ${{ secrets.PINGGY_TOKEN }}
