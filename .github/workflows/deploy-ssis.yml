@@ -29,7 +29,7 @@ jobs:
           if ($exitCode -ne 0) { exit $exitCode }
 
       - name: Create SQL Server Agent Job
-        run: sqlcmd -S . -U ${{ secrets.SQL_USERNAME }} -P ${{ secrets.SQL_PASSWORD }} -i CreateAgentJob.sql
+        run: sqlcmd -S . -U ${{ secrets.SQL_USERNAME }} -P ${{ secrets.SQL_PASSWORD }} -i HandsOnProject/Timesheet/CreateAgentJob.sql
 
       - name: Start SQL Server Agent Job
         run: sqlcmd -S . -U ${{ secrets.SQL_USERNAME }} -P ${{ secrets.SQL_PASSWORD }} -Q "EXEC msdb.dbo.sp_start_job @job_name = N'RunTimesheetEntryEveryMinute';"
