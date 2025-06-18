@@ -15,9 +15,21 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Set PowerShell Execution Policy
+        run: |
+          Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned -Force
+          $currentPolicy = Get-ExecutionPolicy -Scope CurrentUser
+          Write-Host "Execution policy set to: $currentPolicy"
+
       - name: Deploy SSIS Package
         run: |
           "C:\Program Files (x86)\Microsoft SQL Server\160\DTS\Binn\ISDeploymentWizard.exe" /Silent /ModelType:Project /SourcePath:"${{ github.workspace }}\HandsOnProject\Timesheet\SSISProject - Copy\bin\Development\SSISProject.ispac" /DestinationServer:"." /DestinationPath:"/SSISDB/SSISProjectRun/SSISProject"
+
+      - name: Revert PowerShell Execution Policy
+        run: |
+          Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Restricted -Force
+          $currentPolicy = Get-ExecutionPolicy -Scope CurrentUser
+          Write-Host "Execution policy reverted to: $currentPolicy"
 
       - name: Create SQL Server Agent Job
         run: sqlcmd -S . -U ${{ secrets.SQL_USERNAME }} -P ${{ secrets.SQL_PASSWORD }} -i HandsOnProject/Timesheet/CreateAgentJob.sql
