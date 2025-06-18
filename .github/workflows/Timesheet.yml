@@ -7,24 +7,22 @@ on:
 jobs:
   create-database:
     runs-on: ubuntu-latest
+    container: mcr.microsoft.com/mssql-tools
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    
-    - name: Install SQL tools (updated)
+      
+    - name: Run SQL script
+      env:
+        SQL_USER: ${{ secrets.SQL_USERNAME }}
+        SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
+        PINGGY_TUNNEL: ${{ secrets.PINGGY_TCP_TUNNEL }}
       run: |
-        # Add Microsoft repository
-        curl https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor > /usr/share/keyrings/microsoft.gpg
-        echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/ubuntu/$(lsb_release -rs)/prod $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/mssql-release.list
-        
-        # Install dependencies
-        sudo apt-get update
-        sudo apt-get install -y unixodbc-dev
-        sudo ACCEPT_EULA=Y apt-get install -y msodbcsql18 mssql-tools18
-        
-        # Add to PATH
-        echo 'export PATH="$PATH:/opt/mssql-tools18/bin"' >> ~/.bashrc
-        source ~/.bashrc
+        /opt/mssql-tools/bin/sqlcmd -S "$PINGGY_TUNNEL" \
+               -U "$SQL_USER" \
+               -P "$SQL_PASSWORD" \
+               -d master \
+               -i ./TableAndDISSetup.sql
     
     - name: Run DB Setup Script via Pinggy
       env:
