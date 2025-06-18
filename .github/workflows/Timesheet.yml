@@ -1,7 +1,9 @@
 name: Setup Database and Tables
 
 on:
-  workflow_dispatch
+  push:
+    branches:
+      - main
 
 jobs:
   setup:
@@ -15,8 +17,13 @@ jobs:
         run: |
           $toolsUrl = "https://go.microsoft.com/fwlink/?linkid=2156308" # Latest SQL Server ODBC Driver and Command Line Tools
           $installerPath = "$env:TEMP\sqlcmd_installer.exe"
-          Invoke-WebRequest -Uri $toolsUrl -OutFile $installerPath
-          Start-Process -FilePath $installerPath -ArgumentList "/quiet", "/norestart" -Wait
+          Write-Host "Downloading installer from $toolsUrl to $installerPath"
+          Invoke-WebRequest -Uri $toolsUrl -OutFile $installerPath -ErrorAction Stop
+          if (-not (Test-Path $installerPath)) {
+            throw "Installer download failed. File not found at $installerPath"
+          }
+          Write-Host "Starting installer execution"
+          Start-Process -FilePath $installerPath -ArgumentList "/quiet", "/norestart" -Wait -NoNewWindow -WorkingDirectory $env:TEMP
           # Add sqlcmd to PATH
           echo "C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
