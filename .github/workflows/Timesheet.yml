@@ -23,4 +23,4 @@ jobs:
           sudo apt-get install -y mssql-tools unixodbc-dev
 
       - name: Run Database Setup Script
-        run: /opt/mssql-tools/bin/sqlcmd -S ${{ secrets.SQL_SERVER_INSTANCE }} -U ${{ secrets.SQL_USERNAME }} -P ${{ secrets.SQL_PASSWORD }} -i HandsOnProject/Timesheet/TableAndDBSetup.sql
+        run: /opt/mssql-tools/bin/sqlcmd -S ${{ secrets.PINGGY_TCP_TUNNEL }} -U ${{ secrets.SQL_USERNAME }} -P ${{ secrets.SQL_PASSWORD }} -i HandsOnProject/Timesheet/TablesAndDBSetup.sql
