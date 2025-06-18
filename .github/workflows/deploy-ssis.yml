@@ -15,6 +15,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Set Execution Policy for Session
+        run: |
+          Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
+
       - name: Deploy SSIS Package with T-SQL
         run: |
           sqlcmd -S . -U ${{ secrets.SQL_USERNAME }} -P ${{ secrets.SQL_PASSWORD }} -d SSISDB -Q "DECLARE @project_binary VARBINARY(MAX); SET @project_binary = (SELECT BulkColumn FROM OPENROWSET(BULK N'${{ github.workspace }}/SSISProject.ispac', SINGLE_BLOB) AS ProjectFile); EXEC Catalog.deploy_project @folder_name = N'SSISProjectRun', @project_name = N'SSISProject', @project_stream = @project_binary;"
