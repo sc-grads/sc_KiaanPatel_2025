@@ -16,8 +16,8 @@ jobs:
       - name: Set ISPAC path
         shell: cmd
         run: |
-          echo ISPAC_PATH=%cd%\HandsOnProject\Timesheet\SSISProject.ispac >> %GITHUB_ENV%
-          echo ISPAC_PATH is set to: %cd%\HandsOnProject\Timesheet\SSISProject.ispac
+          echo ISPAC_PATH=%GITHUB_WORKSPACE%\HandsOnProject/Timesheet/SSISProject.ispac >> %GITHUB_ENV%          
+          echo ISPAC_PATH is set to: %GITHUB_WORKSPACE%\HandsOnProject\Timesheet\SSISProject.ispac
 
 
 
