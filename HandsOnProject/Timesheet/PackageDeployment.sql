@@ -7,7 +7,7 @@ END
 -- Deploy the package
 DECLARE @ProjectBinary VARBINARY(MAX)
 SELECT @ProjectBinary = BulkColumn 
-FROM OPENROWSET(BULK 'C:\Users\Kiaan Patel\Git\sc_KiaanPatel_2025\HandsOnProject\Timesheet\SSISProject - Copy\bin\Development\SSISProject.ispac', SINGLE_BLOB) AS x
+FROM OPENROWSET(BULK 'C:\Users\Kiaan Patel\Git\sc_KiaanPatel_2025\HandsOnProject\Timesheet\SSISProject.ispac', SINGLE_BLOB) AS x
 
 EXEC SSISDB.catalog.deploy_project 
   @folder_name = 'SSISProject',
