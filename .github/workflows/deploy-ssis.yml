@@ -13,22 +13,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set ISPAC path
-        shell: cmd
-        run: |
-          set "ISPAC_PATH=%GITHUB_WORKSPACE%\HandsOnProject\Timesheet\SSISProject.ispac "
-          
-
-
-
-      - name: Create SSIS Catalog Folder
-        shell: cmd
-        run: |
-          sqlcmd -S SAMBE202507 -E -Q "IF NOT EXISTS(SELECT 1 FROM [SSISDB].[catalog].[folders] WHERE name = 'SSISProject') BEGIN EXEC [SSISDB].[catalog].[create_folder] @folder_name = 'SSISProject', @folder_id = NULL END"
-
       - name: Deploy SSIS Project
         shell: cmd
         run: |
+          set "ISPAC_PATH=%GITHUB_WORKSPACE%\HandsOnProject\Timesheet\SSISProject.ispac "
           sqlcmd -S SAMBE202507 -E -v IspacPath="%ISPAC_PATH%" -i HandsOnProject\Timesheet\PackageDeployment.sql 
 
       - name: Create SQL Server Agent Job
