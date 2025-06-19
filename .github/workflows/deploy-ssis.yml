@@ -25,7 +25,7 @@ jobs:
           echo "Checking file at: %ISPAC_PATH%"
           if not exist "%ISPAC_PATH%" (
             echo Error: ISPAC file not found
-            dir "%cd%C:\Users\Kiaan Patel\Git\sc_KiaanPatel_2025\HandsOnProject\Timesheet\SSISProject.ispac"
+            dir "%cd%HandsOnProject\Timesheet"
             exit /b 1
           )
 
