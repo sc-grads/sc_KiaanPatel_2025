@@ -21,7 +21,7 @@ jobs:
 
       - name: Deploy SSIS Package with T-SQL
         run: |
-          $exitCode = cmd /c "sqlcmd -S . -U ${{ secrets.SQL_USERNAME }} -P ${{ secrets.SQL_PASSWORD }} -d SSISDB -Q \"$(@'
+          $exitCode = cmd /c "sqlcmd -S . -E -d SSISDB -Q \"$(@'
           DECLARE @project_binary VARBINARY(MAX);
           SET @project_binary = (SELECT BulkColumn FROM OPENROWSET(BULK N'${{ github.workspace }}/SSISProject.ispac', SINGLE_BLOB) AS ProjectFile);
           EXEC Catalog.deploy_project @folder_name = N'SSISProjectRun', @project_name = N'SSISProject', @project_stream = @project_binary;
