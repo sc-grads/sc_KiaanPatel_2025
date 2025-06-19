@@ -1,0 +1,35 @@
+name: Deploy SSIS Package and Create Job
+
+on:
+  workflow_run:
+    workflows: ["Setup Database and Tables"]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set Execution Policy for Session
+        run: |
+          Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
+
+      - name: Deploy SSIS Package with T-SQL
+        run: |
+          $exitCode = cmd /c "sqlcmd -S . -E -d SSISDB -Q \"$(@'
+          DECLARE @project_binary VARBINARY(MAX);
+          SET @project_binary = (SELECT BulkColumn FROM OPENROWSET(BULK N'${{ github.workspace }}/SSISProject.ispac', SINGLE_BLOB) AS ProjectFile);
+          EXEC Catalog.deploy_project @folder_name = N'SSISProjectRun', @project_name = N'SSISProject', @project_stream = @project_binary;
+          '@)\""
+          if ($exitCode -ne 0) { exit $exitCode }
+
+      - name: Create SQL Server Agent Job
+        run: sqlcmd -S . -U ${{ secrets.SQL_USERNAME }} -P ${{ secrets.SQL_PASSWORD }} -i HandsOnProject/Timesheet/CreateAgentJob.sql
+
+      - name: Start SQL Server Agent Job
+        run: sqlcmd -S . -U ${{ secrets.SQL_USERNAME }} -P ${{ secrets.SQL_PASSWORD }} -Q "EXEC msdb.dbo.sp_start_job @job_name = N'RunTimesheetEntryEveryMinute';"
