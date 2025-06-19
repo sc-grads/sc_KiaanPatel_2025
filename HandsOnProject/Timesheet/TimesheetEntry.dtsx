@@ -11,8 +11,8 @@
   DTS:LocaleID="7177"
   DTS:ObjectName="ForEachLoop"
   DTS:PackageType="5"
-  DTS:VersionBuild="290"
-  DTS:VersionGUID="{9D8D4925-64CC-4300-B052-5D0D0110FC90}">
+  DTS:VersionBuild="297"
+  DTS:VersionGUID="{FEB6823C-B292-41FC-AD47-9FF26F6F6B56}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -39,7 +39,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="0"
           DTS:ConnectRetryInterval="0"
-          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Kiaan Patel\OneDrive - Northern Data (Pty) Ltd\Documents\CodeCrusaders_TimeSheets\Kiaan Patel\Kiaan_Patel March_Final.xlsx;Extended Properties=&quot;Excel 12.0 XML;HDR=YES&quot;;" />
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Kiaan Patel\OneDrive - Northern Data (Pty) Ltd\Documents\CodeCrusaders_TimeSheets\Kiaan Patel\Kiaan_Patel March_Final.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -51,7 +51,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="0"
           DTS:ConnectRetryInterval="0"
-          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Kiaan Patel\OneDrive - Northern Data (Pty) Ltd\Documents\CodeCrusaders_TimeSheets\Kiaan Patel\Kiaan_Patel March_Final.xlsx;Extended Properties=&quot;Excel 12.0 XML;HDR=YES&quot;;" />
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Kiaan Patel\OneDrive - Northern Data (Pty) Ltd\Documents\CodeCrusaders_TimeSheets\Kiaan Patel\Kiaan_Patel March_Final.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -65,7 +65,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="0"
           DTS:ConnectRetryInterval="0"
-          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=&quot;C:\Users\Kiaan Patel\OneDrive - Northern Data (Pty) Ltd\Documents\CodeCrusaders_TimeSheets\Kiaan Patel\Kiaan_Patel_March_Final.xlsx&quot;;Extended Properties=&quot;Excel 12.0 XML;HDR=YES&quot;;" />
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=&quot;C:\Users\Kiaan Patel\OneDrive - Northern Data (Pty) Ltd\Documents\CodeCrusaders_TimeSheets\Kiaan Patel\Kiaan_Patel_March_Final.xlsx&quot;;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -79,7 +79,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="0"
           DTS:ConnectRetryInterval="0"
-          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=&quot;C:\Users\Kiaan Patel\OneDrive - Northern Data (Pty) Ltd\Documents\CodeCrusaders_TimeSheets\Kiaan Patel\Kiaan_Patel_March_Final.xlsx&quot;;Extended Properties=&quot;Excel 12.0 XML;HDR=YES&quot;;" />
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=&quot;C:\Users\Kiaan Patel\OneDrive - Northern Data (Pty) Ltd\Documents\CodeCrusaders_TimeSheets\Kiaan Patel\Kiaan_Patel_March_Final.xlsx&quot;;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -93,7 +93,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="0"
           DTS:ConnectRetryInterval="0"
-          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=&quot;C:\Users\Kiaan Patel\OneDrive - Northern Data (Pty) Ltd\Documents\CodeCrusaders_TimeSheets\Kiaan Patel\Kiaan_Patel_March_Final.xlsx&quot;;Extended Properties=&quot;Excel 12.0 XML;HDR=YES&quot;;" />
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=&quot;C:\Users\Kiaan Patel\OneDrive - Northern Data (Pty) Ltd\Documents\CodeCrusaders_TimeSheets\Kiaan Patel\Kiaan_Patel_March_Final.xlsx&quot;;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -3426,6 +3426,29 @@ where [refTable].[LeaveID] = ?</property>
                               name="FriendlyExpression">@[User::FilePath]</property>
                           </properties>
                         </outputColumn>
+                        <outputColumn
+                          refId="Package\Leave_Staging Container\ExcelToLeaveTable\Derived Column 1.Outputs[Derived Column Output].Columns[Derived Month]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          length="50"
+                          lineageId="Package\Leave_Staging Container\ExcelToLeaveTable\Derived Column 1.Outputs[Derived Column Output].Columns[Derived Month]"
+                          name="Derived Month"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">@[User::Month]</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">@[User::Month]</property>
+                          </properties>
+                        </outputColumn>
                       </outputColumns>
                       <externalMetadataColumns />
                     </output>
@@ -4435,6 +4458,13 @@ where [refTable].[TypeOfLeave] = ? and [refTable].[StartDate] = ? and [refTable]
                           cachedName="Derived File PAth"
                           externalMetadataColumnId="Package\Leave_Staging Container\ExcelToLeaveTable\OLE DB Destination 2.Inputs[OLE DB Destination Input].ExternalColumns[FilePath]"
                           lineageId="Package\Leave_Staging Container\ExcelToLeaveTable\Derived Column 1.Outputs[Derived Column Output].Columns[Derived File PAth]" />
+                        <inputColumn
+                          refId="Package\Leave_Staging Container\ExcelToLeaveTable\OLE DB Destination 2.Inputs[OLE DB Destination Input].Columns[Derived Month]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="Derived Month"
+                          externalMetadataColumnId="Package\Leave_Staging Container\ExcelToLeaveTable\OLE DB Destination 2.Inputs[OLE DB Destination Input].ExternalColumns[Month]"
+                          lineageId="Package\Leave_Staging Container\ExcelToLeaveTable\Derived Column 1.Outputs[Derived Column Output].Columns[Derived Month]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -4456,6 +4486,11 @@ where [refTable].[TypeOfLeave] = ? and [refTable].[StartDate] = ? and [refTable]
                           refId="Package\Leave_Staging Container\ExcelToLeaveTable\OLE DB Destination 2.Inputs[OLE DB Destination Input].ExternalColumns[Timestamp]"
                           dataType="dbTimeStamp"
                           name="Timestamp" />
+                        <externalMetadataColumn
+                          refId="Package\Leave_Staging Container\ExcelToLeaveTable\OLE DB Destination 2.Inputs[OLE DB Destination Input].ExternalColumns[Month]"
+                          dataType="wstr"
+                          length="50"
+                          name="Month" />
                       </externalMetadataColumns>
                     </input>
                   </inputs>
@@ -6807,6 +6842,103 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
               </outputs>
             </component>
             <component
+              refId="Package\Populate Client and Employee Table\Derived Column 2"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column 2"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Populate Client and Employee Table\Derived Column 2.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Populate Client and Employee Table\Derived Column 2.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Populate Client and Employee Table\Derived Column 2.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Populate Client and Employee Table\Derived Column 2.Outputs[Derived Column Output].Columns[Derived Month]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Populate Client and Employee Table\Derived Column 2.Outputs[Derived Column Output].Columns[Derived Month]"
+                      name="Derived Month"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">@[User::Month]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[User::Month]</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Populate Client and Employee Table\Derived Column 2.Outputs[Derived Column Output].Columns[Derived FilePath]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="1000"
+                      lineageId="Package\Populate Client and Employee Table\Derived Column 2.Outputs[Derived Column Output].Columns[Derived FilePath]"
+                      name="Derived FilePath"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">@[User::FilePath]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[User::FilePath]</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Populate Client and Employee Table\Derived Column 2.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Populate Client and Employee Table\Derived Column 2.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Populate Client and Employee Table\Derived Column 2.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Populate Client and Employee Table\Derived Column 2.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Populate Client and Employee Table\Derived Column 2.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Populate Client and Employee Table\Derived Column 2.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
               refId="Package\Populate Client and Employee Table\Excel Source"
               componentClassID="Microsoft.ExcelSource"
               contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
@@ -7643,6 +7775,20 @@ where [refTable].[EmployeeName] = ?</property>
                       cachedName="ErrorMessage"
                       externalMetadataColumnId="Package\Populate Client and Employee Table\OLE DB Destination 2.Inputs[OLE DB Destination Input].ExternalColumns[ErrorMessage]"
                       lineageId="Package\Populate Client and Employee Table\Script Component.Outputs[Output 0].Columns[ErrorMessage]" />
+                    <inputColumn
+                      refId="Package\Populate Client and Employee Table\OLE DB Destination 2.Inputs[OLE DB Destination Input].Columns[Derived Month]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Derived Month"
+                      externalMetadataColumnId="Package\Populate Client and Employee Table\OLE DB Destination 2.Inputs[OLE DB Destination Input].ExternalColumns[Month]"
+                      lineageId="Package\Populate Client and Employee Table\Derived Column 2.Outputs[Derived Column Output].Columns[Derived Month]" />
+                    <inputColumn
+                      refId="Package\Populate Client and Employee Table\OLE DB Destination 2.Inputs[OLE DB Destination Input].Columns[Derived FilePath]"
+                      cachedDataType="wstr"
+                      cachedLength="1000"
+                      cachedName="Derived FilePath"
+                      externalMetadataColumnId="Package\Populate Client and Employee Table\OLE DB Destination 2.Inputs[OLE DB Destination Input].ExternalColumns[FilePath]"
+                      lineageId="Package\Populate Client and Employee Table\Derived Column 2.Outputs[Derived Column Output].Columns[Derived FilePath]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -7652,8 +7798,7 @@ where [refTable].[EmployeeName] = ?</property>
                       name="ErrorID" />
                     <externalMetadataColumn
                       refId="Package\Populate Client and Employee Table\OLE DB Destination 2.Inputs[OLE DB Destination Input].ExternalColumns[FilePath]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="255"
                       name="FilePath" />
                     <externalMetadataColumn
@@ -7665,6 +7810,11 @@ where [refTable].[EmployeeName] = ?</property>
                       refId="Package\Populate Client and Employee Table\OLE DB Destination 2.Inputs[OLE DB Destination Input].ExternalColumns[Timestamp]"
                       dataType="dbTimeStamp"
                       name="Timestamp" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Client and Employee Table\OLE DB Destination 2.Inputs[OLE DB Destination Input].ExternalColumns[Month]"
+                      dataType="wstr"
+                      length="50"
+                      name="Month" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -8140,9 +8290,10 @@ public class Input0Buffer: ScriptBuffer
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SC_c30e9c18556d4b269bd3b65815730d06</RootNamespace>
     <AssemblyName>SC_c30e9c18556d4b269bd3b65815730d06</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>true</ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>
+    <TargetFrameworkProfile></TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -8252,23 +8403,23 @@ namespace SC_c30e9c18556d4b269bd3b65815730d06.Properties {
                       dataType="System.String"><![CDATA[UTF16LE]]></arrayElement>
                     <arrayElement
                       dataType="System.String"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
-<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="3.0" schemaVersion="1.0">
+<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="4.0" schemaVersion="1.0">
   <msb:PropertyGroup>
-    <msb:Language>msBuild</msb:Language>
     <msb:CodeName>SC_c30e9c18556d4b269bd3b65815730d06</msb:CodeName>
+    <msb:Language>msBuild</msb:Language>
     <msb:DisplayName>SC_c30e9c18556d4b269bd3b65815730d06</msb:DisplayName>
-    <msb:ProjectId>{80C31D18-75DE-4F61-B14B-8E3B9025A58B}</msb:ProjectId>
+    <msb:ProjectId>{9A701448-5BF0-4206-BCCE-7317B7305FF6}</msb:ProjectId>
   </msb:PropertyGroup>
   <msb:ItemGroup>
     <msb:Project Include="SC_c30e9c18556d4b269bd3b65815730d06.csproj" />
+    <msb:File Include="main.cs" />
+    <msb:File Include="BufferWrapper.cs" />
+    <msb:File Include="ComponentWrapper.cs" />
     <msb:File Include="Properties\Settings.settings" />
     <msb:File Include="Properties\AssemblyInfo.cs" />
     <msb:File Include="Properties\Resources.resx" />
     <msb:File Include="Properties\Resources.Designer.cs" />
-    <msb:File Include="main.cs" />
-    <msb:File Include="BufferWrapper.cs" />
     <msb:File Include="Properties\Settings.Designer.cs" />
-    <msb:File Include="ComponentWrapper.cs" />
   </msb:ItemGroup>
 </c:Project>]]></arrayElement>
                     <arrayElement
@@ -8404,14 +8555,14 @@ namespace SC_c30e9c18556d4b269bd3b65815730d06.Properties {
                     <arrayElement
                       dataType="System.String"><![CDATA[TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1v
-ZGUuDQ0KJAAAAAAAAABQRQAATAEDALYcSGgAAAAAAAAAAOAAIiALATAAABQAAAAIAAAAAAAAWjMA
+ZGUuDQ0KJAAAAAAAAABQRQAATAEDACiCVGgAAAAAAAAAAOAAIiALATAAABQAAAAIAAAAAAAAVjMA
 AAAgAAAAQAAAAAAAEAAgAAAAAgAABAAAAAAAAAAGAAAAAAAAAACAAAAAAgAAAAAAAAMAYIUAABAA
-ABAAAAAAEAAAEAAAAAAAABAAAAAAAAAAAAAAAAgzAABPAAAAAEAAAFAEAAAAAAAAAAAAAAAAAAAA
+ABAAAAAAEAAAEAAAAAAAABAAAAAAAAAAAAAAAAQzAABPAAAAAEAAAFAEAAAAAAAAAAAAAAAAAAAA
 AAAAAGAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAIAAACAAAAAAAAAAAAAAACCAAAEgAAAAAAAAAAAAAAC50ZXh0AAAAYBMAAAAgAAAAFAAAAAIA
+AAAAIAAACAAAAAAAAAAAAAAACCAAAEgAAAAAAAAAAAAAAC50ZXh0AAAAXBMAAAAgAAAAFAAAAAIA
 AAAAAAAAAAAAAAAAACAAAGAucnNyYwAAAFAEAAAAQAAAAAYAAAAWAAAAAAAAAAAAAAAAAABAAABA
-LnJlbG9jAAAMAAAAAGAAAAACAAAAHAAAAAAAAAAAAAAAAAAAQAAAQgAAAAAAAAAAAAAAAAAAAAA8
-MwAAAAAAAEgAAAACAAUA/CEAAFQQAAABAAAAAAAAAFAyAAC4AAAAAAAAAAAAAAAAAAAAAAAAAAAA
+LnJlbG9jAAAMAAAAAGAAAAACAAAAHAAAAAAAAAAAAAAAAAAAQAAAQgAAAAAAAAAAAAAAAAAAAAA4
+MwAAAAAAAEgAAAACAAUA/CEAAFAQAAABAAAAAAAAAEwyAAC4AAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4CKBAAAAoqHgIoEQAACioTMAQAOgAAAAEAABEDbwYAAAYs
 MQNvBgAABgsSASgSAAAKcgEAAHACKBMAAAoDbwYAAAZvFAAACigVAAAKCgMGbwoAAAYqHgIoDgAA
 BioqAgMEBSgWAAAKKlICexcAAAoCexgAAAoWlG8ZAAAKKiICFigaAAAKKlICexcAAAoCexgAAAoX
@@ -8421,7 +8572,7 @@ AgMoIgAACg4EcwUAAAZvEAAABipKKwcCA28RAAAGA28MAAAGLfEqBio6AigjAAAKAgN9AwAABCo6
 AigjAAAKAgN9BAAABCoeAigjAAAKKq5+BQAABC0ecrYAAHDQBwAAAigkAAAKbyUAAApzJgAACoAF
 AAAEfgUAAAQqGn4GAAAEKh4CgAYAAAQqGn4HAAAEKh4CKCcAAAoqLnMZAAAGgAcAAAQqQlNKQgEA
 AQAAAAAADAAAAHY0LjAuMzAzMTkAAAAABQBsAAAA2AUAACN+AABEBgAACAcAACNTdHJpbmdzAAAA
-AEwNAAAoAQAAI1VTAHQOAAAQAAAAI0dVSUQAAACEDgAA0AEAACNCbG9iAAAAAAAAAAIAAAFXFaIB
+AEwNAAAoAQAAI1VTAHQOAAAQAAAAI0dVSUQAAACEDgAAzAEAACNCbG9iAAAAAAAAAAIAAAFXFaIB
 CQEAAAD6ATMAFgAAAQAAACEAAAAIAAAABwAAABoAAAAPAAAAJwAAABAAAAABAAAAAwAAAAkAAAAK
 AAAAAQAAAAUAAAABAAAAAABDAwEAAAAAAAYAOwI3BQYAzwI3BQYAhwEkBQ8AqwUAAAYAtAEYBAYA
 HgIYBAYA/wEYBAYAtgIYBAYAWwIYBAYAdAIYBAYAywEYBAYA5gEKAwoAjwLUAAoAzQTUAA4AvgTU
@@ -8442,8 +8593,8 @@ MQAXBRAAOQAXBRAAQQAXBRAASQAXBRAAUQAXBRAAWQAXBRAAYQAXBRAAaQAXBQYAmQAXBQYAuQAX
 BRUAyQAXBQYAiQDtAgYAiQD4AgYA0QAkAyAAiQBYACQA2QBEBCkA4QA0Bi4AcQAXBTUAcQDTBD8A
 cQDzBUMAeQAaAEcAcQCoA0wAcQC3A1EAcQCvAwEA6QAXBRAAcQDxBlcAcQBCBlcAiQAXBQYA4QAh
 BlsAiQAHBmIAkQAXBQYA+QC4AGgA+QD5BnAAoQAXBXYAwQAXBQYALgALAPsALgATAAQBLgAbACMB
-LgAjACwBLgArAFUBLgAzAFUBLgA7AFsBLgBDACwBLgBLAGMBLgBTAFUBLgBbAHwBQwBjAMoB4QB7
-AMoB4wBrAMoB6QBzACMBCQFzACMBGwADAAEABwAHAAgACQAAAIsA4AAAAG8D5AAAAOID4AAAAJwD
+LgAjACwBLgArAFUBLgAzAFUBLgA7AFsBLgBDACwBLgBLAGMBLgBTAFUBLgBbAHwBQwBjAMYB4QB7
+AMYB4wBrAMYB6QBzACMBCQFzACMBGwADAAEABwAHAAgACQAAAIsA4AAAAG8D5AAAAOID4AAAAJwD
 5AAAAJkA6AAAAIQD5AAAAN4E7AAAABoB8QAAAFIG9gACAAYAAwACAAcABQACAAgABwACAAkACQAB
 AAoACwABAAsADQACABUADwACABYAEQABABcAEQACABgAEwAEgAAAAQAAAAAAAAAAAAAAAAAjAAAA
 BAAAAAAAAAAAAAAAfgBuAAAAAAAQAAAAAAAAAAAAAACHAIgGAAAAABAAAAAAAAAAAAAAAIcApQYA
@@ -8484,20 +8635,20 @@ ACAAcAByAG8AcABlAHIAdAB5ACAAYwBhAG4AbgBvAHQAIABiAGUAIABzAGUAdAAgAHQAbwAgAEYA
 YQBsAHMAZQAuACAAQQBzAHMAaQBnAG4AIABhACAAdgBhAGwAdQBlACAAdABvACAAdABoAGUAIABj
 AG8AbAB1AG0AbgAgAGkAbgBzAHQAZQBhAGQALgAAD0kAbgBwAHUAdAAgADAAAHFTAEMAXwBjADMA
 MABlADkAYwAxADgANQA1ADYAZAA0AGIAMgA2ADkAYgBkADMAYgA2ADUAOAAxADUANwAzADAAZAAw
-ADYALgBQAHIAbwBwAGUAcgB0AGkAZQBzAC4AUgBlAHMAbwB1AHIAYwBlAHMAAPhblawIsm9MoZun
-dJ4+nDgABCABAQgDIAABBSABARERBCABAQ4FIAEBEVkEBwIOCAMgAA4EIAASbQQgAQ4IBgADDg4O
+ADYALgBQAHIAbwBwAGUAcgB0AGkAZQBzAC4AUgBlAHMAbwB1AHIAYwBlAHMAAPUV32ZGeh1EscmM
+4tgA5YkABCABAQgDIAABBSABARERBCABAQ4FIAEBEVkEBwIOCAMgAA4EIAASbQQgAQ4IBgADDg4O
 DgkgAwESPR0IEkEDBhI9AwYdCAQgAQgIBCABAggFIAIBCBwDIAACBiACAg4ReQUgAR0ICAcAARJ9
 EYCBBSAAEoCFByACAQ4SgIUIt3pcVhk04IkIiYRdzYCAzJEDBhIUAwYSGAMGEkUDBhJRAwYSVQMG
 EiAFIAEBEgwDIAAIBCABAQIJIAQBCA4SPRJBBSABARJFBAAAElEEAAASVQUAAQESVQQAABIgAwAA
 AQMoAAgDKAACAygADgQIABJRBAgAElUECAASIAgBAAgAAAAAAB4BAAEAVAIWV3JhcE5vbkV4Y2Vw
 dGlvblRocm93cwEIAQACAAAAAAAoAQAjU0NfYzMwZTljMTg1NTZkNGIyNjliZDNiNjU4MTU3MzBk
-MDYAAAUBAAAAAAcBAAJIUAAAGAEAE0NvcHlyaWdodCBAIEhQIDIwMjUAAE0BABwuTkVURnJhbWV3
-b3JrLFZlcnNpb249djQuNy4yAQBUDhRGcmFtZXdvcmtEaXNwbGF5TmFtZRQuTkVUIEZyYW1ld29y
-ayA0LjcuMgQBAAAAALQAAADOyu++AQAAAJEAAABsU3lzdGVtLlJlc291cmNlcy5SZXNvdXJjZVJl
-YWRlciwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNL
-ZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5I1N5c3RlbS5SZXNvdXJjZXMuUnVudGltZVJlc291cmNl
-U2V0AgAAAAAAAAAAAAAAUEFEUEFEULQAAAAwMwAAAAAAAAAAAABKMwAAACAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAPDMAAAAAAAAAAAAAAABfQ29yRGxsTWFpbgBtc2NvcmVlLmRsbAAAAAAA/yUAIAAQ
+MDYAAAUBAAAAAAcBAAJIUAAAGAEAE0NvcHlyaWdodCBAIEhQIDIwMjUAAEkBABouTkVURnJhbWV3
+b3JrLFZlcnNpb249djQuNwEAVA4URnJhbWV3b3JrRGlzcGxheU5hbWUSLk5FVCBGcmFtZXdvcmsg
+NC43BAEAAAAAtAAAAM7K774BAAAAkQAAAGxTeXN0ZW0uUmVzb3VyY2VzLlJlc291cmNlUmVhZGVy
+LCBtc2NvcmxpYiwgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRv
+a2VuPWI3N2E1YzU2MTkzNGUwODkjU3lzdGVtLlJlc291cmNlcy5SdW50aW1lUmVzb3VyY2VTZXQC
+AAAAAAAAAAAAAABQQURQQURQtAAAACwzAAAAAAAAAAAAAEYzAAAAIAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAA4MwAAAAAAAAAAAAAAAF9Db3JEbGxNYWluAG1zY29yZWUuZGxsAAAAAAD/JQAgABAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -8527,7 +8678,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAMAAAAXDMAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAMAAAAWDMAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -8842,6 +8993,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
               name="Derived Column Output"
               startId="Package\Populate Client and Employee Table\Derived Column 1.Outputs[Derived Column Output]" />
             <path
+              refId="Package\Populate Client and Employee Table.Paths[Derived Column Output2]"
+              endId="Package\Populate Client and Employee Table\Script Component.Inputs[Input 0]"
+              name="Derived Column Output"
+              startId="Package\Populate Client and Employee Table\Derived Column 2.Outputs[Derived Column Output]" />
+            <path
               refId="Package\Populate Client and Employee Table.Paths[Excel Source Error Output]"
               endId="Package\Populate Client and Employee Table\Union All.Inputs[Union All Input 1]"
               name="Excel Source Error Output"
@@ -8888,7 +9044,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
               startId="Package\Populate Client and Employee Table\Script Component.Outputs[Output 0]" />
             <path
               refId="Package\Populate Client and Employee Table.Paths[Union All Output 1]"
-              endId="Package\Populate Client and Employee Table\Script Component.Inputs[Input 0]"
+              endId="Package\Populate Client and Employee Table\Derived Column 2.Inputs[Derived Column Input]"
               name="Union All Output 1"
               startId="Package\Populate Client and Employee Table\Union All.Outputs[Union All Output 1]" />
           </paths>
@@ -13293,6 +13449,29 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
                               name="FriendlyExpression">@[User::FilePath]</property>
                           </properties>
                         </outputColumn>
+                        <outputColumn
+                          refId="Package\Timesheet_Staging Container\ExcelToTimesheetTable\Derived Column 1.Outputs[Derived Column Output].Columns[Derived Month]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          length="50"
+                          lineageId="Package\Timesheet_Staging Container\ExcelToTimesheetTable\Derived Column 1.Outputs[Derived Column Output].Columns[Derived Month]"
+                          name="Derived Month"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">@[User::Month]</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">@[User::Month]</property>
+                          </properties>
+                        </outputColumn>
                       </outputColumns>
                       <externalMetadataColumns />
                     </output>
@@ -14175,6 +14354,13 @@ where [refTable].[Date] = ? and [refTable].[EmployeeName] = ?</property>
                           cachedName="ErrorMessage"
                           externalMetadataColumnId="Package\Timesheet_Staging Container\ExcelToTimesheetTable\OLE DB Destination 2.Inputs[OLE DB Destination Input].ExternalColumns[ErrorMessage]"
                           lineageId="Package\Timesheet_Staging Container\ExcelToTimesheetTable\Script Component.Outputs[Output 0].Columns[ErrorMessage]" />
+                        <inputColumn
+                          refId="Package\Timesheet_Staging Container\ExcelToTimesheetTable\OLE DB Destination 2.Inputs[OLE DB Destination Input].Columns[Derived Month]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="Derived Month"
+                          externalMetadataColumnId="Package\Timesheet_Staging Container\ExcelToTimesheetTable\OLE DB Destination 2.Inputs[OLE DB Destination Input].ExternalColumns[Month]"
+                          lineageId="Package\Timesheet_Staging Container\ExcelToTimesheetTable\Derived Column 1.Outputs[Derived Column Output].Columns[Derived Month]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -14196,6 +14382,11 @@ where [refTable].[Date] = ? and [refTable].[EmployeeName] = ?</property>
                           refId="Package\Timesheet_Staging Container\ExcelToTimesheetTable\OLE DB Destination 2.Inputs[OLE DB Destination Input].ExternalColumns[Timestamp]"
                           dataType="dbTimeStamp"
                           name="Timestamp" />
+                        <externalMetadataColumn
+                          refId="Package\Timesheet_Staging Container\ExcelToTimesheetTable\OLE DB Destination 2.Inputs[OLE DB Destination Input].ExternalColumns[Month]"
+                          dataType="wstr"
+                          length="50"
+                          name="Month" />
                       </externalMetadataColumns>
                     </input>
                   </inputs>
@@ -16112,6 +16303,10 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
           Id="Package\AuditLog Data Input\Lookup"
           TopLeft="203.999996960163,206.99999691546" />
         <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\AuditLog Data Input\OLE DB Destination"
+          TopLeft="191.999997138977,283.99999576807" />
+        <NodeLayout
           Size="152,41.6"
           Id="Package\AuditLog Data Input\OLE DB Source"
           TopLeft="222.999996677041,33.9999994933605" />
@@ -16119,10 +16314,40 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
           Size="143.2,41.6"
           Id="Package\AuditLog Data Input\Fuzzy Lookup"
           TopLeft="204.999996945262,128.99999807775" />
-        <NodeLayout
-          Size="171.2,41.6"
-          Id="Package\AuditLog Data Input\OLE DB Destination"
-          TopLeft="191.999997138977,283.99999576807" />
+        <EdgeLayout
+          Id="Package\AuditLog Data Input.Paths[OLE DB Source Output]"
+          TopLeft="298.999996677041,75.5999994933605">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-22.3999997317791,53.3999985843897"
+              Start="0,0"
+              End="-22.3999997317791,45.8999985843897">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.6999992921948" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.6999992921948"
+                    Point2="0,26.6999992921948"
+                    Point3="-4,26.6999992921948" />
+                  <mssgle:LineSegment
+                    End="-18.3999997317791,26.6999992921948" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-18.3999997317791,26.6999992921948"
+                    Point2="-22.3999997317791,26.6999992921948"
+                    Point3="-22.3999997317791,30.6999992921948" />
+                  <mssgle:LineSegment
+                    End="-22.3999997317791,45.8999985843897" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package\AuditLog Data Input.Paths[Lookup No Match Output]"
           TopLeft="260.399996960163,248.59999691546">
@@ -16193,40 +16418,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <EdgeLayout
-          Id="Package\AuditLog Data Input.Paths[OLE DB Source Output]"
-          TopLeft="298.999996677041,75.5999994933605">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-22.3999997317791,53.3999985843897"
-              Start="0,0"
-              End="-22.3999997317791,45.8999985843897">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,22.6999992921948" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,22.6999992921948"
-                    Point2="0,26.6999992921948"
-                    Point3="-4,26.6999992921948" />
-                  <mssgle:LineSegment
-                    End="-18.3999997317791,26.6999992921948" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-18.3999997317791,26.6999992921948"
-                    Point2="-22.3999997317791,26.6999992921948"
-                    Point3="-22.3999997317791,30.6999992921948" />
-                  <mssgle:LineSegment
-                    End="-22.3999997317791,45.8999985843897" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
@@ -16236,7 +16427,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:boolean">false</Value>
+          type="q2:string">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
@@ -16246,10 +16437,23 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:int">0</Value>
+          type="q4:string">0</Value>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\AuditLog Data Input\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
@@ -16268,19 +16472,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\AuditLog Data Input\Fuzzy Lookup">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\AuditLog Data Input\OLE DB Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -16452,45 +16643,21 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
       <GraphLayout
         Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="161.6,41.6"
-          Id="Package\Leave_Staging Container\ExcelToLeaveTable\Script Component"
-          TopLeft="1052.99998430908,130.999998047948" />
-        <NodeLayout
           Size="156,41.6"
           Id="Package\Leave_Staging Container\ExcelToLeaveTable\Data Conversion"
           TopLeft="341.999980797371,4.3333334065146" />
         <NodeLayout
-          Size="152.8,41.6"
-          Id="Package\Leave_Staging Container\ExcelToLeaveTable\Derived Column"
-          TopLeft="569.833310901292,11.9333338305024" />
+          Size="161.6,41.6"
+          Id="Package\Leave_Staging Container\ExcelToLeaveTable\Script Component"
+          TopLeft="1052.99998430908,130.999998047948" />
         <NodeLayout
           Size="171.2,41.6"
           Id="Package\Leave_Staging Container\ExcelToLeaveTable\OLE DB Destination"
           TopLeft="110.499993287027,239.333331930505" />
         <NodeLayout
-          Size="180,41.6"
-          Id="Package\Leave_Staging Container\ExcelToLeaveTable\OLE DB Destination 1"
-          TopLeft="735.999989032746,236.999996706843" />
-        <NodeLayout
-          Size="112.8,41.6"
-          Id="Package\Leave_Staging Container\ExcelToLeaveTable\Lookup"
-          TopLeft="329.866657123301,113.266666308178" />
-        <NodeLayout
-          Size="153.6,41.6"
-          Id="Package\Leave_Staging Container\ExcelToLeaveTable\Conditional Split"
-          TopLeft="38.9999940544361,111.133332510458" />
-        <NodeLayout
-          Size="140,41.6"
-          Id="Package\Leave_Staging Container\ExcelToLeaveTable\Excel Source"
-          TopLeft="36.3333272950524,10.7999999010563" />
-        <NodeLayout
-          Size="120,41.6"
-          Id="Package\Leave_Staging Container\ExcelToLeaveTable\Union All"
-          TopLeft="895.99998664856,55.999999165535" />
-        <NodeLayout
-          Size="180,41.6"
-          Id="Package\Leave_Staging Container\ExcelToLeaveTable\OLE DB Destination 2"
-          TopLeft="1003.99998503923,215.999996781349" />
+          Size="152.8,41.6"
+          Id="Package\Leave_Staging Container\ExcelToLeaveTable\Derived Column"
+          TopLeft="569.833310901292,11.9333338305024" />
         <NodeLayout
           Size="119.2,41.6"
           Id="Package\Leave_Staging Container\ExcelToLeaveTable\Multicast"
@@ -16500,13 +16667,201 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
           Id="Package\Leave_Staging Container\ExcelToLeaveTable\Audit"
           TopLeft="206.999996915459,10.9999998360872" />
         <NodeLayout
+          Size="153.6,41.6"
+          Id="Package\Leave_Staging Container\ExcelToLeaveTable\Conditional Split"
+          TopLeft="38.9999940544361,111.133332510458" />
+        <NodeLayout
+          Size="180,41.6"
+          Id="Package\Leave_Staging Container\ExcelToLeaveTable\OLE DB Destination 1"
+          TopLeft="735.999989032746,236.999996706843" />
+        <NodeLayout
+          Size="180,41.6"
+          Id="Package\Leave_Staging Container\ExcelToLeaveTable\OLE DB Destination 2"
+          TopLeft="1003.99998503923,215.999996781349" />
+        <NodeLayout
+          Size="120,41.6"
+          Id="Package\Leave_Staging Container\ExcelToLeaveTable\Union All"
+          TopLeft="895.99998664856,55.999999165535" />
+        <NodeLayout
+          Size="112.8,41.6"
+          Id="Package\Leave_Staging Container\ExcelToLeaveTable\Lookup"
+          TopLeft="329.866657123301,113.266666308178" />
+        <NodeLayout
           Size="161.6,41.6"
           Id="Package\Leave_Staging Container\ExcelToLeaveTable\Derived Column 1"
           TopLeft="1064.99998413026,53.9999991953373" />
         <NodeLayout
+          Size="140,41.6"
+          Id="Package\Leave_Staging Container\ExcelToLeaveTable\Excel Source"
+          TopLeft="36.3333272950524,10.7999999010563" />
+        <NodeLayout
           Size="126.4,41.6"
           Id="Package\Leave_Staging Container\ExcelToLeaveTable\Aggregate"
           TopLeft="561.999991625548,235.999996721744" />
+        <EdgeLayout
+          Id="Package\Leave_Staging Container\ExcelToLeaveTable.Paths[Derived Column Output1]"
+          TopLeft="1145.79998413026,95.5999991953373">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-11.9999998211799,35.3999988526107"
+              Start="0,0"
+              End="-11.9999998211799,27.8999988526107">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.6999994263053" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13.6999994263053"
+                    Point2="0,17.6999994263053"
+                    Point3="-4,17.6999994263053" />
+                  <mssgle:LineSegment
+                    End="-7.99999982117993,17.6999994263053" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-7.99999982117993,17.6999994263053"
+                    Point2="-11.9999998211799,17.6999994263053"
+                    Point3="-11.9999998211799,21.6999994263053" />
+                  <mssgle:LineSegment
+                    End="-11.9999998211799,27.8999988526107" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Leave_Staging Container\ExcelToLeaveTable.Paths[Derived Column Output]"
+          TopLeft="646.233310901292,53.5333338305024">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-530.433316846856,57.5999986799557"
+              Start="0,0"
+              End="-530.433316846856,50.0999986799557">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.7999993399779" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24.7999993399779"
+                    Point2="0,28.7999993399779"
+                    Point3="-4,28.7999993399779" />
+                  <mssgle:LineSegment
+                    End="-526.433316846856,28.7999993399779" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-526.433316846856,28.7999993399779"
+                    Point2="-530.433316846856,28.7999993399779"
+                    Point3="-530.433316846856,32.7999993399779" />
+                  <mssgle:LineSegment
+                    End="-530.433316846856,50.0999986799557" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-273.216658423428,33.7999993399779,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Leave_Staging Container\ExcelToLeaveTable.Paths[Data Conversion Output]"
+          TopLeft="497.999980797371,28.9333336185085">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="71.8333301039208,0"
+              Start="0,0"
+              End="64.3333301039208,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="64.3333301039208,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="24.1666650519604,5,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Leave_Staging Container\ExcelToLeaveTable.Paths[Conditional Split Default Output]"
+          TopLeft="192.599994054436,132.999999409318">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="137.266663068865,0"
+              Start="0,0"
+              End="129.766663068865,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="129.766663068865,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-14.3917075280675,5,158.550078125,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Leave_Staging Container\ExcelToLeaveTable.Paths[Audit Output 1]"
+          TopLeft="309.399996915459,28.4666666213009">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="32.5999838819114,0"
+              Start="0,0"
+              End="25.0999838819114,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="25.0999838819114,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Leave_Staging Container\ExcelToLeaveTable.Paths[Aggregate Output 1]"
+          TopLeft="688.399991625548,257.299996714294">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="47.5999974071983,0"
+              Start="0,0"
+              End="40.0999974071983,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="40.0999974071983,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="12.0499987035992,5,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package\Leave_Staging Container\ExcelToLeaveTable.Paths[Union All Output 1]"
           TopLeft="1015.99998664856,75.7999991804361">
@@ -16777,170 +17132,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Leave_Staging Container\ExcelToLeaveTable.Paths[Derived Column Output1]"
-          TopLeft="1145.79998413026,95.5999991953373">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-11.9999998211799,35.3999988526107"
-              Start="0,0"
-              End="-11.9999998211799,27.8999988526107">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,13.6999994263053" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,13.6999994263053"
-                    Point2="0,17.6999994263053"
-                    Point3="-4,17.6999994263053" />
-                  <mssgle:LineSegment
-                    End="-7.99999982117993,17.6999994263053" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-7.99999982117993,17.6999994263053"
-                    Point2="-11.9999998211799,17.6999994263053"
-                    Point3="-11.9999998211799,21.6999994263053" />
-                  <mssgle:LineSegment
-                    End="-11.9999998211799,27.8999988526107" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Leave_Staging Container\ExcelToLeaveTable.Paths[Derived Column Output]"
-          TopLeft="646.233310901292,53.5333338305024">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-530.433316846856,57.5999986799557"
-              Start="0,0"
-              End="-530.433316846856,50.0999986799557">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,24.7999993399779" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,24.7999993399779"
-                    Point2="0,28.7999993399779"
-                    Point3="-4,28.7999993399779" />
-                  <mssgle:LineSegment
-                    End="-526.433316846856,28.7999993399779" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-526.433316846856,28.7999993399779"
-                    Point2="-530.433316846856,28.7999993399779"
-                    Point3="-530.433316846856,32.7999993399779" />
-                  <mssgle:LineSegment
-                    End="-530.433316846856,50.0999986799557" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-273.216658423428,33.7999993399779,16,16"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Leave_Staging Container\ExcelToLeaveTable.Paths[Data Conversion Output]"
-          TopLeft="497.999980797371,28.9333336185085">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="71.8333301039208,0"
-              Start="0,0"
-              End="64.3333301039208,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="64.3333301039208,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="24.1666650519604,5,16,16"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Leave_Staging Container\ExcelToLeaveTable.Paths[Conditional Split Default Output]"
-          TopLeft="192.599994054436,132.999999409318">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="137.266663068865,0"
-              Start="0,0"
-              End="129.766663068865,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="129.766663068865,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-14.3917075280675,5,158.550078125,16"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Leave_Staging Container\ExcelToLeaveTable.Paths[Audit Output 1]"
-          TopLeft="309.399996915459,28.4666666213009">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="32.5999838819114,0"
-              Start="0,0"
-              End="25.0999838819114,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="25.0999838819114,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Leave_Staging Container\ExcelToLeaveTable.Paths[Aggregate Output 1]"
-          TopLeft="688.399991625548,257.299996714294">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="47.5999974071983,0"
-              Start="0,0"
-              End="40.0999974071983,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="40.0999974071983,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="12.0499987035992,5,16,16"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
@@ -16958,7 +17149,20 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Leave_Staging Container\ExcelToLeaveTable\OLE DB Destination 1">
+    design-time-name="Package\Leave_Staging Container\ExcelToLeaveTable\OLE DB Destination 2">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Leave_Staging Container\ExcelToLeaveTable\Excel Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -16994,20 +17198,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Leave_Staging Container\ExcelToLeaveTable\Excel Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Leave_Staging Container\ExcelToLeaveTable\OLE DB Destination 2">
+    design-time-name="Package\Leave_Staging Container\ExcelToLeaveTable\OLE DB Destination 1">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -17077,65 +17268,31 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
           Id="Package\Populate Client and Employee Table\Lookup"
           TopLeft="142.999997869134,235.999996483326" />
         <EdgeLayout
-          Id="Package\Populate Client and Employee Table.Paths[Union All Output 1]"
-          TopLeft="1243.9999832511,88.799998986721">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="78.9999970346687,52.9999992102385"
-              Start="0,0"
-              End="71.4999970346687,52.9999992102385">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="35.4999985173343,0" />
-                  <mssgle:CubicBezierSegment
-                    Point1="35.4999985173343,0"
-                    Point2="39.4999985173343,0"
-                    Point3="39.4999985173343,4" />
-                  <mssgle:LineSegment
-                    End="39.4999985173343,48.9999992102385" />
-                  <mssgle:CubicBezierSegment
-                    Point1="39.4999985173343,48.9999992102385"
-                    Point2="39.4999985173343,52.9999992102385"
-                    Point3="43.4999985173343,52.9999992102385" />
-                  <mssgle:LineSegment
-                    End="71.4999970346687,52.9999992102385" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
           Id="Package\Populate Client and Employee Table.Paths[Output 0]"
           TopLeft="1403.79998028576,162.59999819696">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-38.7999992847442,62.3999984502793"
+              EndConnector="-38.7999992847401,62.399998450279"
               Start="0,0"
-              End="-38.7999992847442,54.8999984502793">
+              End="-38.7999992847401,54.899998450279">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,27.1999992251396" />
+                    End="0,27.1999992251395" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,27.1999992251396"
-                    Point2="0,31.1999992251396"
-                    Point3="-4,31.1999992251396" />
+                    Point1="0,27.1999992251395"
+                    Point2="0,31.1999992251395"
+                    Point3="-4,31.1999992251395" />
                   <mssgle:LineSegment
-                    End="-34.7999992847442,31.1999992251396" />
+                    End="-34.7999992847401,31.1999992251395" />
                   <mssgle:CubicBezierSegment
-                    Point1="-34.7999992847442,31.1999992251396"
-                    Point2="-38.7999992847442,31.1999992251396"
-                    Point3="-38.7999992847442,35.1999992251396" />
+                    Point1="-34.7999992847401,31.1999992251395"
+                    Point2="-38.7999992847401,31.1999992251395"
+                    Point3="-38.7999992847401,35.1999992251395" />
                   <mssgle:LineSegment
-                    End="-38.7999992847442,54.8999984502793" />
+                    End="-38.7999992847401,54.899998450279" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -17540,32 +17697,81 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="161.6,41.6"
+          Id="Package\Populate Client and Employee Table\Derived Column 2"
+          TopLeft="1305.36660688404,53.2666663351986" />
+        <EdgeLayout
+          Id="Package\Populate Client and Employee Table.Paths[Union All Output 1]"
+          TopLeft="1243.9999832511,88.799998986721">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="61.3666236329386,-14.7333326515224"
+              Start="0,0"
+              End="53.8666236329386,-14.7333326515224">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="26.6833118164693,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="26.6833118164693,0"
+                    Point2="30.6833118164693,0"
+                    Point3="30.6833118164693,-4" />
+                  <mssgle:LineSegment
+                    End="30.6833118164693,-10.7333326515224" />
+                  <mssgle:CubicBezierSegment
+                    Point1="30.6833118164693,-10.7333326515224"
+                    Point2="30.6833118164693,-14.7333326515224"
+                    Point3="34.6833118164693,-14.7333326515224" />
+                  <mssgle:LineSegment
+                    End="53.8666236329386,-14.7333326515224" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Populate Client and Employee Table.Paths[Derived Column Output2]"
+          TopLeft="1386.16660688404,94.8666663351986">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="17.6333734017214,26.1333318617614"
+              Start="0,0"
+              End="17.6333734017214,18.6333318617614">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,9.06666593088068" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,9.06666593088068"
+                    Point2="0,13.0666659308807"
+                    Point3="4,13.0666659308807" />
+                  <mssgle:LineSegment
+                    End="13.6333734017214,13.0666659308807" />
+                  <mssgle:CubicBezierSegment
+                    Point1="13.6333734017214,13.0666659308807"
+                    Point2="17.6333734017214,13.0666659308807"
+                    Point3="17.6333734017214,17.0666659308807" />
+                  <mssgle:LineSegment
+                    End="17.6333734017214,18.6333318617614" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\Populate Client and Employee Table\Lookup 1">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:string">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string">[dbo].[Employee]</Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:string">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\Populate Client and Employee Table\Excel Source 1">
     <Properties>
@@ -17630,6 +17836,29 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
         <Name>UsedTableName</Name>
         <Value
           type="q3:string">[dbo].[Client]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Populate Client and Employee Table\Lookup 1">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[Employee]</Value>
       </Property>
       <Property>
         <Name>TableInfoObjectType</Name>
@@ -17888,41 +18117,33 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
       <GraphLayout
         Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="153.6,41.6"
-          Id="Package\Timesheet_Staging Container\ExcelToTimesheetTable\Conditional Split"
-          TopLeft="254.999986067415,137.799999041756" />
-        <NodeLayout
-          Size="180,41.6"
-          Id="Package\Timesheet_Staging Container\ExcelToTimesheetTable\OLE DB Destination 2"
-          TopLeft="901.999986559153,273.999995917082" />
-        <NodeLayout
-          Size="171.2,41.6"
-          Id="Package\Timesheet_Staging Container\ExcelToTimesheetTable\OLE DB Destination"
-          TopLeft="92.6666584644057,299.266664799386" />
-        <NodeLayout
-          Size="152.8,41.6"
-          Id="Package\Timesheet_Staging Container\ExcelToTimesheetTable\Derived Column"
-          TopLeft="58.8333294433034,186.066667245163" />
+          Size="102.4,41.6"
+          Id="Package\Timesheet_Staging Container\ExcelToTimesheetTable\Audit"
+          TopLeft="252.666671180063,14.1333330125279" />
         <NodeLayout
           Size="112.8,41.6"
           Id="Package\Timesheet_Staging Container\ExcelToTimesheetTable\Lookup"
           TopLeft="509.666651058528,94.199997604489" />
         <NodeLayout
-          Size="120,41.6"
-          Id="Package\Timesheet_Staging Container\ExcelToTimesheetTable\Union All"
-          TopLeft="755.999988734722,52.9999992102385" />
-        <NodeLayout
           Size="119.2,41.6"
           Id="Package\Timesheet_Staging Container\ExcelToTimesheetTable\Multicast"
           TopLeft="318.833330734736,294.866663209531" />
         <NodeLayout
-          Size="156,44.8"
-          Id="Package\Timesheet_Staging Container\ExcelToTimesheetTable\Data Conversion"
-          TopLeft="79.6666616383526,83.4000004365046" />
+          Size="152.8,41.6"
+          Id="Package\Timesheet_Staging Container\ExcelToTimesheetTable\Derived Column"
+          TopLeft="58.8333294433034,186.066667245163" />
         <NodeLayout
           Size="140,41.6"
           Id="Package\Timesheet_Staging Container\ExcelToTimesheetTable\Excel Source"
           TopLeft="34.4999977971111,17.800000210007" />
+        <NodeLayout
+          Size="161.6,41.6"
+          Id="Package\Timesheet_Staging Container\ExcelToTimesheetTable\Script Component"
+          TopLeft="901.999986559153,150.999997749925" />
+        <NodeLayout
+          Size="156,44.8"
+          Id="Package\Timesheet_Staging Container\ExcelToTimesheetTable\Data Conversion"
+          TopLeft="79.6666616383526,83.4000004365046" />
         <NodeLayout
           Size="116,41.6"
           Id="Package\Timesheet_Staging Container\ExcelToTimesheetTable\Auditlog"
@@ -17932,17 +18153,59 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
           Id="Package\Timesheet_Staging Container\ExcelToTimesheetTable\Derived Column 1"
           TopLeft="942.999985948205,79.9999988079071" />
         <NodeLayout
-          Size="102.4,41.6"
-          Id="Package\Timesheet_Staging Container\ExcelToTimesheetTable\Audit"
-          TopLeft="252.666671180063,14.1333330125279" />
+          Size="153.6,41.6"
+          Id="Package\Timesheet_Staging Container\ExcelToTimesheetTable\Conditional Split"
+          TopLeft="254.999986067415,137.799999041756" />
         <NodeLayout
-          Size="161.6,41.6"
-          Id="Package\Timesheet_Staging Container\ExcelToTimesheetTable\Script Component"
-          TopLeft="901.999986559153,150.999997749925" />
+          Size="120,41.6"
+          Id="Package\Timesheet_Staging Container\ExcelToTimesheetTable\Union All"
+          TopLeft="755.999988734722,52.9999992102385" />
+        <NodeLayout
+          Size="180,41.6"
+          Id="Package\Timesheet_Staging Container\ExcelToTimesheetTable\OLE DB Destination 2"
+          TopLeft="901.999986559153,273.999995917082" />
         <NodeLayout
           Size="126.4,41.6"
           Id="Package\Timesheet_Staging Container\ExcelToTimesheetTable\Aggregate"
           TopLeft="585.833326557444,230.133330000507" />
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\Timesheet_Staging Container\ExcelToTimesheetTable\OLE DB Destination"
+          TopLeft="92.6666584644057,299.266664799386" />
+        <EdgeLayout
+          Id="Package\Timesheet_Staging Container\ExcelToTimesheetTable.Paths[Union All Output 1]"
+          TopLeft="875.999988734722,73.7999992102385">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="66.999997213483,26.9999995976686"
+              Start="0,0"
+              End="59.499997213483,26.9999995976686">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="29.4999986067415,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="29.4999986067415,0"
+                    Point2="33.4999986067415,0"
+                    Point3="33.4999986067415,4" />
+                  <mssgle:LineSegment
+                    End="33.4999986067415,22.9999995976686" />
+                  <mssgle:CubicBezierSegment
+                    Point1="33.4999986067415,22.9999995976686"
+                    Point2="33.4999986067415,26.9999995976686"
+                    Point3="37.4999986067415,26.9999995976686" />
+                  <mssgle:LineSegment
+                    End="59.499997213483,26.9999995976686" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package\Timesheet_Staging Container\ExcelToTimesheetTable.Paths[Output 0]"
           TopLeft="982.799986559153,192.599997749925">
@@ -18407,40 +18670,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Timesheet_Staging Container\ExcelToTimesheetTable.Paths[Union All Output 1]"
-          TopLeft="875.999988734722,73.7999992102385">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="66.999997213483,26.9999995976686"
-              Start="0,0"
-              End="59.499997213483,26.9999995976686">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="29.4999986067415,0" />
-                  <mssgle:CubicBezierSegment
-                    Point1="29.4999986067415,0"
-                    Point2="33.4999986067415,0"
-                    Point3="33.4999986067415,4" />
-                  <mssgle:LineSegment
-                    End="33.4999986067415,22.9999995976686" />
-                  <mssgle:CubicBezierSegment
-                    Point1="33.4999986067415,22.9999995976686"
-                    Point2="33.4999986067415,26.9999995976686"
-                    Point3="37.4999986067415,26.9999995976686" />
-                  <mssgle:LineSegment
-                    End="59.499997213483,26.9999995976686" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
@@ -18457,38 +18686,12 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
     </LayoutInfo>
   </DtsEventHandler>
   <PipelineComponentMetadata
-    design-time-name="Package\Timesheet_Staging Container\ExcelToTimesheetTable\OLE DB Destination 2">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Timesheet_Staging Container\ExcelToTimesheetTable\OLE DB Destination">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
     design-time-name="Package\Timesheet_Staging Container\ExcelToTimesheetTable\Lookup">
     <Properties>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:boolean">false</Value>
+          type="q2:string">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
@@ -18498,7 +18701,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:int">0</Value>
+          type="q4:string">0</Value>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -18520,6 +18723,32 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\Timesheet_Staging Container\ExcelToTimesheetTable\Auditlog">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Timesheet_Staging Container\ExcelToTimesheetTable\OLE DB Destination 2">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Timesheet_Staging Container\ExcelToTimesheetTable\OLE DB Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
