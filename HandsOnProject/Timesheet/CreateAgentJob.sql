@@ -23,7 +23,7 @@ EXEC msdb.dbo.sp_add_jobstep @job_name=N'Run_Timesheet_SSIS_Job', @step_name=N'S
 		@retry_attempts=0, 
 		@retry_interval=0, 
 		@os_run_priority=0, @subsystem=N'SSIS', 
-		@command=N'/ISSERVER "\"\SSISDB\SSISProject\SSISProjectRun\TimesheetEntry.dtsx\"" /SERVER "\".\"" /Par "\"$ServerOption::LOGGING_LEVEL(Int16)\"";1 /Par "\"$ServerOption::SYNCHRONIZED(Boolean)\"";True /CALLERINFO SQLAGENT /REPORTING E', 
+		@command=N'/ISSERVER "\"\SSISDB\SSISProject\SSISProject\TimesheetEntry.dtsx\"" /SERVER "\".\"" /Par "\"$ServerOption::LOGGING_LEVEL(Int16)\"";1 /Par "\"$ServerOption::SYNCHRONIZED(Boolean)\"";True /CALLERINFO SQLAGENT /REPORTING E', 
 		@database_name=N'master', 
 		@flags=0
 GO
