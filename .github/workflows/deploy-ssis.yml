@@ -16,7 +16,7 @@ jobs:
       - name: Deploy SSIS Project
         shell: cmd
         run: |
-          set "ISPAC_PATH=%GITHUB_WORKSPACE%\HandsOnProject\Timesheet\SSISProject.ispac "
+          set "ISPAC_PATH=%GITHUB_WORKSPACE%\HandsOnProject\Timesheet\SSISProject.ispac"
           sqlcmd -S SAMBE202507 -E -v IspacPath="%ISPAC_PATH%" -i HandsOnProject\Timesheet\PackageDeployment.sql 
 
       - name: Create SQL Server Agent Job
