@@ -1,7 +1,10 @@
 name: deploy-ssis
 
 on:
-  workflow_call:
+  workflow_run:
+    workflows: ["Setup Database and Tables"]
+    types:
+      - completed
 
 jobs:
   deploy-ssis:
@@ -31,7 +34,6 @@ jobs:
         run: |
           sqlcmd -S SAMBE202507 -E -Q "IF NOT EXISTS(SELECT 1 FROM [SSISDB].[catalog].[folders] WHERE name = 'SSISProject') BEGIN EXEC [SSISDB].[catalog].[create_folder] @folder_name = 'SSISProject', @folder_id = NULL END"
 
-
       - name: Deploy SSIS Project
         shell: cmd
         run: |
@@ -41,4 +43,4 @@ jobs:
         run: sqlcmd -S . -U ${{ secrets.SQL_USERNAME }} -P ${{ secrets.SQL_PASSWORD }} -i HandsOnProject/Timesheet/CreateAgentJob.sql
 
       - name: Start SQL Server Agent Job
-        run: sqlcmd -S . -U ${{ secrets.SQL_USERNAME }} -P ${{ secrets.SQL_PASSWORD }} -Q "EXEC msdb.dbo.sp_start_job @job_name = N'RunTimesheetEntryEveryMinute';"
+        run: sqlcmd -S . -U ${{ secrets.SQL_USERNAME }} -P ${{ secrets.SQL_PASSWORD }} -Q "EXEC msdb.dbo.sp_start_job @job_name = N'Run_Timesheet_SSIS_Job';"
