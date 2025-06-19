@@ -23,7 +23,7 @@ EXEC msdb.dbo.sp_add_jobstep
     @step_name = N'Execute TimesheetEntry SSIS Package',
     @step_id = 1,
     @subsystem = N'SSIS',
-    @command = N'/ISSERVER "\"\SSISDB\SSISProjectRun\SSISProject\TimesheetEntry.dtsx\"" /SERVER "\".\""',
+    @command = N'/ISSERVER "\"\SSISDB\SSISProject\SSISProjectRun\TimesheetEntry.dtsx\"" /SERVER "\".\""',
     @on_success_action = 1, -- Quit with success
     @on_fail_action = 2; -- Quit with failure
 
