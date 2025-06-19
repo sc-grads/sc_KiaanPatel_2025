@@ -7,26 +7,38 @@ on:
       - completed
 
 jobs:
-  deploy:
+  deploy-ssis:
     runs-on: self-hosted
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Set Execution Policy for Session
+      - name: Set ISPAC path
+        shell: cmd
         run: |
-          Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
+          echo ISPAC_PATH=%cd%\HandsOnProject\Timesheet\SSISProjectTrial.ispac >> %GITHUB_ENV%
+          echo ISPAC_PATH is set to: %cd%\HandsOnProject\Timesheet\SSISProjectTrial.ispac
 
-      - name: Deploy SSIS Package with T-SQL
+      - name: Verify ISPAC file
+        shell: cmd
         run: |
-          $exitCode = cmd /c "sqlcmd -S . -E -d SSISDB -Q \"$(@'
-          DECLARE @project_binary VARBINARY(MAX);
-          SET @project_binary = (SELECT BulkColumn FROM OPENROWSET(BULK N'${{ github.workspace }}/SSISProject.ispac', SINGLE_BLOB) AS ProjectFile);
-          EXEC Catalog.deploy_project @folder_name = N'SSISProjectRun', @project_name = N'SSISProject', @project_stream = @project_binary;
-          '@)\""
-          if ($exitCode -ne 0) { exit $exitCode }
+          echo "Checking file at: %ISPAC_PATH%"
+          if not exist "%ISPAC_PATH%" (
+            echo Error: ISPAC file not found
+            dir "%cd%\HandsOnProject\Timesheet\SSISProject - Copy\bin\Development"
+            exit /b 1
+          )
+
+      - name: Create SSIS Catalog Folder
+        shell: cmd
+        run: |
+          sqlcmd -S SAMBE202507 -E -Q "IF NOT EXISTS(SELECT 1 FROM [SSISDB].[catalog].[folders] WHERE name = 'SSISProject') BEGIN EXEC [SSISDB].[catalog].[create_folder] @folder_name = 'SSISProject', @folder_id = NULL END"
+
+      - name: Deploy SSIS Project
+        shell: cmd
+        run: |
+          sqlcmd -S SAMBE202507 -E -v IspacPath="%ISPAC_PATH%" -i HandsOnProject/Timesheet/PackageDeployment.sql
 
       - name: Create SQL Server Agent Job
         run: sqlcmd -S . -U ${{ secrets.SQL_USERNAME }} -P ${{ secrets.SQL_PASSWORD }} -i HandsOnProject/Timesheet/CreateAgentJob.sql
