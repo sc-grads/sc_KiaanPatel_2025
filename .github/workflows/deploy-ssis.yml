@@ -25,7 +25,7 @@ jobs:
       - name: Deploy SSIS Package
         shell: cmd
         run: |
-          "C:\SSIS_TOOLS\SSISDeploy.exe" -s:"${{ github.workspace }}\HandsOnProjects\Timesheet\SSISProject.ispac" -d:"catalog;/SSISDB/SSISProject/SSISProject;SAMBE202507" -at:win
+          "C:\SSIS_TOOLS\SSISDeploy.exe" -s:"C:\Users\Kiaan Patel\Git\sc_KiaanPatel_2025\HandsOnProject\Timesheet\SSISProject.ispac" -d:"catalog;/SSISDB/SSISProject/SSISProject;SAMBE202507" -at:win
         working-directory: ${{ github.workspace }}
 
       - name: Create SQL Server Agent Job
