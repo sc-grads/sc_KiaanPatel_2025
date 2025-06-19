@@ -189,6 +189,7 @@ IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'ErrorLog' AND type = 'U')
 BEGIN
     CREATE TABLE ErrorLog (
         ErrorID INT PRIMARY KEY IDENTITY(1,1),
+        Month NVARCHAR(50),
         FilePath NVARCHAR(255),
         ErrorMessage NVARCHAR(4000),
         Timestamp DATETIME DEFAULT GETDATE()
