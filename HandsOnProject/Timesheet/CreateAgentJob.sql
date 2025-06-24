@@ -32,7 +32,7 @@ USE [msdb]
 GO
 
 -- Adding Step 2 to execute the PowerShell script
-EXEC msdb.dbo.sp_add_jobstep 
+/*EXEC msdb.dbo.sp_add_jobstep 
 	@job_name=N'Run_Timesheet_SSIS_Job', 
 	@step_name=N'Step2', 
 	@step_id=2, 
@@ -69,7 +69,7 @@ EXEC msdb.dbo.sp_add_jobstep
 		
 		', 
 		@database_name=N'master', 
-		@flags=0
+		@flags=0*/
 GO
 
 -- Adding a schedule to run every Friday at 5 PM
