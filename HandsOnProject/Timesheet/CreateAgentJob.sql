@@ -43,23 +43,33 @@ EXEC msdb.dbo.sp_add_jobstep
 	@retry_interval=0, 
 	@os_run_priority=0, 
 	@subsystem=N'PowerShell', 
-	@command=N'# Set the path to your Elasticsearch executable
-		$elasticPath = "C:\ELK\elasticsearch-9.0.2-windows-x86_64\elasticsearch-9.0.2\bin\elasticsearch.bat"		 
+	@command=N'
+		# Set the path to your Elasticsearch executable
+		$elasticPath = "C:\ELK\elasticsearch-9.0.2-windows-x86_64\elasticsearch-9.0.2\bin\elasticsearch.bat"
+		
 		# Launch Elasticsearch
-		Start-Process -FilePath $elasticPath		 
-		Start-Sleep -Seconds 60		 
+		Start-Process -FilePath $elasticPath 
+		
+		Start-Sleep -Seconds 60
+		
 		# Set the path to your Logstash installation and config file
 		$logstashPath = "C:\ELK\logstash-9.0.2-windows-x86_64\logstash-9.0.2\bin\logstash.bat"
-		$FilePath = "C:\ELK\Data\apache.conf"		 
+		$configFile = "C:\ELK\Data\apache.conf"
+		
 		# Run Logstash with your configuration file
-		Start-Process -FilePath $logstashPath -ArgumentList "-f `"$FilePath`"" -NoNewWindow -Wait		 
+		Start-Process -FilePath $logstashPath -ArgumentList "-f `"$configFile`"" -NoNewWindow -Wait
+		
 		# Set the path to your Logstash installation and config file
 		$logstashPath = "C:\ELK\logstash-9.0.2-windows-x86_64\logstash-9.0.2\bin\logstash.bat"
-		$FilePathError = "C:\ELK\Data\errorlog.conf"		 
+		$ErrorconfigFile = "C:\ELK\Data\errorlog.conf"
+		
 		# Run Logstash with your configuration file
-		Start-Process -FilePath $logstashPath -ArgumentList "-f `"$FilePathError`"" -NoNewWindow -Wait', 
-	@database_name=N'master', 
-	@flags=0
+		Start-Process -FilePath $logstashPath -ArgumentList "-f `"$ErrorconfigFile`"" -NoNewWindow -Wait
+		
+		
+		', 
+		@database_name=N'master', 
+		@flags=0
 GO
 
 -- Adding a schedule to run every Friday at 5 PM
