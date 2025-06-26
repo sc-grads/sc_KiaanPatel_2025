@@ -13,3 +13,4 @@ select * from AuditLog
 select * from AuditLog_Staging
 select * from ErrorLog
 
+drop database TimesheetDB
