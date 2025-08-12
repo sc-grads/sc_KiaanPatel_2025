@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Sambe Consulting - Kiaan Patel Work\\Udemy Courses\\Complete C# Masterclass\\GuessNumber\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{ACFC7F36-4004-42CF-B9B7-D6F3D8D94A78}|GuessNumber.csproj|c:\\sambe consulting - kiaan patel work\\udemy courses\\complete c# masterclass\\guessnumber\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ACFC7F36-4004-42CF-B9B7-D6F3D8D94A78}|GuessNumber.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Sambe Consulting - Kiaan Patel Work\\Udemy Courses\\Complete C# Masterclass\\GuessNumber\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Sambe Consulting - Kiaan Patel Work\\Udemy Courses\\Complete C# Masterclass\\GuessNumber\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAEYAAAAAAAAAAAAswCgAAABHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-12T08:31:02.373Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

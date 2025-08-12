@@ -1,0 +1,14 @@
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\FirstProject\bin\Debug\net8.0\FirstProject.exe
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\FirstProject\bin\Debug\net8.0\FirstProject.deps.json
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\FirstProject\bin\Debug\net8.0\FirstProject.runtimeconfig.json
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\FirstProject\bin\Debug\net8.0\FirstProject.dll
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\FirstProject\bin\Debug\net8.0\FirstProject.pdb
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\FirstProject\obj\Debug\net8.0\FirstProject.GeneratedMSBuildEditorConfig.editorconfig
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\FirstProject\obj\Debug\net8.0\FirstProject.AssemblyInfoInputs.cache
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\FirstProject\obj\Debug\net8.0\FirstProject.AssemblyInfo.cs
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\FirstProject\obj\Debug\net8.0\FirstProject.csproj.CoreCompileInputs.cache
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\FirstProject\obj\Debug\net8.0\FirstProject.dll
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\FirstProject\obj\Debug\net8.0\refint\FirstProject.dll
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\FirstProject\obj\Debug\net8.0\FirstProject.pdb
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\FirstProject\obj\Debug\net8.0\FirstProject.genruntimeconfig.cache
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\FirstProject\obj\Debug\net8.0\ref\FirstProject.dll

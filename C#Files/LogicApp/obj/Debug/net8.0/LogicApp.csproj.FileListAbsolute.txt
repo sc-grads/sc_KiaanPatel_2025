@@ -1,0 +1,14 @@
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\LogicApp\bin\Debug\net8.0\LogicApp.exe
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\LogicApp\bin\Debug\net8.0\LogicApp.deps.json
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\LogicApp\bin\Debug\net8.0\LogicApp.runtimeconfig.json
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\LogicApp\bin\Debug\net8.0\LogicApp.dll
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\LogicApp\bin\Debug\net8.0\LogicApp.pdb
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\LogicApp\obj\Debug\net8.0\LogicApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\LogicApp\obj\Debug\net8.0\LogicApp.AssemblyInfoInputs.cache
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\LogicApp\obj\Debug\net8.0\LogicApp.AssemblyInfo.cs
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\LogicApp\obj\Debug\net8.0\LogicApp.csproj.CoreCompileInputs.cache
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\LogicApp\obj\Debug\net8.0\LogicApp.dll
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\LogicApp\obj\Debug\net8.0\refint\LogicApp.dll
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\LogicApp\obj\Debug\net8.0\LogicApp.pdb
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\LogicApp\obj\Debug\net8.0\LogicApp.genruntimeconfig.cache
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\LogicApp\obj\Debug\net8.0\ref\LogicApp.dll

@@ -1,0 +1,14 @@
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\MyAdditionCalculator\bin\Debug\net8.0\MyAdditionCalculator.exe
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\MyAdditionCalculator\bin\Debug\net8.0\MyAdditionCalculator.deps.json
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\MyAdditionCalculator\bin\Debug\net8.0\MyAdditionCalculator.runtimeconfig.json
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\MyAdditionCalculator\bin\Debug\net8.0\MyAdditionCalculator.dll
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\MyAdditionCalculator\bin\Debug\net8.0\MyAdditionCalculator.pdb
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\MyAdditionCalculator\obj\Debug\net8.0\MyAdditionCalculator.GeneratedMSBuildEditorConfig.editorconfig
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\MyAdditionCalculator\obj\Debug\net8.0\MyAdditionCalculator.AssemblyInfoInputs.cache
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\MyAdditionCalculator\obj\Debug\net8.0\MyAdditionCalculator.AssemblyInfo.cs
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\MyAdditionCalculator\obj\Debug\net8.0\MyAdditionCalculator.csproj.CoreCompileInputs.cache
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\MyAdditionCalculator\obj\Debug\net8.0\MyAdditionCalculator.dll
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\MyAdditionCalculator\obj\Debug\net8.0\refint\MyAdditionCalculator.dll
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\MyAdditionCalculator\obj\Debug\net8.0\MyAdditionCalculator.pdb
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\MyAdditionCalculator\obj\Debug\net8.0\MyAdditionCalculator.genruntimeconfig.cache
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\MyAdditionCalculator\obj\Debug\net8.0\ref\MyAdditionCalculator.dll
