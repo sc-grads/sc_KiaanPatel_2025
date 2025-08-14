@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Sambe Consulting - Kiaan Patel Work\\Udemy Courses\\Complete C# Masterclass\\WeatherStationSim\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{9754E802-E41A-41C3-8765-AD4C5DE4B5C1}|WeatherStationSim.csproj|c:\\sambe consulting - kiaan patel work\\udemy courses\\complete c# masterclass\\weatherstationsim\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9754E802-E41A-41C3-8765-AD4C5DE4B5C1}|WeatherStationSim.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Sambe Consulting - Kiaan Patel Work\\Udemy Courses\\Complete C# Masterclass\\WeatherStationSim\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Sambe Consulting - Kiaan Patel Work\\Udemy Courses\\Complete C# Masterclass\\WeatherStationSim\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAE8AAAAAAAAAAAAkwFUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-13T08:20:02.404Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

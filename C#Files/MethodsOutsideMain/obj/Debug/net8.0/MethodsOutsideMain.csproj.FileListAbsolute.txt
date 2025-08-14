@@ -1,0 +1,14 @@
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\MethodsOutsideMain\bin\Debug\net8.0\MethodsOutsideMain.exe
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\MethodsOutsideMain\bin\Debug\net8.0\MethodsOutsideMain.deps.json
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\MethodsOutsideMain\bin\Debug\net8.0\MethodsOutsideMain.runtimeconfig.json
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\MethodsOutsideMain\bin\Debug\net8.0\MethodsOutsideMain.dll
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\MethodsOutsideMain\bin\Debug\net8.0\MethodsOutsideMain.pdb
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\MethodsOutsideMain\obj\Debug\net8.0\MethodsOutsideMain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\MethodsOutsideMain\obj\Debug\net8.0\MethodsOutsideMain.AssemblyInfoInputs.cache
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\MethodsOutsideMain\obj\Debug\net8.0\MethodsOutsideMain.AssemblyInfo.cs
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\MethodsOutsideMain\obj\Debug\net8.0\MethodsOutsideMain.csproj.CoreCompileInputs.cache
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\MethodsOutsideMain\obj\Debug\net8.0\MethodsOutsideMain.dll
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\MethodsOutsideMain\obj\Debug\net8.0\refint\MethodsOutsideMain.dll
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\MethodsOutsideMain\obj\Debug\net8.0\MethodsOutsideMain.pdb
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\MethodsOutsideMain\obj\Debug\net8.0\MethodsOutsideMain.genruntimeconfig.cache
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\MethodsOutsideMain\obj\Debug\net8.0\ref\MethodsOutsideMain.dll
