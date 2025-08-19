@@ -1,0 +1,14 @@
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\ArrayList\bin\Debug\net8.0\ArrayList.exe
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\ArrayList\bin\Debug\net8.0\ArrayList.deps.json
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\ArrayList\bin\Debug\net8.0\ArrayList.runtimeconfig.json
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\ArrayList\bin\Debug\net8.0\ArrayList.dll
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\ArrayList\bin\Debug\net8.0\ArrayList.pdb
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\ArrayList\obj\Debug\net8.0\ArrayList.GeneratedMSBuildEditorConfig.editorconfig
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\ArrayList\obj\Debug\net8.0\ArrayList.AssemblyInfoInputs.cache
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\ArrayList\obj\Debug\net8.0\ArrayList.AssemblyInfo.cs
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\ArrayList\obj\Debug\net8.0\ArrayList.csproj.CoreCompileInputs.cache
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\ArrayList\obj\Debug\net8.0\ArrayList.dll
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\ArrayList\obj\Debug\net8.0\refint\ArrayList.dll
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\ArrayList\obj\Debug\net8.0\ArrayList.pdb
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\ArrayList\obj\Debug\net8.0\ArrayList.genruntimeconfig.cache
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\ArrayList\obj\Debug\net8.0\ref\ArrayList.dll

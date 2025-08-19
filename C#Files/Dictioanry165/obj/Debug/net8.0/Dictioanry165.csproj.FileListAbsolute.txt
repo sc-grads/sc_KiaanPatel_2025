@@ -1,0 +1,14 @@
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\Dictioanry165\bin\Debug\net8.0\Dictioanry165.exe
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\Dictioanry165\bin\Debug\net8.0\Dictioanry165.deps.json
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\Dictioanry165\bin\Debug\net8.0\Dictioanry165.runtimeconfig.json
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\Dictioanry165\bin\Debug\net8.0\Dictioanry165.dll
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\Dictioanry165\bin\Debug\net8.0\Dictioanry165.pdb
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\Dictioanry165\obj\Debug\net8.0\Dictioanry165.GeneratedMSBuildEditorConfig.editorconfig
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\Dictioanry165\obj\Debug\net8.0\Dictioanry165.AssemblyInfoInputs.cache
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\Dictioanry165\obj\Debug\net8.0\Dictioanry165.AssemblyInfo.cs
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\Dictioanry165\obj\Debug\net8.0\Dictioanry165.csproj.CoreCompileInputs.cache
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\Dictioanry165\obj\Debug\net8.0\Dictioanry165.dll
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\Dictioanry165\obj\Debug\net8.0\refint\Dictioanry165.dll
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\Dictioanry165\obj\Debug\net8.0\Dictioanry165.pdb
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\Dictioanry165\obj\Debug\net8.0\Dictioanry165.genruntimeconfig.cache
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\Dictioanry165\obj\Debug\net8.0\ref\Dictioanry165.dll

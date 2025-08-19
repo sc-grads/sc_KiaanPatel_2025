@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Sambe Consulting - Kiaan Patel Work\\Udemy Courses\\Complete C# Masterclass\\Lists\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{8FDF367B-BD76-4CB8-8C18-F20DF69FD449}|Lists.csproj|c:\\sambe consulting - kiaan patel work\\udemy courses\\complete c# masterclass\\lists\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8FDF367B-BD76-4CB8-8C18-F20DF69FD449}|Lists.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Sambe Consulting - Kiaan Patel Work\\Udemy Courses\\Complete C# Masterclass\\Lists\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Sambe Consulting - Kiaan Patel Work\\Udemy Courses\\Complete C# Masterclass\\Lists\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAFYAAAAAAAAAAAAWwE4AAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-15T07:23:23.684Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
