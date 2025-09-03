@@ -1,0 +1,17 @@
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\LoginApp\bin\Debug\LoginApp.exe.config
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\LoginApp\bin\Debug\LoginApp.exe
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\LoginApp\bin\Debug\LoginApp.pdb
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\LoginApp\obj\Debug\LoginApp.csproj.AssemblyReference.cache
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\LoginApp\obj\Debug\LoginView.g.cs
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\LoginApp\obj\Debug\MainWindow.g.cs
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\LoginApp\obj\Debug\App.g.cs
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\LoginApp\obj\Debug\LoginApp_MarkupCompile.cache
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\LoginApp\obj\Debug\LoginApp_MarkupCompile.lref
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\LoginApp\obj\Debug\LoginView.baml
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\LoginApp\obj\Debug\MainWindow.baml
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\LoginApp\obj\Debug\LoginApp.g.resources
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\LoginApp\obj\Debug\LoginApp.Properties.Resources.resources
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\LoginApp\obj\Debug\LoginApp.csproj.GenerateResource.cache
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\LoginApp\obj\Debug\LoginApp.csproj.CoreCompileInputs.cache
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\LoginApp\obj\Debug\LoginApp.exe
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\LoginApp\obj\Debug\LoginApp.pdb

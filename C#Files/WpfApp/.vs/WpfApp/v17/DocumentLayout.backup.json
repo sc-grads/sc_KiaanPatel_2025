@@ -1,0 +1,70 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Sambe Consulting - Kiaan Patel Work\\Udemy Courses\\Complete C# Masterclass\\WpfApp\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{0661167B-8724-463E-B3B8-47219CCE0263}|WpfApp.csproj|c:\\sambe consulting - kiaan patel work\\udemy courses\\complete c# masterclass\\wpfapp\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{0661167B-8724-463E-B3B8-47219CCE0263}|WpfApp.csproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0661167B-8724-463E-B3B8-47219CCE0263}|WpfApp.csproj|c:\\sambe consulting - kiaan patel work\\udemy courses\\complete c# masterclass\\wpfapp\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0661167B-8724-463E-B3B8-47219CCE0263}|WpfApp.csproj|solutionrelative:mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0661167B-8724-463E-B3B8-47219CCE0263}|WpfApp.csproj|c:\\sambe consulting - kiaan patel work\\udemy courses\\complete c# masterclass\\wpfapp\\data\\person.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0661167B-8724-463E-B3B8-47219CCE0263}|WpfApp.csproj|solutionrelative:data\\person.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Person.cs",
+              "DocumentMoniker": "C:\\Sambe Consulting - Kiaan Patel Work\\Udemy Courses\\Complete C# Masterclass\\WpfApp\\Data\\Person.cs",
+              "RelativeDocumentMoniker": "Data\\Person.cs",
+              "ToolTip": "C:\\Sambe Consulting - Kiaan Patel Work\\Udemy Courses\\Complete C# Masterclass\\WpfApp\\Data\\Person.cs",
+              "RelativeToolTip": "Data\\Person.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-21T20:12:55.89Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Sambe Consulting - Kiaan Patel Work\\Udemy Courses\\Complete C# Masterclass\\WpfApp\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "MainWindow.xaml",
+              "ToolTip": "C:\\Sambe Consulting - Kiaan Patel Work\\Udemy Courses\\Complete C# Masterclass\\WpfApp\\MainWindow.xaml",
+              "RelativeToolTip": "MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-08-21T20:11:26.063Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Sambe Consulting - Kiaan Patel Work\\Udemy Courses\\Complete C# Masterclass\\WpfApp\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "MainWindow.xaml.cs",
+              "ToolTip": "C:\\Sambe Consulting - Kiaan Patel Work\\Udemy Courses\\Complete C# Masterclass\\WpfApp\\MainWindow.xaml.cs",
+              "RelativeToolTip": "MainWindow.xaml.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAowCgAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-21T20:11:26.002Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

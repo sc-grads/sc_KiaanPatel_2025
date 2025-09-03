@@ -1,0 +1,85 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Sambe Consulting - Kiaan Patel Work\\Udemy Courses\\Complete C# Masterclass\\CurrencyConverter\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{0EFB180F-21FF-4874-B193-B143801A80AD}|CurrencyConverter.csproj|C:\\Sambe Consulting - Kiaan Patel Work\\Udemy Courses\\Complete C# Masterclass\\CurrencyConverter\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{0EFB180F-21FF-4874-B193-B143801A80AD}|CurrencyConverter.csproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0EFB180F-21FF-4874-B193-B143801A80AD}|CurrencyConverter.csproj|c:\\sambe consulting - kiaan patel work\\udemy courses\\complete c# masterclass\\currencyconverter\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0EFB180F-21FF-4874-B193-B143801A80AD}|CurrencyConverter.csproj|solutionrelative:mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0EFB180F-21FF-4874-B193-B143801A80AD}|CurrencyConverter.csproj|C:\\Sambe Consulting - Kiaan Patel Work\\Udemy Courses\\Complete C# Masterclass\\CurrencyConverter\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{0EFB180F-21FF-4874-B193-B143801A80AD}|CurrencyConverter.csproj|solutionrelative:app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0EFB180F-21FF-4874-B193-B143801A80AD}|CurrencyConverter.csproj|C:\\Sambe Consulting - Kiaan Patel Work\\Udemy Courses\\Complete C# Masterclass\\CurrencyConverter\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0EFB180F-21FF-4874-B193-B143801A80AD}|CurrencyConverter.csproj|solutionrelative:app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "App.xaml.cs",
+              "DocumentMoniker": "C:\\Sambe Consulting - Kiaan Patel Work\\Udemy Courses\\Complete C# Masterclass\\CurrencyConverter\\App.xaml.cs",
+              "RelativeDocumentMoniker": "App.xaml.cs",
+              "ToolTip": "C:\\Sambe Consulting - Kiaan Patel Work\\Udemy Courses\\Complete C# Masterclass\\CurrencyConverter\\App.xaml.cs",
+              "RelativeToolTip": "App.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-22T13:39:08.47Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "App.xaml",
+              "DocumentMoniker": "C:\\Sambe Consulting - Kiaan Patel Work\\Udemy Courses\\Complete C# Masterclass\\CurrencyConverter\\App.xaml",
+              "RelativeDocumentMoniker": "App.xaml",
+              "ToolTip": "C:\\Sambe Consulting - Kiaan Patel Work\\Udemy Courses\\Complete C# Masterclass\\CurrencyConverter\\App.xaml",
+              "RelativeToolTip": "App.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-08-22T13:39:07.194Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Sambe Consulting - Kiaan Patel Work\\Udemy Courses\\Complete C# Masterclass\\CurrencyConverter\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "MainWindow.xaml",
+              "ToolTip": "C:\\Sambe Consulting - Kiaan Patel Work\\Udemy Courses\\Complete C# Masterclass\\CurrencyConverter\\MainWindow.xaml*",
+              "RelativeToolTip": "MainWindow.xaml*",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-08-22T13:38:43.857Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Sambe Consulting - Kiaan Patel Work\\Udemy Courses\\Complete C# Masterclass\\CurrencyConverter\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "MainWindow.xaml.cs",
+              "ToolTip": "C:\\Sambe Consulting - Kiaan Patel Work\\Udemy Courses\\Complete C# Masterclass\\CurrencyConverter\\MainWindow.xaml.cs",
+              "RelativeToolTip": "MainWindow.xaml.cs",
+              "ViewState": "AgIAAIMAAAAAAAAAAAAqwJMAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-22T13:38:43.795Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

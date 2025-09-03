@@ -1,0 +1,15 @@
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\CurrencyConverterDatabaseApp\bin\Debug\CurrencyConverterDatabaseApp.exe.config
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\CurrencyConverterDatabaseApp\bin\Debug\CurrencyConverterDatabaseApp.exe
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\CurrencyConverterDatabaseApp\bin\Debug\CurrencyConverterDatabaseApp.pdb
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\CurrencyConverterDatabaseApp\obj\Debug\CurrencyConverterDatabaseApp.csproj.AssemblyReference.cache
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\CurrencyConverterDatabaseApp\obj\Debug\MainWindow.g.cs
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\CurrencyConverterDatabaseApp\obj\Debug\App.g.cs
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\CurrencyConverterDatabaseApp\obj\Debug\CurrencyConverterDatabaseApp_MarkupCompile.cache
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\CurrencyConverterDatabaseApp\obj\Debug\CurrencyConverterDatabaseApp_MarkupCompile.lref
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\CurrencyConverterDatabaseApp\obj\Debug\MainWindow.baml
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\CurrencyConverterDatabaseApp\obj\Debug\CurrencyConverterDatabaseApp.g.resources
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\CurrencyConverterDatabaseApp\obj\Debug\CurrencyConverterDatabaseApp.Properties.Resources.resources
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\CurrencyConverterDatabaseApp\obj\Debug\CurrencyConverterDatabaseApp.csproj.GenerateResource.cache
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\CurrencyConverterDatabaseApp\obj\Debug\CurrencyConverterDatabaseApp.csproj.CoreCompileInputs.cache
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\CurrencyConverterDatabaseApp\obj\Debug\CurrencyConverterDatabaseApp.exe
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\CurrencyConverterDatabaseApp\obj\Debug\CurrencyConverterDatabaseApp.pdb

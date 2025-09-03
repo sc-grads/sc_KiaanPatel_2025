@@ -1,0 +1,16 @@
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\MyFirstWPF\bin\Debug\MyFirstWPF.exe.config
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\MyFirstWPF\bin\Debug\MyFirstWPF.exe
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\MyFirstWPF\bin\Debug\MyFirstWPF.pdb
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\MyFirstWPF\obj\Debug\MyFirstWPF.csproj.AssemblyReference.cache
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\MyFirstWPF\obj\Debug\MainWindow.g.cs
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\MyFirstWPF\obj\Debug\App.g.cs
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\MyFirstWPF\obj\Debug\MyFirstWPF_MarkupCompile.cache
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\MyFirstWPF\obj\Debug\MyFirstWPF_MarkupCompile.lref
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\MyFirstWPF\obj\Debug\MainWindow.baml
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\MyFirstWPF\obj\Debug\MyFirstWPF.g.resources
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\MyFirstWPF\obj\Debug\MyFirstWPF.Properties.Resources.resources
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\MyFirstWPF\obj\Debug\MyFirstWPF.csproj.GenerateResource.cache
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\MyFirstWPF\obj\Debug\MyFirstWPF.csproj.CoreCompileInputs.cache
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\MyFirstWPF\obj\Debug\MyFirstWPF.exe
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\MyFirstWPF\obj\Debug\MyFirstWPF.pdb
+C:\Sambe Consulting - Kiaan Patel Work\Udemy Courses\Complete C# Masterclass\MyFirstWPF\obj\Debug\MyFirstWPF.exe.config
