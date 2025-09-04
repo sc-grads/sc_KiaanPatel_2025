@@ -1,6 +1,0 @@
-SELECT TOP (1000) [Title]
-      ,[FirstName]
-      ,[LastName]
-      ,[PhoneNumber]
-      ,[PhoneType]
-  FROM [AdventureWorks2022].[dbo].[EmployeePhoneDetail]
