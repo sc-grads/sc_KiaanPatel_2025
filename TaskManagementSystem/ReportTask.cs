@@ -15,6 +15,8 @@ namespace TaskManagementSystem
         {
             return $"Report {ReportName} generated successfully";
 
+            Console.WriteLine();
+
         }
 
     }
