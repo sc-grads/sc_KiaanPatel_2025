@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<RptDataSource xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="PracAct2">
-  <ConnectionProperties>
-    <Extension>SQL</Extension>
-    <ConnectString>Data Source=.;Initial Catalog=AdventureWorks2022;TrustServerCertificate=True</ConnectString>
-  </ConnectionProperties>
-  <DataSourceID>46a3f7f8-c00d-422a-af38-d7498074f5cd</DataSourceID>
-</RptDataSource>
