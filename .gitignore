@@ -1,4 +1,4 @@
 *HandsOnProject/Timesheet/SSISProject
-.vs
-bin/
-obj/
+*.vs
+*bin/
+*obj/
