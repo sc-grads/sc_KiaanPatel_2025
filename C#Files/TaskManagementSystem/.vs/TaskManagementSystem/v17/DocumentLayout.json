@@ -3,6 +3,18 @@
   "WorkspaceRootPath": "C:\\Users\\Kiaan Patel\\Git\\sc_KiaanPatel_2025\\C#Files\\TaskManagementSystem\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{8626A87D-F5CC-4657-A140-32B093F91404}|TaskManagementSystem.csproj|c:\\users\\kiaan patel\\git\\sc_kiaanpatel_2025\\c#files\\taskmanagementsystem\\reporttask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8626A87D-F5CC-4657-A140-32B093F91404}|TaskManagementSystem.csproj|solutionrelative:reporttask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8626A87D-F5CC-4657-A140-32B093F91404}|TaskManagementSystem.csproj|c:\\users\\kiaan patel\\git\\sc_kiaanpatel_2025\\c#files\\taskmanagementsystem\\emailtask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8626A87D-F5CC-4657-A140-32B093F91404}|TaskManagementSystem.csproj|solutionrelative:emailtask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8626A87D-F5CC-4657-A140-32B093F91404}|TaskManagementSystem.csproj|c:\\users\\kiaan patel\\git\\sc_kiaanpatel_2025\\c#files\\taskmanagementsystem\\itask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8626A87D-F5CC-4657-A140-32B093F91404}|TaskManagementSystem.csproj|solutionrelative:itask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{8626A87D-F5CC-4657-A140-32B093F91404}|TaskManagementSystem.csproj|c:\\users\\kiaan patel\\git\\sc_kiaanpatel_2025\\c#files\\taskmanagementsystem\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8626A87D-F5CC-4657-A140-32B093F91404}|TaskManagementSystem.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -23,12 +35,51 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "ReportTask.cs",
+              "DocumentMoniker": "C:\\Users\\Kiaan Patel\\Git\\sc_KiaanPatel_2025\\C#Files\\TaskManagementSystem\\ReportTask.cs",
+              "RelativeDocumentMoniker": "ReportTask.cs",
+              "ToolTip": "C:\\Users\\Kiaan Patel\\Git\\sc_KiaanPatel_2025\\C#Files\\TaskManagementSystem\\ReportTask.cs",
+              "RelativeToolTip": "ReportTask.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-04T08:05:20.394Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "EmailTask.cs",
+              "DocumentMoniker": "C:\\Users\\Kiaan Patel\\Git\\sc_KiaanPatel_2025\\C#Files\\TaskManagementSystem\\EmailTask.cs",
+              "RelativeDocumentMoniker": "EmailTask.cs",
+              "ToolTip": "C:\\Users\\Kiaan Patel\\Git\\sc_KiaanPatel_2025\\C#Files\\TaskManagementSystem\\EmailTask.cs",
+              "RelativeToolTip": "EmailTask.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-04T08:02:30.813Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ITask.cs",
+              "DocumentMoniker": "C:\\Users\\Kiaan Patel\\Git\\sc_KiaanPatel_2025\\C#Files\\TaskManagementSystem\\ITask.cs",
+              "RelativeDocumentMoniker": "ITask.cs",
+              "ToolTip": "C:\\Users\\Kiaan Patel\\Git\\sc_KiaanPatel_2025\\C#Files\\TaskManagementSystem\\ITask.cs",
+              "RelativeToolTip": "ITask.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-04T08:01:19.481Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Kiaan Patel\\Git\\sc_KiaanPatel_2025\\C#Files\\TaskManagementSystem\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\Kiaan Patel\\Git\\sc_KiaanPatel_2025\\C#Files\\TaskManagementSystem\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAvAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-04T07:55:45.775Z",
               "EditorCaption": ""
