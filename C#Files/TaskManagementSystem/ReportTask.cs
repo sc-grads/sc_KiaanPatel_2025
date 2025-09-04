@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TaskManagementSystem
 {
-    internal class ReportTask
+    internal class ReportTask : ITask<string>
     {
         public int MyProperty { get; set; }
         public string ReportName { get; set; }
@@ -14,8 +14,6 @@ namespace TaskManagementSystem
         public string Perform()
         {
             return $"Report {ReportName} generated successfully";
-
-            Console.WriteLine();
 
         }
 
