@@ -1,0 +1,36 @@
+name: Multi-Environment SQL Deployment
+
+on:
+  workflow_dispatch:
+    inputs:
+      skip-production:
+        description: 'Skip production deployment?'
+        required: false
+        default: 'false'
+        type: boolean
+
+# Add concurrency to avoid runner delays (as done previously)
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.inputs.environment || 'default' }}
+  cancel-in-progress: false
+
+jobs:
+  deploy-development:
+    uses: ./.github/workflows/TestTemplate.yml
+    with:
+      environment: development
+      DB_NAME: AutoTestKiaan
+    secrets:
+      SQL_SERVER: ${{ secrets.PINGGY_URL }}  # Use your secrets for development
+      SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
+
+  deploy-production:
+    needs: deploy-development  # Ensures production runs only after development succeeds
+    if: ${{ !inputs.skip-production }}  # Skip production if the input is true
+    uses: ./.github/workflows/TestTemplate.yml
+    with:
+      environment: production
+      DB_NAME: AutoTestKiaan
+    secrets:
+      SQL_SERVER: ${{ secrets.FRIEND_SERVER_URL }}  # Use your friend's secrets for production
+      SQL_PASSWORD: ${{ secrets.FRIEND_SQL_PASSWORD }}

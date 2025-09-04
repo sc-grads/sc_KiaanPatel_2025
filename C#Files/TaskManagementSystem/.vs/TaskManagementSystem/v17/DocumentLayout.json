@@ -40,7 +40,7 @@
               "RelativeDocumentMoniker": "ReportTask.cs",
               "ToolTip": "C:\\Users\\Kiaan Patel\\Git\\sc_KiaanPatel_2025\\C#Files\\TaskManagementSystem\\ReportTask.cs",
               "RelativeToolTip": "ReportTask.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABEAAAAeAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-04T08:05:20.394Z",
               "EditorCaption": ""
@@ -55,7 +55,8 @@
               "RelativeToolTip": "EmailTask.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAABGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-04T08:02:30.813Z"
+              "WhenOpened": "2025-09-04T08:02:30.813Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -67,7 +68,8 @@
               "RelativeToolTip": "ITask.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-04T08:01:19.481Z"
+              "WhenOpened": "2025-09-04T08:01:19.481Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -79,7 +81,8 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-04T07:55:45.775Z"
+              "WhenOpened": "2025-09-04T07:55:45.775Z",
+              "EditorCaption": ""
             }
           ]
         }

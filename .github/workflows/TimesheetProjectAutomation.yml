@@ -1,0 +1,51 @@
+name: Timesheet Project SQL Server Database and Job Deployment
+
+on:
+  workflow_dispatch: # Manual trigger only
+
+jobs:
+  deploy-and-execute:
+    runs-on: windows-latest # Windows for better SQL Server support
+    
+    steps:
+    # 1. Checkout code
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    # 2. Install SQL tools only
+    - name: Install SQL Server CLI tools
+      run: choco install sqlserver-cmdlineutils -y
+
+    # 3. Database setup using YOUR EXISTING TUNNEL
+    - name: Execute database setup
+      run: |
+        sqlcmd -S "${{ secrets.PINGGY_TOKEN }}" `
+               -U "${{ secrets.SQL_USERNAME }}" `
+               -P "${{ secrets.SQL_PASSWORD }}" `
+               -i "HandsOnProject/Timesheet/TableAndDBSetup.sql"
+
+    # 4. Execute SQL Agent Job (FIXED VERSION)
+    - name: Run SQL Agent Job
+      run: |
+        $jobName = "TimesheetProjectJob"
+        $sql = @"
+        USE msdb;
+        EXEC dbo.sp_start_job N'$jobName';
+        WAITFOR DELAY '00:00:05';
+        SELECT TOP 1 run_status FROM dbo.sysjobhistory 
+        WHERE job_id = (SELECT job_id FROM dbo.sysjobs WHERE name = N'$jobName') 
+        ORDER BY instance_id DESC;
+        "@
+        
+        sqlcmd -S "${{ secrets.PINGGY_TOKEN }}" `
+               -U "${{ secrets.SQL_USERNAME }}" `
+               -P "${{ secrets.SQL_PASSWORD }}" `
+               -Q "$sql"
+
+    # 5. Verification
+    - name: Verify execution
+      run: |
+        sqlcmd -S "${{ secrets.PINGGY_TOKEN }}" `
+               -U "${{ secrets.SQL_USERNAME }}" `
+               -P "${{ secrets.SQL_PASSWORD }}" `
+               -Q "USE TimesheetDB; SELECT COUNT(*) AS Tables FROM sys.tables;"
