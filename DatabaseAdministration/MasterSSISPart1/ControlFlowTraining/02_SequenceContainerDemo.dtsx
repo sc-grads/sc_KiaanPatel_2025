@@ -1,0 +1,436 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/28/2025 1:55:23 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SAMBE202507"
+  DTS:CreatorName="SAMBE202507\Kiaan Patel"
+  DTS:DTSID="{86F17C47-1A3C-45E1-AEA3-91D325D8207D}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5685.0"
+  DTS:LocaleID="7177"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="2"
+  DTS:VersionGUID="{90712622-13B2-4B51-A58F-7A570B6FDB1E}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Bulk insert operations"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{69174901-B1C3-47F9-95BC-95F89609E654}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Bulk insert operations">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Bulk insert operations\Script Task"
+          DTS:CreationName="Microsoft.ScriptTask"
+          DTS:Description="Script Task"
+          DTS:DTSID="{1822B486-E5DC-4133-B914-78FEE2344E96}"
+          DTS:ExecutableType="Microsoft.ScriptTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Script Task"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ScriptProject
+              Name="ST_8e144f2454e74bcf9f6077da2b496e47"
+              VSTAMajorVersion="16"
+              VSTAMinorVersion="0"
+              Language="CSharp" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Bulk insert operations\Script Task 1"
+          DTS:CreationName="Microsoft.ScriptTask"
+          DTS:Description="Script Task"
+          DTS:DTSID="{EB40A139-6BAF-478C-ABEB-6440342A4DF2}"
+          DTS:ExecutableType="Microsoft.ScriptTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Script Task 1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ScriptProject
+              Name="ST_79e8f8e04b3e44f09c15993b088af53a"
+              VSTAMajorVersion="16"
+              VSTAMinorVersion="0"
+              Language="CSharp" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Bulk insert operations\Script Task 2"
+          DTS:CreationName="Microsoft.ScriptTask"
+          DTS:Description="Script Task"
+          DTS:DTSID="{05D072FB-4FB9-48A7-81F8-D7F1AE5004F1}"
+          DTS:ExecutableType="Microsoft.ScriptTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Script Task 2"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ScriptProject
+              Name="ST_a1d7d908efd5406ab9ed1a3a756ff2e4"
+              VSTAMajorVersion="16"
+              VSTAMinorVersion="0"
+              Language="CSharp" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Bulk insert operations.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{A47C4FB7-B9DC-4FCD-844F-D80B690891EB}"
+          DTS:From="Package\Bulk insert operations\Script Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Bulk insert operations\Script Task 1" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Bulk insert operations.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{8BF16F97-351E-4EB7-AD68-074D43AC4923}"
+          DTS:From="Package\Bulk insert operations\Script Task 1"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Bulk insert operations\Script Task 2" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\transferring DB objects"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{8A409B09-8A42-4FD0-9B67-43AD021508AA}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="transferring DB objects">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\transferring DB objects\Script Task"
+          DTS:CreationName="Microsoft.ScriptTask"
+          DTS:Description="Script Task"
+          DTS:DTSID="{9CEDC1B0-54A0-4B85-AC9E-CD955E4D6756}"
+          DTS:ExecutableType="Microsoft.ScriptTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Script Task"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ScriptProject
+              Name="ST_61a8b460904b422589e60f63e1a14ea0"
+              VSTAMajorVersion="16"
+              VSTAMinorVersion="0"
+              Language="CSharp" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\uploading files"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{95073E8B-C422-409F-BD31-FA465A1FC2C9}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="uploading files">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\uploading files\Script Task"
+          DTS:CreationName="Microsoft.ScriptTask"
+          DTS:Description="Script Task"
+          DTS:DTSID="{072010D2-4D21-4019-A5EA-6A746334CB7B}"
+          DTS:ExecutableType="Microsoft.ScriptTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Script Task"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ScriptProject
+              Name="ST_1806c17d30bf43dc996047ee7cc6282e"
+              VSTAMajorVersion="16"
+              VSTAMinorVersion="0"
+              Language="CSharp" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\uploading files\Script Task 1"
+          DTS:CreationName="Microsoft.ScriptTask"
+          DTS:Description="Script Task"
+          DTS:DTSID="{B276D882-AEB5-4149-AE8E-0A48F5F565A6}"
+          DTS:ExecutableType="Microsoft.ScriptTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Script Task 1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ScriptProject
+              Name="ST_eedd16aba0d647da8fd41446e19adbe8"
+              VSTAMajorVersion="16"
+              VSTAMinorVersion="0"
+              Language="CSharp" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\uploading files.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{AC57226A-EA62-404B-8800-459FFF17A0CD}"
+          DTS:From="Package\uploading files\Script Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\uploading files\Script Task 1" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{8B6B0FDD-1438-4CB3-8D37-93203EF889FD}"
+      DTS:From="Package\Bulk insert operations"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\uploading files" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{72DC34A6-EB21-4F9A-9770-87BC564B161B}"
+      DTS:From="Package\uploading files"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\transferring DB objects" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="130.4,41.6"
+          Id="Package\Bulk insert operations\Script Task"
+          TopLeft="33.2999916677677,18.7333322907157" />
+        <NodeLayout
+          Size="139.2,41.6"
+          Id="Package\Bulk insert operations\Script Task 1"
+          TopLeft="75.7999893456702,87.1999984812737" />
+        <NodeLayout
+          Size="139.2,41.6"
+          Id="Package\Bulk insert operations\Script Task 2"
+          TopLeft="112.466654008959,148.733331386712" />
+        <EdgeLayout
+          Id="Package\Bulk insert operations.PrecedenceConstraints[Constraint]"
+          TopLeft="98.4999916677677,60.3333322907157">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="46.8999976779025,26.866666190558"
+              Start="0,0"
+              End="46.8999976779025,19.366666190558">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,9.43333309527902" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,9.43333309527902"
+                    Point2="0,13.433333095279"
+                    Point3="4,13.433333095279" />
+                  <mssgle:LineSegment
+                    End="42.8999976779025,13.433333095279" />
+                  <mssgle:CubicBezierSegment
+                    Point1="42.8999976779025,13.433333095279"
+                    Point2="46.8999976779025,13.433333095279"
+                    Point3="46.8999976779025,17.433333095279" />
+                  <mssgle:LineSegment
+                    End="46.8999976779025,19.366666190558" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Bulk insert operations.PrecedenceConstraints[Constraint 1]"
+          TopLeft="214.99998934567,107.999998481274">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="15.3999953558049,40.7333329054382"
+              Start="0,0"
+              End="15.3999953558049,33.2333329054382">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="11.3999953558049,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="11.3999953558049,0"
+                    Point2="15.3999953558049,0"
+                    Point3="15.3999953558049,4" />
+                  <mssgle:LineSegment
+                    End="15.3999953558049,33.2333329054382" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="256.8,245.6"
+          Size="256.8,288.8"
+          Id="Package\Bulk insert operations"
+          TopLeft="44.9999975413083,86.6666660639975" />
+        <NodeLayout
+          Size="130.4,41.6"
+          Id="Package\uploading files\Script Task"
+          TopLeft="86.0999752764912,7.73333234495584" />
+        <NodeLayout
+          Size="139.2,41.6"
+          Id="Package\uploading files\Script Task 1"
+          TopLeft="85.2666419886891,69.133332146075" />
+        <EdgeLayout
+          Id="Package\uploading files.PrecedenceConstraints[Constraint]"
+          TopLeft="86.0999752764912,28.5333323449558">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-0.83333328780212,61.3999998011192"
+              Start="0,0"
+              End="-8.33333328780212,61.3999998011192">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-19.3333332878021,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-19.3333332878021,0"
+                    Point2="-23.3333332878021,0"
+                    Point3="-23.3333332878021,4" />
+                  <mssgle:LineSegment
+                    End="-23.3333332878021,57.3999998011192" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-23.3333332878021,57.3999998011192"
+                    Point2="-23.3333332878021,61.3999998011192"
+                    Point3="-19.3333332878021,61.3999998011192" />
+                  <mssgle:LineSegment
+                    End="-8.33333328780212,61.3999998011192" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="319.2,162.4"
+          Size="319.2,205.6"
+          Id="Package\uploading files"
+          TopLeft="361.666646906072,79.7333327788777" />
+        <NodeLayout
+          Size="130.4,41.6"
+          Id="Package\transferring DB objects\Script Task"
+          TopLeft="46.6332969538056,12.9333323087957" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="204.8,109.6"
+          Size="204.8,152.8"
+          Id="Package\transferring DB objects"
+          TopLeft="725.83329367555,91.0666662447983" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="301.799997541308,231.066666063998">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="59.8666493647637,-48.5333332851198"
+              Start="0,0"
+              End="52.3666493647637,-48.5333332851198">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="25.9333246823819,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="25.9333246823819,0"
+                    Point2="29.9333246823819,0"
+                    Point3="29.9333246823819,-4" />
+                  <mssgle:LineSegment
+                    End="29.9333246823819,-44.5333332851198" />
+                  <mssgle:CubicBezierSegment
+                    Point1="29.9333246823819,-44.5333332851198"
+                    Point2="29.9333246823819,-48.5333332851198"
+                    Point3="33.9333246823819,-48.5333332851198" />
+                  <mssgle:LineSegment
+                    End="52.3666493647637,-48.5333332851198" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="680.866646906072,182.533332778878">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="44.9666467694781,-15.0666665340794"
+              Start="0,0"
+              End="37.4666467694781,-15.0666665340794">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="18.483323384739,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="18.483323384739,0"
+                    Point2="22.483323384739,0"
+                    Point3="22.483323384739,-4" />
+                  <mssgle:LineSegment
+                    End="22.483323384739,-11.0666665340794" />
+                  <mssgle:CubicBezierSegment
+                    Point1="22.483323384739,-11.0666665340794"
+                    Point2="22.483323384739,-15.0666665340794"
+                    Point3="26.483323384739,-15.0666665340794" />
+                  <mssgle:LineSegment
+                    End="37.4666467694781,-15.0666665340794" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

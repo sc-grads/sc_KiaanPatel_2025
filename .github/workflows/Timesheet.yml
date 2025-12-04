@@ -1,0 +1,31 @@
+name: Setup Database and Tables
+
+on:
+  workflow_dispatch
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install Microsoft SQL Server Command Line Tools
+        run: |
+          # Add Microsoft package repository
+          curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+          curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list
+          sudo apt-get update
+          sudo ACCEPT_EULA=Y apt-get install -y mssql-tools unixodbc-dev
+          # Add sqlcmd to PATH
+          echo "/opt/mssql-tools/bin" >> $GITHUB_PATH
+
+      - name: Test SQL Server Connection
+        run: |
+          sqlcmd -S "${{ secrets.PINGGY_TCP_TUNNEL }}" -U "${{ secrets.SQL_USERNAME }}" -P "${{ secrets.SQL_PASSWORD }}" -Q "SELECT @@VERSION" -o connection_test.log
+          cat connection_test.log
+        continue-on-error: true
+
+      - name: Run Database Setup Script
+        run: sqlcmd -S "${{ secrets.PINGGY_TCP_TUNNEL }}" -U "${{ secrets.SQL_USERNAME }}" -P "${{ secrets.SQL_PASSWORD }}" -i HandsOnProject/Timesheet/TableAndDBSetup.sql
